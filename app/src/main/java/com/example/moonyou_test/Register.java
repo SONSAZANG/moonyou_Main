@@ -65,8 +65,6 @@ public class Register extends AppCompatActivity {
                     return;
                 }
 
-                progressBar.setVisibility(View.VISIBLE);
-
                 //register the user in firebase
 
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -80,6 +78,14 @@ public class Register extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+
+
+        mLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Login.class));
             }
         });
     }

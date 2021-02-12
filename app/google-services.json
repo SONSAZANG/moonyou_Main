@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "926150406764",
+    "project_id": "moonyou-test",
+    "storage_bucket": "moonyou-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926150406764:android:34859fef933461b0b99e49",
+        "android_client_info": {
+          "package_name": "com.example.moonyou_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926150406764-74s0c7lati5ta0a1cetfg63l4hnp16f4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASHPw5Y2txCeGJFYXn3GVdAlbR0SJS-YU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926150406764-74s0c7lati5ta0a1cetfg63l4hnp16f4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

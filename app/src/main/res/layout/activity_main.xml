@@ -5,15 +5,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="578dp"
         android:layout_weight="3"
         android:orientation="vertical">
 
         <ViewFlipper
             android:id="@+id/image_slide"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/text1"
@@ -27,17 +32,21 @@
             android:layout_height="wrap_content"
             android:text=" 연극 날짜 : " />
 
-
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#005500"
-        android:gravity="center"
         android:layout_weight="5"
-        >
+        android:background="#005500"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="연극" />
+
         <Button
             android:id="@+id/musical"
             android:layout_width="wrap_content"
@@ -50,11 +59,6 @@
             android:layout_height="wrap_content"
             android:text="게시판" />
 
-        <Button
-            android:id="@+id/show"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="연극" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,7 +78,7 @@
             android:id="@+id/home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="홈홈" />
+            android:text="홈" />
         <Button
             android:id="@+id/community"
             android:layout_width="wrap_content"
@@ -82,14 +86,15 @@
             android:text="커뮤니티" />
 
         <Button
-            android:id="@+id/fan_menu"
+            android:id="@+id/mypage_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="배우팬게시판" />
+            android:text="마이" />
+
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:onClick="logout"
             android:text="Logout" />
         ></LinearLayout>

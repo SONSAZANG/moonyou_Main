@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+
+    <ImageView
+        android:layout_width="411dp"
+        android:layout_height="170dp"
+        android:adjustViewBounds="false"
+        android:background="#CA8888"
+        android:clickable="true"
+        android:cropToPadding="false"
+        android:scaleType="centerInside"
+        android:src="@drawable/top_image"
+        android:visibility="visible"></ImageView>
+
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:background="@color/common_google_signin_btn_text_light_default"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="연극 정보 "></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름 : "></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="배우 : "></TextView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="394dp"
+        android:background="#03FFCB"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/show_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:text="공연 정보" />
+
+        <Button
+            android:id="@+id/actor_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:text="배우 정보" />
+
+        <Button
+            android:id="@+id/review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:text="관람 후기" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/book"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+
+            android:text="예매하기" />
+
+    </LinearLayout>
+
+</LinearLayout>

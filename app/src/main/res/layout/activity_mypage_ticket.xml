@@ -1,0 +1,181 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 상단 마이페이지 / 블루 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="188dp"
+        android:layout_weight="3"
+        android:background="#2196F3"
+        >
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="마이페이지"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <!-- 마이페이지 버튼 3개 / 핑크 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#FF91B8"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/infochange_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="정보 수정" />
+
+        <Button
+            android:id="@+id/myticket_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내 티켓" />
+
+        <Button
+            android:id="@+id/myreview_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나의 리뷰" />
+    </LinearLayout>
+
+    <!-- 1티켓 내용 레이아웃 / 연두 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:gravity="left"
+        android:background="#76FF00">
+
+        <!-- 2티켓 하나에대한 부모 레이아웃 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <!-- 3텍스트뷰 레이아웃 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="티켓 번호 qwer1234">
+                </TextView>
+                <!-- 3클로즈 -->
+            </LinearLayout>
+            <!-- 4이미지뷰와 텍스트를 가로정렬하기위한 레이아웃 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="101dp"
+                    android:layout_height="145dp"
+                    android:src="@drawable/top_image01"></ImageView>
+                <!-- 5텍스트 모음 레이아웃 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="연극 정보"
+                        ></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="연극 이름 : 로드윅"
+                        ></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="연극 기간 : xxxx.xx.xx ~ yyyy.yy.yy"
+                        ></TextView>
+                    <!-- 5클로즈 -->
+                </LinearLayout>
+                <!-- 4클로즈 -->
+            </LinearLayout>
+            <!-- 2클로즈 -->
+        </LinearLayout>
+
+
+            <!-- 6티켓 하나에대한 부모 레이아웃 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <!-- 7텍스트뷰 레이아웃 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="티켓 번호 qwer1234">
+                    </TextView>
+                    <!-- 7클로즈 -->
+                </LinearLayout>
+
+                <!-- 8이미지뷰와 텍스트를 가로정렬하기위한 레이아웃 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="101dp"
+                        android:layout_height="145dp"
+                        android:src="@drawable/top_image02"></ImageView>
+
+                    <!-- 9텍스트 모음 레이아웃 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="연극 정보"
+                            ></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="연극 이름 : 헤드윅"
+                            ></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="연극 기간 : xxxx.xx.xx ~ yyyy.yy.yy"
+                            ></TextView>
+                        <!-- 9클로즈 -->
+                    </LinearLayout>
+                    <!-- 8클로즈 -->
+                </LinearLayout>
+                <!-- 6클로즈 -->
+            </LinearLayout>
+        <!-- 1클로즈 -->
+    </LinearLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,90 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="고객센터"
+    android:textAlignment="center"
+    android:textStyle="bold"
+    android:textColor="@color/black"
+    android:textSize="100px"/>
+
+<com.google.android.material.tabs.TabLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/help_center">
+
+    <com.google.android.material.tabs.TabItem
+        android:id="@+id/tabItem1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FAQ"
+        android:textAlignment="center"
+        />
+    <com.google.android.material.tabs.TabItem
+        android:id="@+id/tabItem2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1:1문의"
+        android:textAlignment="center"
+        />
+</com.google.android.material.tabs.TabLayout>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/FAQ"
+    android:visibility="visible">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text1"
+        android:text="자주 묻는 질문"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <ListView
+        android:id="@+id/FAQ_list"
+        android:layout_width="375dp"
+        android:layout_height="500dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"/>
+
+</FrameLayout>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/one_to_one"
+    android:visibility="gone">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text2"
+        android:text="나의 문의"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1:1 문의하기"
+        android:textColor="#000000"
+        android:layout_marginTop="500dp"
+        android:layout_marginStart="275dp"
+        android:visibility="visible"
+        />
+</FrameLayout>
+</LinearLayout>

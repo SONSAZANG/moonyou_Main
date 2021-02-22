@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
@@ -19,6 +20,34 @@ public class MainActivity extends AppCompatActivity {
 
         v_fllipper = findViewById(R.id.image_slide);
 
+        Button button1 = (Button) findViewById(R.id.show);
+        button1.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity2.class);
+                startActivity(intent);
+            }
+        });
+
+        Button button2 = (Button) findViewById(R.id.mypage_btn);
+        button2.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),mypage_main.class);
+                startActivity(intent);
+            }
+        });
+        Button button3 = (Button) findViewById(R.id.menu);
+        button3.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),maincommunity.class);
+                startActivity(intent);
+            }
+        });
         for(int image : images) {
             fllipperImages(image);
         }
@@ -47,11 +76,6 @@ public class MainActivity extends AppCompatActivity {
         v_fllipper.setOutAnimation(this,android.R.anim.slide_out_right);
     }
 
-    public void logout(View view) {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(), Login.class));
-        finish();
-    }
 
 
 

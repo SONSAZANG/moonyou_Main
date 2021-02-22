@@ -1,0 +1,140 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <ViewFlipper
+            android:id="@+id/image_slide2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="#005500"
+
+        >
+
+        <Button
+
+            android:id="@+id/allpost"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:text="전체글"
+            android:layout_gravity="center"
+            android:layout_margin="2dp"
+          />
+
+        <Button
+            android:id="@+id/hotpost"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:text="인기글"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+          />
+        <Button
+            android:id="@+id/Noticecs"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:text="공지" />
+        <Button
+            android:id="@+id/mypost"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:text="내가쓴글"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:background="#0000cc"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="글제목"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"/>
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성자"
+            android:textSize="20sp"
+            android:layout_marginStart="150dp"
+            android:textColor="#ffffff"
+            />
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성일"
+            android:textSize="20sp"
+            android:layout_marginStart="60dp"
+            android:textColor="#ffffff"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_weight="1"
+        android:background="#0000FF"
+        android:gravity="center">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:layout_weight="2"
+     >
+        <Button
+            android:id="@+id/home"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="홈"
+            android:layout_margin="2dp"
+            android:layout_gravity="bottom"/>
+        <Button
+            android:id="@+id/community"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="커뮤니티"
+            android:layout_margin="1px"
+            android:layout_gravity="bottom"/>
+
+        <Button
+            android:id="@+id/fanpage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="배우팬게시판"
+            android:layout_margin="1px"
+            android:layout_gravity="bottom"/>
+
+        <Button
+            android:id="@+id/mypage_btn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="마이페이지"
+            android:layout_margin="1px"
+            android:layout_gravity="bottom"
+            />
+        ></LinearLayout>
+
+</LinearLayout>

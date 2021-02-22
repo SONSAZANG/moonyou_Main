@@ -48,6 +48,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button button4 = (Button) findViewById(R.id.center);
+        button4.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),help_center.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         for(int image : images) {
             fllipperImages(image);
         }

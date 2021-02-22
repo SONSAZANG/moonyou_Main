@@ -12,6 +12,7 @@ public class maincommunity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maincommunity);
+
         v_fllipper = findViewById(R.id.image_slide2);
         for(int image : images) {
             fllipperImages(image);

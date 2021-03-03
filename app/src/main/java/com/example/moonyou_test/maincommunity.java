@@ -3,7 +3,9 @@ package com.example.moonyou_test;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
-
+import com.example.moonyou_test.maincommunity;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentReference;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class maincommunity extends AppCompatActivity {

@@ -8,10 +8,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".mypage_review"></activity>
         <activity android:name=".maincommunity"></activity>
-        <activity android:name=".help_center"></activity>
+        <activity android:name=".help_center">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".mypage_ticket" />
         <activity android:name=".mypage_main" />
         <activity android:name=".MainActivity2" />

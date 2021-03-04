@@ -10,15 +10,12 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".book_seat"></activity>
+        <activity android:name=".show_main" />
+        <activity android:name=".book_calender" />
         <activity android:name=".mypage_review"></activity>
         <activity android:name=".maincommunity"></activity>
-        <activity android:name=".help_center">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".help_center"></activity>
         <activity android:name=".mypage_ticket" />
         <activity android:name=".mypage_main" />
         <activity android:name=".MainActivity2" />

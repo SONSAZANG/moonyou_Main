@@ -54,7 +54,7 @@
             android:text="뮤지컬" />
 
         <Button
-            android:id="@+id/menu"
+            android:id="@+id/messageboard_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="게시판" />

@@ -40,6 +40,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button button3 = (Button) findViewById(R.id.messageboard_btn);
+        button3.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),mypage_main.class);
+                startActivity(intent);
+            }
+        });
+
 
         for(int image : images) {
             fllipperImages(image);

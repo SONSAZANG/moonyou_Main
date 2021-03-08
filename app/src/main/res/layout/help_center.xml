@@ -54,7 +54,7 @@ android:orientation="vertical">
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F0F0F0"/>
+        android:background="#ffffff"/>
 
 </FrameLayout>
 <FrameLayout
@@ -73,6 +73,15 @@ android:orientation="vertical">
         android:textSize="20sp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"/>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"/>
+
 
     <Button
         android:id="@+id/QA"

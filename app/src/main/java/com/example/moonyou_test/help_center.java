@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import androidx.annotation.NonNull;
 import android.view.View;
@@ -25,16 +27,29 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.example.moonyou_test.Login;
+import com.google.firebase.auth.FirebaseUser;
 import java.util.HashMap;
 import java.util.Map;
 
-public class help_center extends AppCompatActivity {
+import io.opencensus.tags.Tag;
 
+public class help_center extends AppCompatActivity {
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
     private RecyclerView recyclerview;
     Button QA;
+    private RecyclerView recyclerViewlist;
+    private FirebaseFirestore firebaseFirestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +63,12 @@ public class help_center extends AppCompatActivity {
                 int pos = tab.getPosition();
                 changeView(pos);
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 // do nothing
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 // do nothing
@@ -80,28 +97,37 @@ public class help_center extends AppCompatActivity {
 
         data.add(places);
 
-        recyclerview.setAdapter(new ExpandableListAdapter(data));
+        recyclerview.setAdapter(new ExpandableListAdapter(data)); //어댑터연결
 
-        QA = (Button) findViewById(R.id.QA);
+      /*  firebaseFirestore= firebaseFirestore.getInstance();
+       recyclerViewlist=findViewById(R.id.recyclerview2);
+
+       Query query= firebaseFirestore.collection("QA");
+
+       firestore<listview> options=new  FirestoreRecyclerOpions*/
+        //set the Adapter
+
+        QA = (Button) findViewById(R.id.QA); //1대1문의 버튼
         QA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder ad = new AlertDialog.Builder(help_center.this);
-
-                ad.setTitle("Title");       // 제목 설정
-                ad.setMessage("Message");   // 내용 설정
+                ad.setTitle("문의내용");       // 제목
                 final EditText et = new EditText(help_center.this);
                 ad.setView(et);
+
                 // 확인 버튼 설정
                 ad.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String text = et.getText().toString();
                         addData(text);
+                        mycs();
                         dialog.dismiss();     //닫기
                         // Event
                     }
                 });
+
                 // 취소 버튼 설정
                 ad.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
@@ -109,20 +135,26 @@ public class help_center extends AppCompatActivity {
                         dialog.dismiss();     //닫기
                         // Event
                     }
-                });// 창 띄우기
-                ad.show();
+                });
+                ad.show();// 창 띄우기
             }
-            private void addData(String QA){
+
+            private void addData(String QA) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
+                FirebaseUser user = fAuth.getCurrentUser();
+                String email = user.getEmail();
                 Map<String, Object> comm = new HashMap<>();
                 comm.put("QA", QA);
-
-                db.collection("QA").add(comm).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("Faber", "Document ID = " + documentReference.get());
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+                comm.put("userid", email);
+                db.collection("QA")
+                        .document("usercs")
+                        .set(comm)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d("Faber", "Document ID = " + comm);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d("faber", "Document Error!!");
@@ -131,8 +163,10 @@ public class help_center extends AppCompatActivity {
             }
         });
 
+
     }
-    private void changeView(int index){
+
+    private void changeView(int index) {
         FrameLayout FAQ = (FrameLayout) findViewById(R.id.FAQ);
         FrameLayout one_to_one = (FrameLayout) findViewById(R.id.one_to_one);
 
@@ -144,9 +178,27 @@ public class help_center extends AppCompatActivity {
             case 1:
                 FAQ.setVisibility(View.GONE);
                 one_to_one.setVisibility(View.VISIBLE);
+                mycs();
                 break;
         }
     }
-}
-    
+
+    private void mycs() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = fAuth.getCurrentUser();
+        String email = user.getEmail();
+        CollectionReference userdb= db.collection("QA");
+                Query USERDATE= userdb.whereEqualTo("userid", email);
+        USERDATE.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        Log.d("data = ",  " => " + document.getData());
+                    }
+                }
+            }
+        });
+}}
+
 

@@ -30,19 +30,31 @@
             android:id="@+id/infochange_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="정보 수정" />
+=======
+            android:text="정보수정" />
+>>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
 
         <Button
             android:id="@+id/myticket_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="내 티켓" />
+=======
+            android:text="내티켓" />
+>>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
 
         <Button
             android:id="@+id/myreview_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="나의 리뷰" />
+=======
+            android:text="나의리뷰" />
+>>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
     </LinearLayout>
 
     <LinearLayout
@@ -62,7 +74,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:text="내가 쓴 게시물"></TextView>
+=======
+                android:text="내가쓴게시물"></TextView>
+>>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
 
         </LinearLayout>
 
@@ -74,7 +90,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:text="내가 찜한 게시물">
+=======
+                android:text="내가찜한게시물">
+>>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
             </TextView>
 
 
@@ -86,7 +106,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:text="내가 평가한 리뷰">
+=======
+                android:text="내가평가한리뷰">
+>>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
             </TextView>
 
         </LinearLayout>

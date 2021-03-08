@@ -24,13 +24,17 @@
             android:id="@+id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="연극 이름 : " />
+            android:text="연극이름" />
 
         <TextView
             android:id="@+id/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text=" 연극 날짜 : " />
+=======
+            android:text="연극날짜" />
+>>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
 
     </LinearLayout>
 
@@ -54,11 +58,20 @@
             android:text="뮤지컬" />
 
         <Button
+            android:id="@+id/center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="고객센터" />
+
+<<<<<<< HEAD
+=======
+        <Button
             android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="게시판" />
 
+>>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
     </LinearLayout>
 
     <LinearLayout
@@ -73,7 +86,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5">
+        android:layout_weight="5"
+        android:gravity="center">
         <Button
             android:id="@+id/home"
             android:layout_width="wrap_content"
@@ -92,11 +106,10 @@
             android:text="마이" />
 
         <Button
-            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="logout"
-            android:text="Logout" />
+            android:text="로그아웃" />
         ></LinearLayout>
 
 </LinearLayout>

@@ -11,12 +11,49 @@ import android.widget.ViewFlipper;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity<fAuth> extends AppCompatActivity {
+    FirebaseAuth fAuth= FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button button1 = (Button) findViewById(R.id.show);
+        button1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity2.class);
+                startActivity(intent);
+            }
+        });
+
+        Button button2 = (Button) findViewById(R.id.mypage_btn);
+        button2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),mypage_main.class);
+                startActivity(intent);
+            }
+        });
+
+        Button button3 = (Button) findViewById(R.id.menu);
+        button3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),maincommunity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button button4 = (Button) findViewById(R.id.center);
+        button4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),help_center.class);
+                startActivity(intent);
+            }
+        });
 
         v_fllipper = findViewById(R.id.image_slide);
 
@@ -69,12 +106,11 @@ public class MainActivity extends AppCompatActivity {
         v_fllipper.setOutAnimation(this,android.R.anim.slide_out_right);
     }
 
-    public void logout(View view) {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(), Login.class));
-        finish();
-    }
 
-
+    public void logout(View view){
+        fAuth.signOut();
+        Intent intent = new Intent(getApplicationContext(),Login.class);
+        startActivity(intent);
+    } //로그아웃 기능 구현
 
 }

@@ -8,17 +8,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-<<<<<<< HEAD
-        android:theme="@style/Theme.Moonyou_test">
-        <activity android:name=".mypage_review"></activity>
-=======
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".mypage_review"></activity>
-        <activity android:name=".maincommunity"></activity>
-        <activity android:name=".help_center">
-        </activity>
->>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
+
+        <activity android:name=".mypage_review" />
+        <activity android:name=".book_final" />
+        <activity android:name=".maincommunity" />
+        <activity android:name=".help_center" />
+        <activity android:name=".show_main" />
+        <activity android:name=".book_seat" />
+        <activity android:name=".book_calender" />
         <activity android:name=".mypage_ticket" />
         <activity android:name=".mypage_main" />
         <activity android:name=".MainActivity2" />

@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,35 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="578dp"
         android:layout_weight="3"
-        android:orientation="vertical">
+        android:gravity="center">
 
         <ViewFlipper
             android:id="@+id/image_slide"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/text1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="연극이름" />
-
-        <TextView
-            android:id="@+id/text2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:text=" 연극 날짜 : " />
-=======
-            android:text="연극날짜" />
->>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
-
     </LinearLayout>
 
     <LinearLayout
@@ -63,26 +41,47 @@
             android:layout_height="wrap_content"
             android:text="고객센터" />
 
-<<<<<<< HEAD
-=======
+
         <Button
             android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="게시판" />
 
->>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
-        android:background="#0000FF"
-        android:gravity="center">
+        android:background="#FFD4D4"
+        android:gravity="left"
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="랭킹 추천"
+            android:fontFamily="@font/godob"
+            android:padding="5dp"></TextView>
+
+
+        <Gallery
+            android:id="@+id/gallery1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spacing="5dp" />
+
+        <ImageView
+            android:id="@+id/rank_poster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+        </ImageView>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

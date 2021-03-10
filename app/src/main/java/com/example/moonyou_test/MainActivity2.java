@@ -2,14 +2,10 @@ package com.example.moonyou_test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-<<<<<<< HEAD
-import android.os.Bundle;
-=======
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
->>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -17,8 +13,6 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_before);
-<<<<<<< HEAD
-=======
 
         Button button1 = (Button) findViewById(R.id.showmain_btn);
         button1.setOnClickListener(new View.OnClickListener(){
@@ -29,6 +23,5 @@ public class MainActivity2 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
->>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
     }
 }

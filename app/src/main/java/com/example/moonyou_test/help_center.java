@@ -146,12 +146,13 @@ public class help_center extends AppCompatActivity {
                 Map<String, Object> comm = new HashMap<>();
                 comm.put("QA", QA);
                 comm.put("userid", email);
+                comm.put("answer", "");
+                comm.put("state","답변대기");
                 db.collection("QA")
-                        .document("usercs")
-                        .set(comm)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        .add(comm)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
-                            public void onSuccess(Void aVoid) {
+                            public void onSuccess(DocumentReference documentReference) {
                                 Log.d("Faber", "Document ID = " + comm);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -184,21 +185,42 @@ public class help_center extends AppCompatActivity {
     }
 
     private void mycs() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = fAuth.getCurrentUser();
         String email = user.getEmail();
-        CollectionReference userdb= db.collection("QA");
-                Query USERDATE= userdb.whereEqualTo("userid", email);
-        USERDATE.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for(QueryDocumentSnapshot document: task.getResult()){
-                        Log.d("data = ",  " => " + document.getData());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        ArrayList<String> commlist = new ArrayList<String>();
+        ArrayList<String> statelist = new ArrayList<String>();
+        db.collection("QA")
+                .whereEqualTo("userid", email)
+                .get().
+                addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+                            for (QueryDocumentSnapshot document : task.getResult())
+                            {
+                                getset QnA = document.toObject(getset.class);
+                                Log.d("FABERJOOOOOOOO","Hello" + QnA.getState());
+                                String comm = QnA.getQA();
+                                String state = QnA.getState();
+                                commlist.add(comm);
+                                statelist.add(state);
+                            }
+                        }
+                        else
+                        {
+                            Log.d("faberJOOOOOOO", "Error : ", task.getException());
+                        }
+
+                        RecyclerView recyclerView = findViewById(R.id.recyclerview2);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(help_center.this));
+
+                        myhelpadapter adapter = new myhelpadapter(commlist, statelist);
+                        recyclerView.setAdapter(adapter);
                     }
-                }
-            }
-        });
-}}
+                });
+    }
+}
 
 

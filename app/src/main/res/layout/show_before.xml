@@ -33,10 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-<<<<<<< HEAD
-=======
         android:id="@+id/showmain_btn"
->>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
         android:text="연극 리스트 보기">
 
     </Button>
@@ -61,12 +58,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="14dp"
-<<<<<<< HEAD
-        android:layout_weight="5">
-=======
         android:layout_weight="5"
         android:gravity="center">
->>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
 
         <Button
             android:id="@+id/home"

@@ -30,31 +30,19 @@
             android:id="@+id/infochange_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:text="정보 수정" />
-=======
             android:text="정보수정" />
->>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
 
         <Button
             android:id="@+id/myticket_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:text="내 티켓" />
-=======
             android:text="내티켓" />
->>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
 
         <Button
             android:id="@+id/myreview_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:text="나의 리뷰" />
-=======
             android:text="나의리뷰" />
->>>>>>> c3fca53c0029a91d7d21f374cfaf44a4857e93ff
     </LinearLayout>
 
     <LinearLayout

@@ -60,8 +60,8 @@ public class help_center extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 // TODO : process tab selection event.
-                int pos = tab.getPosition();
-                changeView(pos);
+                int pos = tab.getPosition(); //jdk, 3.17 16:30,"현재 탭 번호탭 불러오기"
+                changeView(pos); //jdk, 3.17 16:30,"탭 번호 변경시 함수 실행"
             }
 
             @Override
@@ -111,25 +111,25 @@ public class help_center extends AppCompatActivity {
         QA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder ad = new AlertDialog.Builder(help_center.this);
-                ad.setTitle("문의내용");       // 제목
-                final EditText et = new EditText(help_center.this);
-                ad.setView(et);
+                AlertDialog.Builder ad = new AlertDialog.Builder(help_center.this); //jdk, 3.17 16:30,"경고창 인텐트"
+                ad.setTitle("문의내용");       // 제목 //jdk, 3.17 16:30,"경고창 제목 설정 "
+                final EditText et = new EditText(help_center.this); //jdk, 3.17 16:30,"경고창 내 텍스트창 선언"
+                ad.setView(et); //jdk, 3.17 16:30,"경고창 출력"
 
                 // 확인 버튼 설정
-                ad.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                ad.setPositiveButton("Yes", new DialogInterface.OnClickListener() { //jdk, 3.17 16:30,"YES버튼 클릭 시"
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String text = et.getText().toString();
-                        addData(text);
-                        mycs();
+                        String text = et.getText().toString(); //jdk, 3.17 16:30,"경고창 텍스트 창 내의 텍스트 저장"
+                        addData(text); //jdk, 3.17 16:30," 저장된 텍스트를 전달하여 db에 저장하는 함수 실행 "
+                        mycs(); //jdk, 3.17 16:30,"1:1문의 새로고침"
                         dialog.dismiss();     //닫기
                         // Event
                     }
                 });
 
                 // 취소 버튼 설정
-                ad.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                ad.setNegativeButton("No", new DialogInterface.OnClickListener() { //jdk, 3.17 16:30,"No 버튼 클릭 시"
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();     //닫기
@@ -140,19 +140,19 @@ public class help_center extends AppCompatActivity {
             }
 
             private void addData(String QA) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                FirebaseUser user = fAuth.getCurrentUser();
-                String email = user.getEmail();
-                Map<String, Object> comm = new HashMap<>();
-                comm.put("QA", QA);
-                comm.put("userid", email);
-                comm.put("answer", "");
-                comm.put("state","답변대기");
-                db.collection("QA")
-                        .add(comm)
+                FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30,"파이어스토어 연결"
+                FirebaseUser user = fAuth.getCurrentUser(); //jdk, 3.17 16:30," 현재 로그인 한 유저 정보 불러오기"
+                String email = user.getEmail(); //jdk, 3.17 16:30," 유저의 이메일 저장"
+                Map<String, Object> comm = new HashMap<>(); //jdk, 3.17 16:30," 해쉬맵 선언"
+                comm.put("QA", QA); //jdk, 3.17 16:30,"QA키에 문의내용 저장"
+                comm.put("userid", email); //jdk, 3.17 16:30,"userid키에 유저 이메일 저장"
+                comm.put("answer", ""); //jdk, 3.17 16:30,"answer키에 값 없이 저장"
+                comm.put("state","답변대기"); //jdk, 3.17 16:30,"state키에 답변상태 저장"
+                db.collection("QA") //jdk, 3.17 16:30,"QA 컬렉션에"
+                        .add(comm) //jdk, 3.17 16:30,"임의의 문서ID로 데이터 추가"
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
+                            public void onSuccess(DocumentReference documentReference) { //jdk, 3.17 16:30,"성공시"
                                 Log.d("Faber", "Document ID = " + comm);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -185,27 +185,27 @@ public class help_center extends AppCompatActivity {
     }
 
     private void mycs() {
-        FirebaseUser user = fAuth.getCurrentUser();
-        String email = user.getEmail();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ArrayList<String> commlist = new ArrayList<String>();
-        ArrayList<String> statelist = new ArrayList<String>();
-        db.collection("QA")
-                .whereEqualTo("userid", email)
-                .get().
+        FirebaseUser user = fAuth.getCurrentUser(); //jdk, 3.17 16:30,"현재 로그인 유저 불러오기"
+        String email = user.getEmail(); //jdk, 3.17 16:30,"유저 이메일 저장"
+        FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30,"파이어스토어 연결 "
+        ArrayList<String> commlist = new ArrayList<String>(); //jdk, 3.17 16:30,"내용 arraylist 선언"
+        ArrayList<String> statelist = new ArrayList<String>(); //jdk, 3.17 16:30,"상태 arraylist 선언"
+        db.collection("QA") //jdk, 3.17 16:30,"QA 컬렉션에서"
+                .whereEqualTo("userid", email) //jdk, 3.17 16:30,"userid 필드 값이 로그인한 유저 이메일과 동일한"
+                .get().//jdk, 3.17 16:30,"데이터 불러오기"
                 addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful())
+                        if(task.isSuccessful()) //jdk, 3.17 16:30,"성공시"
                         {
-                            for (QueryDocumentSnapshot document : task.getResult())
+                            for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"결과를  한 줄 씩document에"
                             {
-                                getset QnA = document.toObject(getset.class);
+                                getset QnA = document.toObject(getset.class); //jdk, 3.17 16:30,"document를 getset클래스 형식으로 QnA에 저장"
                                 Log.d("FABERJOOOOOOOO","Hello" + QnA.getState());
-                                String comm = QnA.getQA();
-                                String state = QnA.getState();
-                                commlist.add(comm);
-                                statelist.add(state);
+                                String comm = QnA.getQA(); //jdk, 3.17 16:30,"문의 내용 comm에 저장"
+                                String state = QnA.getState();//jdk, 3.17 16:30,"답변 상태 state에 저장"
+                                commlist.add(comm); //jdk, 3.17 16:30,"문의 내용을 arraylist에 추가"
+                                statelist.add(state);//jdk, 3.17 16:30,"답변상태를 arraylist에 추가"
                             }
                         }
                         else
@@ -213,11 +213,11 @@ public class help_center extends AppCompatActivity {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
 
-                        RecyclerView recyclerView = findViewById(R.id.recyclerview2);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(help_center.this));
+                        RecyclerView recyclerView = findViewById(R.id.recyclerview2); //jdk, 3.17 16:30,"리사이클러 뷰 선언 및 연결"
+                        recyclerView.setLayoutManager(new LinearLayoutManager(help_center.this)); //jdk, 3.17 16:30,"리사이클러 뷰의 전체 레이아웃 관리자 선언 및 액티비티 정보 전달"
 
-                        myhelpadapter adapter = new myhelpadapter(commlist, statelist);
-                        recyclerView.setAdapter(adapter);
+                        myhelpadapter adapter = new myhelpadapter(commlist, statelist); //jdk, 3.17 16:30,"리사이클러 뷰 데이터 어댑터에 commlist와 statelist 전달"
+                        recyclerView.setAdapter(adapter); //jdk, 3.17 16:30,"리사이클러 뷰에 어댑터 설정"
                     }
                 });
     }

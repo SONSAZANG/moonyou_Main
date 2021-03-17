@@ -1,10 +1,13 @@
 package com.example.moonyou_test;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,10 +16,26 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.StorageReference;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.Query.Direction;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 
 public class MainActivity<fAuth> extends AppCompatActivity {
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    static ArrayList<String> image_Path = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +43,36 @@ public class MainActivity<fAuth> extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //랭킹포스터 스피너
-        Gallery gallery1 = (Gallery) findViewById(R.id.gallery1);
-        MyGalleryAdapter galAdapter = new MyGalleryAdapter(this);
-        gallery1.setAdapter(galAdapter);
+        FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30, "DB 연결"
+        db.collection("show_info") //jdk, 3.17 16:30,"show_info 컬렉션 지정"
+                .orderBy("hit", Direction.DESCENDING) //jdk, 3.17 16:30,"hit로 내림차순 정렬"
+                .limit(5) //jdk, 3.17 16:30,"5개까지만"
+                .get() //jdk, 3.17 16:30,"db 불러오기"
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() //jdk, 3.17 16:30,"작업 완료시"
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if(task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
+                        {
+                            for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
+                            {
+                                show_info hit = document.toObject(show_info.class); //jdk, 3.17 16:30,"불러운 데이터 document를 show_info 클래스 형식으로 hit 이름으로 저장"
+                                Log.d("FABERJOOOOOOOO","Hello" + hit.getImage_Path());
+                                String comm = hit.getImage_Path(); //jdk, 3.17 16:30,"hit에서 이미지 경로 받아 comm에 저장"
+                                image_Path.add(comm); //jdk, 3.17 16:30,"arraylist image_Path에 인덱스 추가"
+                                Log.d("faberJOOOOOOO", "MMMMMMMMMMMMMMMMMMMMMMMMM");
+                            }
+                        }
+                        else
+                        {
+                            Log.d("faberJOOOOOOO", "Error : ", task.getException());
+                        }
+                        Gallery gallery1 = (Gallery) findViewById(R.id.gallery1); //jdk, 3.17 16:30,"갤러리 뷰 선언 및 연결"
+                        MyGalleryAdapter galAdapter = new MyGalleryAdapter(MainActivity.this); //jdk, 3.17 16:30," 액티비티 데이터를 갤러리 어댑터에 넘기고 어댑터 선언"
+                        gallery1.setAdapter(galAdapter); //jdk, 3.17 16:30,"갤러리 뷰에 어댑터 지정"
+                    }
+                });
 
         Button button1 = (Button) findViewById(R.id.show);
         button1.setOnClickListener(new View.OnClickListener() {
@@ -98,16 +144,15 @@ public class MainActivity<fAuth> extends AppCompatActivity {
 
     public class MyGalleryAdapter extends BaseAdapter{
         Context context;
-        Integer[] posterID = {R.drawable.rankposter1, R.drawable.rankposter2, R.drawable.rankposter3
-                ,R.drawable.rankposter4,R.drawable.rankposter5};
+        FirebaseStorage storage = FirebaseStorage.getInstance(); //jdk, 3.17 16:30,"저장소 연결"
 
         public MyGalleryAdapter(Context c){
             context = c;
-        }
+        } //jdk, 3.17 16:30,"객체 생성시 액티비티 저장"
 
         @Override
         public int getCount() {
-            return posterID.length;
+            return image_Path.size(); //jdk, 3.17 16:30,"데이터의 수(getView를 실행할 횟 수)"
         }
 
         @Override
@@ -122,14 +167,19 @@ public class MainActivity<fAuth> extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageview2 = new ImageView(context);
-            imageview2.setLayoutParams(new Gallery.LayoutParams(400, 500));
-            imageview2.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imageview2.setPadding(5,5,5,5);
+            Log.d("faberJOOOOOOO", "VVVVVVVVVVVVVVVVVVVVVVV");
+            StorageReference storageref = storage.getReference(); //jdk, 3.17 16:30,"저장소 경로 불러오기"
+            StorageReference pathReference = storageref.child("show_posters/" + image_Path.get(position)); //jdk, 3.17 16:30,"position(n번째 이미지뷰) 별 저장소 경로 설정"
+            ImageView imageview2 = new ImageView(context); //jdk, 3.17 16:30,"이미지 뷰 선언"
+            imageview2.setLayoutParams(new Gallery.LayoutParams(400, 500)); //jdk, 3.17 16:30,"이미지 뷰 크기 설정"
+            imageview2.setScaleType(ImageView.ScaleType.FIT_CENTER); //jdk, 3.17 16:30,"비율 설정"
+            imageview2.setPadding(5,5,5,5); //jdk, 3.17 16:30,"이미지 뷰 여백 설정"
 
-            imageview2.setImageResource(posterID[position]);
 
-            return imageview2;
+
+            Glide.with(context).load(pathReference).into(imageview2); //jdk, 3.17 16:30,"파이어베이스 이미지 로더를 이용해 해당 경로의 이미지를 이미지 뷰에 설정"
+
+            return imageview2; //jdk, 3.17 16:30,"이미지 뷰 반환"
         }
     }
     public void logout(View view) {

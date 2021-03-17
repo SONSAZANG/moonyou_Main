@@ -6,52 +6,77 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="101dp"
+        android:layout_height="251dp"
         android:layout_weight="3"
         android:layout_gravity="center"
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/show_mainImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/top_image01"></ImageView>
+            ></ImageView>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/text1"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="연극 정보" />
-    <TextView
-        android:id="@+id/text2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공연이름: "
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/show_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="연극 날짜 : " />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공연기간: "
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/show_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            />
+    </LinearLayout>
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/showmain_btn"
-        android:text="연극 리스트 보기">
+        android:text="연극 정보 보기">
 
     </Button>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="344dp"
+        android:layout_height="194dp"
         android:layout_weight="4"
-        android:background="#0000FF"
+        android:background="#FFEFBA"
         android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="연극 랭킹">
-
-        </TextView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

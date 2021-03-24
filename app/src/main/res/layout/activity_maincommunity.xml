@@ -1,115 +1,119 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/imgspace"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:gravity="center">
         <ViewFlipper
             android:id="@+id/image_slide2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <LinearLayout
+
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:background="#005500"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgspace"
+        android:id="@+id/bord">
 
-        >
-
-        <Button
-
-            android:id="@+id/allpost"
-            android:layout_width="99dp"
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabCOMMItem1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="전체글"
-            android:layout_gravity="center"
-            android:layout_margin="2dp"
-          />
-
-        <Button
-            android:id="@+id/hotpost"
-            android:layout_width="99dp"
+            android:textAlignment="center"
+            />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabCOMMItem2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="인기글"
-            android:layout_gravity="center"
-            android:layout_margin="1dp"
-          />
-        <Button
-            android:id="@+id/Noticecs"
-            android:layout_width="99dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="1dp"
-            android:text="공지" />
-        <Button
-            android:id="@+id/mypost"
-            android:layout_width="99dp"
-            android:layout_height="wrap_content"
-            android:text="내가쓴글"
-            android:layout_gravity="center"
-            android:layout_margin="1dp"
-        />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_weight="1"
-        android:background="#0000cc"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="글제목"
-            android:textSize="20sp"
-            android:textColor="#ffffff"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"/>
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="작성자"
-            android:textSize="20sp"
-            android:layout_marginStart="150dp"
-            android:textColor="#ffffff"
+            android:textAlignment="center"
             />
-        <TextView
-            android:layout_gravity="center"
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabCOMMItem3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="작성일"
-            android:textSize="20sp"
-            android:layout_marginStart="60dp"
-            android:textColor="#ffffff"
+            android:text="공지"
+            android:textAlignment="center"
             />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_weight="1"
-        android:background="#0000FF"
-        android:gravity="center">
-        <ScrollView
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabCOMMItem4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/scroll"
+            android:text="내가 쓴 글"
+            android:textAlignment="center"
             />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+    </com.google.android.material.tabs.TabLayout>
 
-        android:layout_weight="2"
-     >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="525dp"
+        android:layout_below="@id/bord"
+        android:id="@+id/all_board"
+        android:visibility="visible">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/all_posts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="525dp"
+        android:layout_below="@id/bord"
+        android:id="@+id/hot_board"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hot_posts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="#ffffff"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="525dp"
+        android:layout_below="@id/bord"
+        android:id="@+id/Notice_board"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/notice_posts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="#ffffff"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="525dp"
+        android:layout_below="@id/bord"
+        android:id="@+id/my_board"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_posts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"/>
+    </FrameLayout>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/navi">
+
         <Button
             android:id="@+id/home"
             android:layout_width="100dp"
@@ -121,7 +125,8 @@
             android:id="@+id/community"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="커뮤니티"
+            android:layout_marginLeft="100dp"
+            android:text="글쓰기"
             android:layout_margin="1px"
             android:layout_gravity="bottom"/>
 
@@ -139,8 +144,6 @@
             android:layout_height="wrap_content"
             android:text="마이페이지"
             android:layout_margin="1px"
-            android:layout_gravity="bottom"
-            />
-        ></LinearLayout>
-
-</LinearLayout>
+            android:layout_gravity="bottom" />
+    </LinearLayout>
+</RelativeLayout>

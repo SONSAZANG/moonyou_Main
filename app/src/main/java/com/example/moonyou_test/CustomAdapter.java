@@ -1,42 +1,48 @@
 package com.example.moonyou_test;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
-
-    public interface OnListItemLongSelectedInterface {
-        void onItemLongSelected(View v, int position);
-    }
 
     public interface OnListItemSelectedInterface {
         void onItemSelected(View v, int position);
     }
 
     private OnListItemSelectedInterface mListener;
-    private OnListItemLongSelectedInterface mLongListener;
 
-    private ArrayList<User> arrayList;
+    private ArrayList<show_info> arrayList;
     private Context context;
 
-    public CustomAdapter(ArrayList<User> arrayList, Context context
-    , OnListItemSelectedInterface listener
-    , OnListItemLongSelectedInterface longListener) {
+    public CustomAdapter(ArrayList<show_info> arrayList, Context context, OnListItemSelectedInterface listener) {
         this.mListener = listener;
-        this.mLongListener = longListener;
         this.arrayList = arrayList;
         this.context = context;
+
     }
 
     @NonNull
@@ -48,17 +54,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-
-        Glide.with(holder.itemView)
-                .load(arrayList.get(position).getProfile())
-                .into(holder.iv_profile);
-        holder.tv_id.setText(arrayList.get(position).getId());
-        holder.tv_runtime.setText(String.valueOf(arrayList.get(position).getRuntime()));
-        holder.tv_period.setText(arrayList.get(position).getPeriod());
-
-
-
+    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position)
+    {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageref = storage.getReference();
+        show_info item = arrayList.get(position) ;  // 생성자클래스이름 변수= 리스트명.
+        StorageReference pathReference = storageref.child(item.getImage_Path()); //jdk, 3.17 16:30,"position(n번째 이미지뷰) 별 저장소 경로 설정"
+        Glide.with(context).load(pathReference).into(holder.iv_profile);
+        holder.tv_id.setText(item.getTitle());
+        holder.tv_runtime.setText(String.valueOf(item.getRuntime()));
+        holder.tv_period.setText(item.getPeriod());
     }
 
     @Override
@@ -88,15 +93,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                     mListener.onItemSelected(v, getAdapterPosition());
                 }
             });
-
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    mLongListener.onItemLongSelected(v, getAdapterPosition());
-                    return false;
-                }
-            });
-
         }
     }
 }

@@ -169,7 +169,7 @@ public class MainActivity<fAuth> extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             Log.d("faberJOOOOOOO", "VVVVVVVVVVVVVVVVVVVVVVV");
             StorageReference storageref = storage.getReference(); //jdk, 3.17 16:30,"저장소 경로 불러오기"
-            StorageReference pathReference = storageref.child("show_posters/" + image_Path.get(position)); //jdk, 3.17 16:30,"position(n번째 이미지뷰) 별 저장소 경로 설정"
+            StorageReference pathReference = storageref.child(image_Path.get(position)); //jdk, 3.17 16:30,"position(n번째 이미지뷰) 별 저장소 경로 설정"
             ImageView imageview2 = new ImageView(context); //jdk, 3.17 16:30,"이미지 뷰 선언"
             imageview2.setLayoutParams(new Gallery.LayoutParams(400, 500)); //jdk, 3.17 16:30,"이미지 뷰 크기 설정"
             imageview2.setScaleType(ImageView.ScaleType.FIT_CENTER); //jdk, 3.17 16:30,"비율 설정"

@@ -1,2 +1,3 @@
-include ':app'
+include ':richwysiwygeditor'
 rootProject.name = "moonyou_test"
+include ':app'

@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".board_write"/>
         <activity android:name=".maincommpage2"/>
         <activity android:name=".mypage_review" />
         <activity android:name=".book_final" />

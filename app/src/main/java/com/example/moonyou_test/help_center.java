@@ -42,7 +42,6 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.opencensus.tags.Tag;
 
 public class help_center extends AppCompatActivity {
     FirebaseAuth fAuth = FirebaseAuth.getInstance();

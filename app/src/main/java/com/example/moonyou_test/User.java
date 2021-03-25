@@ -1,42 +1,42 @@
 package com.example.moonyou_test;
 
 public class User {
-    private String profile;
-    private String id;
-    private int runtime;
-    private String period;
-
-    public User(){}
-
-    public String getProfile() {
-        return profile;
+    public String getEmail() {
+        return email;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getRuntime() {
-        return runtime;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setPw(int pw) {
-        this.runtime = pw;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public String getPeriod() {
-        return period;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserName(String userName) {
-        this.period = userName;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    private String email;
+    private String name;
+    private String nickname;
+    private String password;
+
+
 }

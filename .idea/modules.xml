@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/moonyou_test.iml" filepath="$PROJECT_DIR$/.idea/modules/moonyou_test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/moonyou_test.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/moonyou_test.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/richwysiwygeditor/moonyou_test.richwysiwygeditor.iml" filepath="$PROJECT_DIR$/.idea/modules/richwysiwygeditor/moonyou_test.richwysiwygeditor.iml" />
     </modules>
   </component>
 </project>

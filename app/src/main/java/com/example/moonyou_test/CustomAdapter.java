@@ -63,7 +63,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         Glide.with(context).load(pathReference).into(holder.iv_profile);
         holder.tv_id.setText(item.getTitle());
         holder.tv_runtime.setText(String.valueOf(item.getRuntime()));
-        holder.tv_period.setText(item.getPeriod());
+        holder.tv_period.setText((item.getStartday()) + " ~ " + (item.getFinishday()));
     }
 
     @Override

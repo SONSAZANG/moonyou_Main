@@ -65,7 +65,7 @@ public class show_main extends AppCompatActivity {
                             StorageReference pathReference = storageref.child(show_info.getImage_Path()); //jdk, 3.17 16:30,"position(n번째 이미지뷰) 별 저장소 경로 설정"
                             Glide.with(show_main.this).load(pathReference).into(show_poster);
                             title_label.setText(show_info.getTitle());
-                            period_label.setText(String.valueOf(show_info.getPeriod()));
+                            period_label.setText((show_info.getStartday()) + " ~ " + (show_info.getFinishday()));
                             runtime_label.setText(String.valueOf(show_info.getRuntime()));
                         }
                         else
@@ -81,6 +81,7 @@ public class show_main extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),book_calender.class);
+                intent.putExtra("show_id", show_info.getShow_id());
                 startActivity(intent);
             }
         });

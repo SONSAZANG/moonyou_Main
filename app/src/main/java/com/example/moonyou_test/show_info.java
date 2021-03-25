@@ -5,6 +5,16 @@ public class show_info {
     private String title;
     private String period;
     private String show_id;
+    private String startday;
+    private String finishday;
+
+    public String getStartday() { return startday; }
+
+    public void setStartday(String startday) { this.startday = startday; }
+
+    public String getFinishday() { return finishday; }
+
+    public void setFinishday(String finishday) { this.finishday = finishday; }
 
     public String getShow_id() {
         return show_id;

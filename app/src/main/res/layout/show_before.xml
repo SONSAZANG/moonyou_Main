@@ -1,8 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FFEB3B">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,51 +65,75 @@
 
     </Button>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C6C6C6"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="194dp"
         android:layout_weight="4"
-        android:background="#FFEFBA"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C6C6C6"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="14dp"
         android:layout_weight="5"
-        android:gravity="center">
-
+        android:gravity="center"
+        android:background="@color/black">
         <Button
             android:id="@+id/home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="홈" />
+            android:text="홈"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:drawableTop="@drawable/ic_baseline_home_24"
+            style="?android:attr/borderlessButtonStyle"
+            />
 
         <Button
             android:id="@+id/community"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="커뮤니티" />
+            android:text="커뮤니티"
+            android:textColor="@color/white"
+            android:drawableTop="@drawable/ic_baseline_3p_24"
+            style="?android:attr/borderlessButtonStyle"
+            />
 
         <Button
-            android:id="@+id/fan_menu"
+            android:id="@+id/mypage_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="배우 팬" />
+            android:text="마이"
+            android:textColor="@color/white"
+            android:drawableTop="@drawable/ic_baseline_person_24"
+            style="?android:attr/borderlessButtonStyle"/>
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="logout"
-            android:text="Logout" />
-        >
-    </LinearLayout>
+            android:text="로그아웃"
+            android:textColor="@color/white"
+            android:drawableTop="@drawable/ic_baseline_close_24"
+            style="?android:attr/borderlessButtonStyle"/>
+        ></LinearLayout>
 
 </LinearLayout>

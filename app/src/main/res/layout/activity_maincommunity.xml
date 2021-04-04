@@ -122,7 +122,7 @@
             android:layout_margin="2dp"
             android:layout_gravity="bottom"/>
         <Button
-            android:id="@+id/community"
+            android:id="@+id/write_board"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"

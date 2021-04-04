@@ -47,6 +47,7 @@ public class maincommunity extends AppCompatActivity
     FrameLayout my_board;
     FrameLayout all_board;
     ArrayList<boardgetset> boardlist = new ArrayList<>(); //User 객체를 담을 어레이 리스트결
+    Button writebtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,16 @@ public class maincommunity extends AppCompatActivity
         for(int image : images) {
             fllipperImages(image);
         }
+
+        writebtn=findViewById(R.id.write_board);
+        writebtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),board_write.class);
+                startActivity(intent);
+            }
+        });
+
     }  //ONCRETE 끝
 
 

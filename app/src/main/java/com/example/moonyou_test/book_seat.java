@@ -25,25 +25,17 @@ public class book_seat extends AppCompatActivity implements View.OnClickListener
     ViewGroup layout;
 
     String seats =
-              "_UUUUUUAAAAARRRR_/"
-            + "_________________/"
-            + "UU__AAAARRRRR__RR/"
-            + "UU__UUUAAAAAA__AA/"
-            + "AA__AAAAAAAAA__AA/"
-            + "AA__AARUUUURR__AA/"
-            + "UU__UUUA_RRRR__AA/"
-            + "AA__AAAA_RRAA__UU/"
-            + "AA__AARR_UUUU__RR/"
-            + "AA__UUAA_UURR__RR/"
-            + "_________________/"
-            + "UU_AAAAAAAUUUU_RR/"
-            + "RR_AAAAAAAAAAA_AA/"
-            + "AA_UUAAAAAUUUU_AA/"
-            + "AA_AAAAAAUUUUU_AA/"
-            + "_________________/";
+              "RARA_URURURURU_ARAR/"
+            + "RARA_ARURURURA_ARAR/"
+            + "RARA_ARARARARA_ARAR/"
+            + "RARA_ARARARARA_ARAR/"
+            + "RARA_ARARARARA_ARAR/"
+            + "RARA_ARARARARA_ARAR/"
+            + "RARA_ARARARARA_ARAR/"
+            + "RARA_ARARARARA_ARAR/";
 
     List<TextView> seatViewList = new ArrayList<>();
-    int seatSize = 100;
+    int seatSize = 150;
     int seatGaping = 10;
 
     int STATUS_AVAILABLE = 1;

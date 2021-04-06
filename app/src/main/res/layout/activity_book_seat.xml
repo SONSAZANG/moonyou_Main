@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="좌석 선택"
-            ></Button>
+            />
 
         <LinearLayout
             android:layout_width="match_parent"

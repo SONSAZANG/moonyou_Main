@@ -42,14 +42,15 @@ public class book_calender extends AppCompatActivity {
     FirebaseStorage storage;
     String strDate;
     String finDate;
+    String date;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_calender);
 
-        Intent intent = getIntent();
-        String showID = intent.getStringExtra("show_id"); // id가져오기
+        Intent intent1 = getIntent();
+        String showID = intent1.getStringExtra("show_id"); // id가져오기
         Toast.makeText(getApplicationContext(), showID, Toast.LENGTH_SHORT).show();
 
         start = findViewById(R.id.startDay);
@@ -59,7 +60,6 @@ public class book_calender extends AppCompatActivity {
         storageref = storage.getReference();
 
         CalendarView calendarView = (CalendarView) findViewById(R.id.simple_calendarview);
-        long selectedDate = calendarView.getDate();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("show_info")
@@ -79,9 +79,6 @@ public class book_calender extends AppCompatActivity {
                             finish.setText(show_info.getFinishday());
                             Log.d("sonsazang", show_info.getStartday());
 
-                            CalendarView calendarView = (CalendarView) findViewById(R.id.simple_calendarview);
-                            long selectedDate = calendarView.getDate();
-
                             strDate = show_info.getStartday();
                             finDate = show_info.getFinishday();
                             SimpleDateFormat dateFormat = new SimpleDateFormat("yy.MM.dd");
@@ -92,40 +89,29 @@ public class book_calender extends AppCompatActivity {
                             calendarView.setMaxDate(finLong);
                             calendarView.setMinDate(strLong);
 
+
                         }
                         else
                         {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
-
                     }
                 });
-
-
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-
-                String date = year + "/" + month + "/" + dayOfMonth;
-                Intent intent = new Intent(book_calender.this, book_seat.class);
-                intent.putExtra("date", date);
-
+                date = year + "/" + (month + 1) + "/" + dayOfMonth;
                 Button button1 = (Button) findViewById(R.id.dateconfirm_btn);
                 button1.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
+                        Intent intent = new Intent(book_calender.this, book_seat.class);
+                        intent.putExtra("date", date);
                         startActivity(intent);
                     }
                 });
-
             }
         });
-
-
-
-
-
-
     }
 }

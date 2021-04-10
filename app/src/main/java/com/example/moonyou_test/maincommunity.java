@@ -38,7 +38,6 @@ import java.util.ArrayList;
 public class maincommunity extends AppCompatActivity
 {
 
-    private View navi;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -46,6 +45,7 @@ public class maincommunity extends AppCompatActivity
     FrameLayout notice_board;
     FrameLayout my_board;
     FrameLayout all_board;
+    FrameLayout navi;
     ArrayList<boardgetset> boardlist = new ArrayList<>(); //User 객체를 담을 어레이 리스트결
     Button writebtn;
 
@@ -57,8 +57,12 @@ public class maincommunity extends AppCompatActivity
         notice_board = (FrameLayout) findViewById(R.id.Notice_board);
         my_board = (FrameLayout) findViewById(R.id.my_board);
         all_board = (FrameLayout) findViewById(R.id.all_board);
+        navi = (FrameLayout) findViewById(R.id.navi);
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.bord);
+
+        getboard();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -101,6 +105,8 @@ public class maincommunity extends AppCompatActivity
                 hot_board.setVisibility(View.GONE);
                 notice_board.setVisibility(View.GONE);
                 my_board.setVisibility(View.GONE);
+                navi.setVisibility(View.GONE);
+                navi.setVisibility(View.VISIBLE);
                 getboard();
                 break;
             case 1:
@@ -108,18 +114,24 @@ public class maincommunity extends AppCompatActivity
                 hot_board.setVisibility(View.VISIBLE);
                 notice_board.setVisibility(View.GONE);
                 my_board.setVisibility(View.GONE);
+                navi.setVisibility(View.GONE);
+                navi.setVisibility(View.VISIBLE);
                 break;
             case 2:
                 all_board.setVisibility(View.GONE);
                 hot_board.setVisibility(View.GONE);
                 notice_board.setVisibility(View.VISIBLE);
                 my_board.setVisibility(View.GONE);
+                navi.setVisibility(View.GONE);
+                navi.setVisibility(View.VISIBLE);
                 break;
             case 3:
                 all_board.setVisibility(View.GONE);
                 hot_board.setVisibility(View.GONE);
                 notice_board.setVisibility(View.GONE);
                 my_board.setVisibility(View.VISIBLE);
+                navi.setVisibility(View.GONE);
+                navi.setVisibility(View.VISIBLE);
                 break;
         }
     }

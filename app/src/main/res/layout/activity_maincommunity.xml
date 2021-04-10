@@ -1,14 +1,14 @@
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/imgspace"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:gravity="center">
+
         <ViewFlipper
             android:id="@+id/image_slide2"
             android:layout_width="match_parent"
@@ -16,134 +16,142 @@
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/bord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgspace"
-        android:id="@+id/bord">
+        app:layout_constraintTop_toBottomOf="@id/imgspace">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabCOMMItem1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="전체글"
-            android:textAlignment="center"
-            />
+            android:textAlignment="center" />
+
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabCOMMItem2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="인기글"
-            android:textAlignment="center"
-            />
+            android:textAlignment="center" />
+
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabCOMMItem3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="공지"
-            android:textAlignment="center"
-            />
+            android:textAlignment="center" />
+
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabCOMMItem4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내가 쓴 글"
-            android:textAlignment="center"
-            />
+            android:textAlignment="center" />
     </com.google.android.material.tabs.TabLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="525dp"
-        android:layout_below="@id/bord"
         android:id="@+id/all_board"
-        android:visibility="visible">
-
+        android:layout_width="match_parent"
+        android:layout_height="460dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/bord"
+        app:layout_constraintBottom_toTopOf="@+id/navi">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/all_posts"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff" />
+            android:layout_height="460dp"
+            android:background="#ffffff"/>
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/hot_board"
         android:layout_width="match_parent"
         android:layout_height="525dp"
-        android:layout_below="@id/bord"
-        android:id="@+id/hot_board"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/bord">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hot_posts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:background="#ffffff"/>
+            android:background="#ffffff" />
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/Notice_board"
         android:layout_width="match_parent"
         android:layout_height="525dp"
-        android:layout_below="@id/bord"
-        android:id="@+id/Notice_board"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/bord">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notice_posts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:background="#ffffff"/>
+            android:background="#ffffff" />
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/my_board"
         android:layout_width="match_parent"
         android:layout_height="525dp"
-        android:layout_below="@id/bord"
-        android:id="@+id/my_board"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/bord">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_posts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"/>
+            android:background="#ffffff" />
     </FrameLayout>
-    <LinearLayout
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
+
+    <FrameLayout
+        android:id="@+id/navi"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/navi">
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/home"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="홈"
-            android:layout_margin="2dp"
-            android:layout_gravity="bottom"/>
-        <Button
-            android:id="@+id/write_board"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:text="글쓰기"
-            android:layout_margin="1px"
-            android:layout_gravity="bottom"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/fanpage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="배우팬게시판"
-            android:layout_margin="1px"
-            android:layout_gravity="bottom"/>
+            <Button
+                android:id="@+id/home"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="2dp"
+                android:text="홈" />
 
-        <Button
-            android:id="@+id/mypage_btn"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="마이페이지"
-            android:layout_margin="1px"
-            android:layout_gravity="bottom" />
-    </LinearLayout>
-</RelativeLayout>
+            <Button
+                android:id="@+id/write_board"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="1px"
+                android:layout_marginLeft="100dp"
+                android:text="글쓰기" />
+
+            <Button
+                android:id="@+id/fanpage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="1px"
+                android:text="배우팬게시판" />
+
+            <Button
+                android:id="@+id/mypage_btn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="1px"
+                android:text="마이페이지" />
+        </LinearLayout>
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

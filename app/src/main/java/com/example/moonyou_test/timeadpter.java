@@ -64,6 +64,8 @@ public class timeadpter extends RecyclerView.Adapter<timeadpter.itemViewHolder> 
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), book_seat.class);
                 intent.putExtra("date", item.getDate());
+                intent.putExtra("time", item.getTime());
+                intent.putExtra("show_id", item.getShow_id());
                 v.getContext().startActivity(intent);
             }
         });

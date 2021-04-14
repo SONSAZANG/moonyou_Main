@@ -64,6 +64,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.tv_id.setText(item.getTitle());
         holder.tv_runtime.setText(String.valueOf(item.getRuntime()));
         holder.tv_period.setText((item.getStartday()) + " ~ " + (item.getFinishday()));
+        holder.tv_views.setText(String.valueOf(item.getHit()));
     }
 
     @Override
@@ -77,6 +78,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         TextView tv_id;
         TextView tv_runtime;
         TextView tv_period;
+        TextView tv_views;
 
 
         public CustomViewHolder(@NonNull View itemView) {
@@ -85,6 +87,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             this.tv_id = itemView.findViewById(R.id.tv_id);
             this.tv_runtime = itemView.findViewById(R.id.tv_runtime);
             this.tv_period = itemView.findViewById(R.id.tv_period);
+            this.tv_views = itemView.findViewById(R.id.tv_views);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

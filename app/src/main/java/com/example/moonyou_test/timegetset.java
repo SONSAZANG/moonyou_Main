@@ -4,6 +4,7 @@ public class timegetset {
     String time;
     String seat_array;
     String date;
+    private String show_id;
     int total_seat;
     int left_seat;
 
@@ -45,5 +46,13 @@ public class timegetset {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getShow_id() {
+        return show_id;
+    }
+
+    public void setShow_id(String show_id) {
+        this.show_id = show_id;
     }
 }

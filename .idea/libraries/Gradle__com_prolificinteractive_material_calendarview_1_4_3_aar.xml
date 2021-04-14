@@ -2,15 +2,11 @@
   <library name="Gradle: com.prolificinteractive:material-calendarview:1.4.3@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a3e34724434d6af2e8f6b86c25d1e83/jetified-material-calendarview-1.4.3/annotations.zip!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/11a17465222715f779b6caeb27ed2ff3/jetified-material-calendarview-1.4.3/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a3e34724434d6af2e8f6b86c25d1e83/jetified-material-calendarview-1.4.3/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a3e34724434d6af2e8f6b86c25d1e83/jetified-material-calendarview-1.4.3/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a3e34724434d6af2e8f6b86c25d1e83/jetified-material-calendarview-1.4.3/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/11a17465222715f779b6caeb27ed2ff3/jetified-material-calendarview-1.4.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/11a17465222715f779b6caeb27ed2ff3/jetified-material-calendarview-1.4.3/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/11a17465222715f779b6caeb27ed2ff3/jetified-material-calendarview-1.4.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

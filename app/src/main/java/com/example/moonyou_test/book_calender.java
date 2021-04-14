@@ -157,6 +157,7 @@ public class book_calender extends AppCompatActivity {
                             {
                                 timegetset time = document.toObject(timegetset.class);
                                 time.setTime(document.getId());
+                                time.setShow_id(showID);
                                 Toast.makeText(getApplicationContext(),document.getId(), Toast.LENGTH_SHORT).show();
                                 Log.d("FABERJOO", String.valueOf(time.getTime()));
                                 int ls = 0, ts = 0;

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#EFEFEF"
     tools:context=".MainActivity"
     android:orientation="vertical">
@@ -24,23 +25,14 @@
         android:layout_height="1dp"
         android:background="#C6C6C6"/>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/topay_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:backgroundTint="#ef4f4f"
-            android:background="@drawable/button_round"
-            android:textColor="#fff"
-            android:text="좌석 선택"
-            />
-
         <LinearLayout
+            android:id="@+id/selected_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -61,6 +53,43 @@
                 />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/selected_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/selected_date"
+            >
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="선택한 시간 -> " />
+
+            <TextView
+                android:id="@+id/seat_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:text="TextView"
+                />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/topay_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:backgroundTint="#ef4f4f"
+            android:background="@drawable/button_round"
+            android:textColor="#fff"
+            android:text="좌석 선택"
+            app:layout_constraintTop_toBottomOf="@+id/selected_time"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

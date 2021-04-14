@@ -7,6 +7,9 @@ public class show_info {
     private String show_id;
     private String startday;
     private String finishday;
+    private String seat_array;
+    private int runtime;
+    private int hit;
 
     public String getStartday() { return startday; }
 
@@ -23,9 +26,6 @@ public class show_info {
     public void setShow_id(String show_id) {
         this.show_id = show_id;
     }
-
-    private int runtime;
-    private int hit;
 
     public String getImage_Path() {
         return image_Path;
@@ -49,6 +49,14 @@ public class show_info {
 
     public void setPeriod(String period) {
         this.period = period;
+    }
+
+    public String getSeat_array() {
+        return seat_array;
+    }
+
+    public void setSeat_array(String seat_array) {
+        this.seat_array = seat_array;
     }
 
     public int getRuntime() {

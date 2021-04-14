@@ -72,6 +72,8 @@ public class book_seat extends AppCompatActivity implements View.OnClickListener
             public void onClick(View v) {
                 intent.putExtra("select", selectedIds);
                 intent.putExtra("date", date);
+                intent.putExtra("show_id", showID);
+                intent.putExtra("time", time);
                 startActivity(intent);
             }
         });

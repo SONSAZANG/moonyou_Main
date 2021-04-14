@@ -94,6 +94,10 @@
             android:layout_height="match_parent"
             android:padding="20dp">
         </ImageView>
+        <TextView
+            android:id="@+id/rank_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

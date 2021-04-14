@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 
@@ -36,17 +37,17 @@ import java.util.ArrayList;
 public class MainActivity<fAuth> extends AppCompatActivity {
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     static ArrayList<String> image_Path = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //랭킹포스터 스피너
         FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30, "DB 연결"
-        db.collection("show_info") //jdk, 3.17 16:30,"show_info 컬렉션 지정"
-                .orderBy("hit", Direction.DESCENDING) //jdk, 3.17 16:30,"hit로 내림차순 정렬"
-                .limit(5) //jdk, 3.17 16:30,"5개까지만"
+        db.collection("show_info")
+                //jdk, 3.17 16:30,"show_info 컬렉션 지정"
+                .orderBy("hit", Direction.DESCENDING)
+                //jdk, 3.17 16:30,"hit로 내림차순 정렬"
+                .limit(5)//jdk, 3.17 16:30,"5개까지만"
                 .get() //jdk, 3.17 16:30,"db 불러오기"
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() //jdk, 3.17 16:30,"작업 완료시"
                 {

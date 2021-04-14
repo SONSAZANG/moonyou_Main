@@ -39,7 +39,6 @@ public class show_main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_main);
-
         Intent intent = getIntent();
         String showID = intent.getStringExtra("show_id"); // id가져오기
         Toast.makeText(getApplicationContext(), showID, Toast.LENGTH_SHORT).show();
@@ -82,6 +81,7 @@ public class show_main extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),book_calender.class);
                 intent.putExtra("show_id", show_info.getShow_id());
+
                 startActivity(intent);
             }
         });

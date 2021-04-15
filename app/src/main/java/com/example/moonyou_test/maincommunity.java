@@ -2,6 +2,7 @@ package com.example.moonyou_test;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -87,7 +88,23 @@ public class maincommunity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button button1 = (Button) findViewById(R.id.home2);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        Button button2 = (Button) findViewById(R.id.mypage_btn2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), mypage_main.class);
+                startActivity(intent);
+            }
+        });
     }  //ONCRETE 끝
 
 
@@ -155,7 +172,6 @@ public class maincommunity extends AppCompatActivity {
         v_fllipper.setInAnimation(this, android.R.anim.slide_in_left);
         v_fllipper.setOutAnimation(this, android.R.anim.slide_out_right);
     }
-
     private void getboard() {
         boardlist.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance(); //파이어스토어 연결
@@ -163,6 +179,9 @@ public class maincommunity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(this).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
         db.collection("Board")
                 .orderBy("time", Direction.DESCENDING)
                 .get()
@@ -196,6 +215,8 @@ public class maincommunity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(this).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
         db.collection("Notice")
                 .orderBy("time", Direction.DESCENDING)
@@ -207,7 +228,6 @@ public class maincommunity extends AppCompatActivity {
                         {
                             for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
                             {
-
                                 boardgetset board = document.toObject(boardgetset.class);
                                 board.setId(document.getId());
                                 Log.d("FABERJOO", String.valueOf(board.getdId()));
@@ -220,6 +240,7 @@ public class maincommunity extends AppCompatActivity {
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
+
     }
 
     private void getuserwrite() {

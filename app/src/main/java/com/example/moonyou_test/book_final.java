@@ -95,6 +95,32 @@ public class book_final extends AppCompatActivity {
                     }
                 });
 
+        Button button1 = (Button) findViewById(R.id.home2);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button button2 = (Button) findViewById(R.id.mypage_btn2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), mypage_main.class);
+                startActivity(intent);
+            }
+        });
+
+        Button button3 = (Button) findViewById(R.id.community2);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), maincommunity.class);
+                startActivity(intent);
+            }
+        });
 
 
         // date 값 substring 사용해서 문자열 형식 변경

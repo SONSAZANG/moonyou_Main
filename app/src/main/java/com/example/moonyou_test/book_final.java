@@ -50,13 +50,14 @@ public class book_final extends AppCompatActivity {
     ImageView ig1;
     Button btn1;
     Button btn2;
-
+    String img1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_final);
 
         Intent select1 = getIntent();
+
         String select = select1.getStringExtra("select");
         String date = select1.getStringExtra("date");
         showID = select1.getStringExtra("show_id");
@@ -84,7 +85,8 @@ public class book_final extends AppCompatActivity {
                             show_info.setShow_id(showID);
                             //jdk, 3.17 16:30,"position(n번째 이미지뷰) 별 저장소 경로 설정"
                             tx1.setText(show_info.getTitle());
-                            StorageReference pathReference = storageref.child(show_info.getImage_Path()); //jdk, 3.17 16:30,"position(n번째 이미지뷰) 별 저장소 경로 설정"
+                            StorageReference pathReference = storageref.child(show_info.getImage_Path());
+                            img1 = String.valueOf(pathReference);
                             Glide.with(book_final.this).load(pathReference).into(ig1);
                         }
                         else
@@ -95,32 +97,6 @@ public class book_final extends AppCompatActivity {
                     }
                 });
 
-        Button button1 = (Button) findViewById(R.id.home2);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button button2 = (Button) findViewById(R.id.mypage_btn2);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), mypage_main.class);
-                startActivity(intent);
-            }
-        });
-
-        Button button3 = (Button) findViewById(R.id.community2);
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), maincommunity.class);
-                startActivity(intent);
-            }
-        });
 
 
         // date 값 substring 사용해서 문자열 형식 변경
@@ -151,8 +127,8 @@ public class book_final extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 seats_change(date, time, seat_array, seatA);
-                resv_save(date, time, dateA, seatA);
-                show_uphit();
+                resv_save(date, time, dateA, seatA, selectA, img1);
+                show_uphit(seatA);
             }
         });
     }
@@ -197,7 +173,7 @@ public class book_final extends AppCompatActivity {
                 });
     }
 
-    public void resv_save(String date, String time, String dateA, String[] seatA)
+    public void resv_save(String date, String time, String dateA, String[] seatA, String selectA, String img1)
     {
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         FirebaseUser user= fAuth.getCurrentUser();
@@ -206,6 +182,8 @@ public class book_final extends AppCompatActivity {
         resv_info.put("date", dateA);
         resv_info.put("time", time);
         resv_info.put("seatCount", seatA.length);
+        resv_info.put("seatName", selectA);
+        resv_info.put("image", img1);
         for(int i = 1; i <= seatA.length; i++)
         {
             resv_info.put("seat_num" + String.valueOf(i), seatA[i-1] + "번");
@@ -231,7 +209,7 @@ public class book_final extends AppCompatActivity {
         Log.d("aaa", "DocumentSnapshot data: ");
     }
 
-    public void show_uphit()
+    public void show_uphit(String[] seatA)
     {
         db.collection("show_info")
                 .document(showID)
@@ -252,7 +230,7 @@ public class book_final extends AppCompatActivity {
                         DocumentReference docref = db.collection("show_info")
                                 .document(showID);
                         Map<String, Object> hit = new HashMap<>(); //해쉬맵 선언
-                        hit.put("hit", show_info.getHit() + 1);
+                        hit.put("hit", show_info.getHit() + seatA.length);
                         docref.update(hit)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override

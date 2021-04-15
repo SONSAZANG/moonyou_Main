@@ -2,7 +2,6 @@ package com.example.moonyou_test;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,8 +48,6 @@ public class MainActivity2 extends AppCompatActivity implements CustomAdapter.On
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>(); //User 객체를 담을 어레이 리스트
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), new LinearLayoutManager(this).getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
 
         db = FirebaseFirestore.getInstance(); // 파이어베이스 데이터베이스 연동
         arrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
@@ -74,32 +71,6 @@ public class MainActivity2 extends AppCompatActivity implements CustomAdapter.On
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
-        Button button1 = (Button) findViewById(R.id.home1);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button button2 = (Button) findViewById(R.id.mypage_btn1);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), mypage_main.class);
-                startActivity(intent);
-            }
-        });
-
-        Button button3 = (Button) findViewById(R.id.community1);
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), maincommunity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override

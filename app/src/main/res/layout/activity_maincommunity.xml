@@ -58,6 +58,7 @@
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/bord"
         app:layout_constraintBottom_toTopOf="@+id/navi">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/all_posts"
             android:layout_width="match_parent"

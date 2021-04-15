@@ -5,38 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Gallery;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.StorageReference;
-import com.bumptech.glide.Glide;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.Query.Direction;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-public class maincommunity extends AppCompatActivity
-{
+
+public class maincommunity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -46,8 +36,10 @@ public class maincommunity extends AppCompatActivity
     FrameLayout my_board;
     FrameLayout all_board;
     FrameLayout navi;
-    ArrayList<boardgetset> boardlist = new ArrayList<>(); //User 객체를 담을 어레이 리스트결
+    ArrayList<boardgetset> boardlist = new ArrayList<>();
+    ArrayList<boardgetset> noticelist = new ArrayList<>();
     Button writebtn;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +62,12 @@ public class maincommunity extends AppCompatActivity
                 int pos = tab.getPosition();
                 changeView(pos);
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 // do nothing
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 // do nothing
@@ -81,15 +75,15 @@ public class maincommunity extends AppCompatActivity
         });
 
         v_fllipper = findViewById(R.id.image_slide2);
-        for(int image : images) {
+        for (int image : images) {
             fllipperImages(image);
         }
 
-        writebtn=findViewById(R.id.write_board);
-        writebtn.setOnClickListener(new View.OnClickListener(){
+        writebtn = findViewById(R.id.write_board);
+        writebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),board_write.class);
+                Intent intent = new Intent(getApplicationContext(), board_write.class);
                 startActivity(intent);
             }
         });
@@ -121,17 +115,21 @@ public class maincommunity extends AppCompatActivity
                 all_board.setVisibility(View.GONE);
                 hot_board.setVisibility(View.GONE);
                 notice_board.setVisibility(View.VISIBLE);
+                getnotice();
                 my_board.setVisibility(View.GONE);
                 navi.setVisibility(View.GONE);
                 navi.setVisibility(View.VISIBLE);
+
                 break;
             case 3:
                 all_board.setVisibility(View.GONE);
                 hot_board.setVisibility(View.GONE);
                 notice_board.setVisibility(View.GONE);
                 my_board.setVisibility(View.VISIBLE);
+                getuserwrite();
                 navi.setVisibility(View.GONE);
                 navi.setVisibility(View.VISIBLE);
+
                 break;
         }
     }
@@ -143,6 +141,7 @@ public class maincommunity extends AppCompatActivity
             R.drawable.top_image02,
             R.drawable.top_image03
     };
+
     // 이미지 슬라이더 구현 메서드
     public void fllipperImages(int image) {
         ImageView imageView = new ImageView(this);
@@ -153,12 +152,11 @@ public class maincommunity extends AppCompatActivity
         v_fllipper.setAutoStart(true);          // 자동 시작 유무 설정
 
         // animation
-        v_fllipper.setInAnimation(this,android.R.anim.slide_in_left);
-        v_fllipper.setOutAnimation(this,android.R.anim.slide_out_right);
+        v_fllipper.setInAnimation(this, android.R.anim.slide_in_left);
+        v_fllipper.setOutAnimation(this, android.R.anim.slide_out_right);
     }
 
-    private void getboard()
-    {
+    private void getboard() {
         boardlist.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance(); //파이어스토어 연결
         recyclerView = findViewById(R.id.all_posts);
@@ -166,24 +164,21 @@ public class maincommunity extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         db.collection("Board")
-                .orderBy("time",Direction.DESCENDING)
+                .orderBy("time", Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
+                        if (task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
                         {
                             for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
                             {
                                 boardgetset board = document.toObject(boardgetset.class);
                                 board.setId(document.getId());
-                                boardlist.add(board);
-                                Toast.makeText(getApplicationContext(),document.getId(), Toast.LENGTH_SHORT).show();
                                 Log.d("FABERJOO", String.valueOf(board.getdId()));
+                                boardlist.add(board);
                             }
-                        }
-                        else
-                        {
+                        } else {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
                         adapter = new commadpter(boardlist, maincommunity.this);
@@ -191,4 +186,95 @@ public class maincommunity extends AppCompatActivity
                     }
                 });
     }
+    private void gethotwrite(){
+
+    }
+    private void getnotice() {
+        boardlist.clear();
+        FirebaseFirestore db = FirebaseFirestore.getInstance(); //파이어스토어 연결
+        recyclerView = findViewById(R.id.notice_posts);
+        recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        db.collection("Notice")
+                .orderBy("time", Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
+                        {
+                            for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
+                            {
+
+                                boardgetset board = document.toObject(boardgetset.class);
+                                board.setId(document.getId());
+                                Log.d("FABERJOO", String.valueOf(board.getdId()));
+                                noticelist.add(board);
+                            }
+                        } else {
+                            Log.d("faberJOOOOOOO", "Error : ", task.getException());
+                        }
+                        adapter = new noticeAdapter(boardlist, maincommunity.this);
+                        recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
+                    }
+                });
+    }
+
+    private void getuserwrite() {
+        boardlist.clear();
+        FirebaseFirestore db = FirebaseFirestore.getInstance(); //파이어스토어 연결
+        recyclerView = findViewById(R.id.my_posts); //리사이클러뷰아디
+        recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        FirebaseUser user = fAuth.getCurrentUser(); //"현재 로그인 유저 불러오기"
+        String email = user.getEmail(); //"유저 이메일 저장"
+        db.collection("user") //user 컬렉션에서
+                .whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) //jdk, 3.17 16:30,"성공시"
+                        {
+                            for (QueryDocumentSnapshot document : task.getResult())// 16:30,"결과를  한 줄 씩document에"
+                            {
+                                User name = document.toObject(User.class);
+                                String naming = name.getNickname(); //닉네임가져오기
+                                Log.d("FABERJOO",naming); //닉네임로그확인
+
+                                db.collection("Board")
+                                        .whereEqualTo("username", naming)
+                                        //여기서 막힘
+                                        .get() //가져오기
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
+                                                {
+                                                    for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
+                                                    {
+                                                        boardgetset board = document.toObject(boardgetset.class);
+                                                        board.setId(document.getId());
+                                                        Log.d("FABERJOO", document.getId());
+                                                        boardlist.add(board);
+                                                    }
+                                                } else {
+                                                    Log.d("faberJOOOOOOO", "Error : ", task.getException());
+                                                }
+                                                adapter = new commadpter(boardlist, maincommunity.this);
+                                                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
+                                            }
+                                        });
+                            }
+                        }
+                    }
+                });
+    }
 }
+
+
+

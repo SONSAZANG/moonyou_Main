@@ -74,6 +74,7 @@ public class book_seat extends AppCompatActivity implements View.OnClickListener
                 intent.putExtra("date", date);
                 intent.putExtra("show_id", showID);
                 intent.putExtra("time", time);
+                intent.putExtra("seat_array", seat_array);
                 startActivity(intent);
             }
         });

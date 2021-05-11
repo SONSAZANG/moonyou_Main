@@ -108,7 +108,7 @@ public class mypage_main extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"결과를  한 줄 씩document에"
                     {
                         mypage_getset mypage_getset = document.toObject(mypage_getset.class);
-                        mypage_getset.setUser(document.getId());
+                        mypage_getset.setShow_ID(document.getId());
                         arrayList.add(mypage_getset);
                     }
                 }

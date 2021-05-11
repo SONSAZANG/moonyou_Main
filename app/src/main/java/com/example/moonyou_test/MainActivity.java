@@ -32,7 +32,9 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity<fAuth> extends AppCompatActivity {
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -43,11 +45,15 @@ public class MainActivity<fAuth> extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //랭킹포스터 스피너
         FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30, "DB 연결"
+        SimpleDateFormat format = new SimpleDateFormat("yy.MM.dd");
+        Date time = new Date();
+        String date = format.format(time);
+        image_Path.clear();
         db.collection("show_info")
                 //jdk, 3.17 16:30,"show_info 컬렉션 지정"
                 .orderBy("hit", Direction.DESCENDING)
                 //jdk, 3.17 16:30,"hit로 내림차순 정렬"
-                .limit(5)//jdk, 3.17 16:30,"5개까지만"
+                //.limit(5)//jdk, 3.17 16:30,"5개까지만"
                 .get() //jdk, 3.17 16:30,"db 불러오기"
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() //jdk, 3.17 16:30,"작업 완료시"
                 {
@@ -59,10 +65,14 @@ public class MainActivity<fAuth> extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
                             {
                                 show_info hit = document.toObject(show_info.class); //jdk, 3.17 16:30,"불러운 데이터 document를 show_info 클래스 형식으로 hit 이름으로 저장"
-                                Log.d("FABERJOOOOOOOO","Hello" + hit.getImage_Path());
-                                String comm = hit.getImage_Path(); //jdk, 3.17 16:30,"hit에서 이미지 경로 받아 comm에 저장"
-                                image_Path.add(comm); //jdk, 3.17 16:30,"arraylist image_Path에 인덱스 추가"
-                                Log.d("faberJOOOOOOO", "MMMMMMMMMMMMMMMMMMMMMMMMM");
+                                show_info hitrank;
+                                if(date.compareTo(hit.getFinishday()) <= 0)
+                                {
+                                    hitrank = document.toObject(show_info.class);
+                                    String comm = hitrank.getImage_Path(); //jdk, 3.17 16:30,"hit에서 이미지 경로 받아 comm에 저장"
+                                    image_Path.add(comm); //jdk, 3.17 16:30,"arraylist image_Path에 인덱스 추가"
+                                    Log.d("faberJOOOOOOO", "MMMMMMMMMMMMMMMMMMMMMMMMM");
+                                }
                             }
                         }
                         else

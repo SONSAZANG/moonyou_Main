@@ -28,6 +28,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 
 import org.w3c.dom.Text;
 
@@ -86,7 +87,7 @@ public class book_final extends AppCompatActivity {
                             //jdk, 3.17 16:30,"position(n번째 이미지뷰) 별 저장소 경로 설정"
                             tx1.setText(show_info.getTitle());
                             StorageReference pathReference = storageref.child(show_info.getImage_Path());
-                            img1 = String.valueOf(pathReference);
+                            img1 = show_info.getImage_Path();
                             Glide.with(book_final.this).load(pathReference).into(ig1);
                         }
                         else

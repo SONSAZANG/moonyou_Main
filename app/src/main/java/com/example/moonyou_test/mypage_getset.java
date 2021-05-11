@@ -1,11 +1,20 @@
 package com.example.moonyou_test;
 
 public class mypage_getset {
-    private String user;
+    private String show_ID;
     private String date;
     private int seatCount;
     private String[] seat_num;
     private String time;
+
+    public String getShow_ID() {
+        return show_ID;
+    }
+
+    public void setShow_ID(String show_ID) {
+        this.show_ID = show_ID;
+    }
+
     private String title;
     private String seatName;
     private String image;
@@ -57,8 +66,4 @@ public class mypage_getset {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public String getUser() { return user; }
-
-    public void setUser(String user) { this.user = user; }
 };

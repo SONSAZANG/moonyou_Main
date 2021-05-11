@@ -10,6 +10,15 @@ public class show_info {
     private String seat_array;
     private int runtime;
     private int hit;
+    private String state;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public String getStartday() { return startday; }
 

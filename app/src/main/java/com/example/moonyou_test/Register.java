@@ -89,7 +89,7 @@ public class Register extends AppCompatActivity {
                             use.put("email",email);
                             use.put("name",name);
                       fbf.collection("user")
-                              .document("user")
+                              .document()
                               .set(use)
                               .addOnSuccessListener(new OnSuccessListener<Void>() {
                                   @Override

@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/BookFinalImage"
+            android:id="@+id/TicketImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
@@ -43,7 +43,7 @@
                 android:layout_marginLeft="10dp"/>
 
             <TextView
-                android:id="@+id/BookFinalName"
+                android:id="@+id/TicketName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -62,7 +62,7 @@
                 android:layout_marginLeft="10dp"/>
 
             <TextView
-                android:id="@+id/BookFinalTime"
+                android:id="@+id/TicketTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -80,7 +80,7 @@
                 android:layout_marginLeft="10dp"/>
 
             <TextView
-                android:id="@+id/BookFinalSeat"
+                android:id="@+id/TicketSeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""

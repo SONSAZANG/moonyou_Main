@@ -68,7 +68,6 @@ public class book_calender extends AppCompatActivity {
         TextView selected_date = (TextView)findViewById(R.id.selected_date);
 
         CalendarView calendarView = (CalendarView) findViewById(R.id.simple_calendarview);
-
         db = FirebaseFirestore.getInstance();
         db.collection("show_info")
                 .document(showID)
@@ -84,11 +83,19 @@ public class book_calender extends AppCompatActivity {
                              //jdk, 3.17 16:30,"position(n번째 이미지뷰) 별 저장소 경로 설정"
                             title_label.setText(show_info.getTitle());
                             Log.d("sonsazang", show_info.getStartday());
-
+                            Date time = new Date();
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yy.MM.dd");
+                            String datee = dateFormat.format(time);
                             strDate = show_info.getStartday();
                             finDate = show_info.getFinishday();
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("yy.MM.dd");
-                            Date strDay = dateFormat.parse(strDate, new ParsePosition(0));
+                            Date strDay;
+                            if(datee.compareTo(strDate) <= 0){
+                                strDay = dateFormat.parse(strDate, new ParsePosition(0));
+                            }
+                            else
+                            {
+                                strDay = dateFormat.parse(datee, new ParsePosition(0));
+                            }
                             Date finDay = dateFormat.parse(finDate, new ParsePosition(0));
                             Long strLong = strDay.getTime();
                             Long finLong = finDay.getTime();

@@ -47,10 +47,9 @@ public class myticket extends AppCompatActivity {
         setContentView(R.layout.myticket);
 
         Intent select1 = getIntent();
-
         String select = select1.getStringExtra("select");
         String date = select1.getStringExtra("date");
-        showID = select1.getStringExtra("show_id");
+        showID = select1.getStringExtra("show_ID");
         String time = select1.getStringExtra("time");
         String seat_array = select1.getStringExtra("seat_array");
         storage = FirebaseStorage.getInstance();

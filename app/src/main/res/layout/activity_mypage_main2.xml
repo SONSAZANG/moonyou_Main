@@ -44,32 +44,95 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/mypage_info"
-        android:visibility="gone">
+        android:visibility="visible">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/text1"
-            android:text="자주 묻는 질문"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"/>
+            android:orientation="vertical"
+            android:layout_marginHorizontal="12.5dp"
+            android:layout_marginVertical="50dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="45dp"
-            android:background="#ffffff" />
+            <EditText
+                android:id="@+id/myid"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:inputType="textPersonName"
+                android:hint="이름"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:enabled="false"/>
+
+            <EditText
+                android:id="@+id/mynick"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:inputType="textPersonName"
+                android:hint="별명"
+                android:ems="10"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:enabled="true"/>
+
+            <EditText
+                android:id="@+id/myemail"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:inputType="textEmailAddress"
+                android:hint="이메일"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:enabled="true"/>
+
+            <EditText
+                android:id="@+id/newpwd"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:inputType="textPassword"
+                android:hint="비밀번호"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:enabled="true"/>
+
+            <EditText
+                android:id="@+id/newpwd1"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:inputType="textPassword"
+                android:hint="비밀번호 확인"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:enabled="true"/>
+
+            <Button
+                android:id="@+id/info_cahnge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수정"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@drawable/button_round"
+                android:backgroundTint="#ef4f4f"
+                android:layout_marginHorizontal="150dp"
+                android:layout_marginTop="15dp"/>
+        </LinearLayout>
 
     </FrameLayout> //my info
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/mypage_ticket"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/REViewMypage"

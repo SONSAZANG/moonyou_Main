@@ -39,6 +39,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="예매번호: "
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/TicketID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="공연이름: "
                 android:layout_marginLeft="10dp"/>
 
@@ -96,6 +115,7 @@
         </LinearLayout>
     </LinearLayout>
     <Button
+        android:id="@+id/gocomu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="커뮤니티 바로가기"
@@ -154,6 +174,6 @@
             android:textColor="@color/white"
             android:drawableTop="@drawable/ic_baseline_close_24"
             style="?android:attr/borderlessButtonStyle"/>
-        ></LinearLayout>
-
+        >
+    </LinearLayout>
 </LinearLayout>

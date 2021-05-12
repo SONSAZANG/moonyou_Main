@@ -185,6 +185,7 @@ public class book_final extends AppCompatActivity {
         resv_info.put("seatCount", seatA.length);
         resv_info.put("seatName", selectA);
         resv_info.put("image", img1);
+        resv_info.put("show_id", showID);
         for(int i = 1; i <= seatA.length; i++)
         {
             resv_info.put("seat_num" + String.valueOf(i), seatA[i-1] + "번");

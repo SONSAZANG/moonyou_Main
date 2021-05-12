@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
-    EditText mFullName, mEmail, mPassword, mPhone;
+    EditText mFullName, mEmail, mPassword, nickname;
     Button mRegisterBtn;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
@@ -44,6 +44,7 @@ public class Register extends AppCompatActivity {
         mPassword = findViewById(R.id.Password);
         mRegisterBtn = findViewById(R.id.registerBtn);
         mLoginBtn = findViewById(R.id.createText);
+        nickname = findViewById(R.id.nickname);
         fAuth = FirebaseAuth.getInstance();
 
         if(fAuth.getCurrentUser() != null) {
@@ -85,9 +86,10 @@ public class Register extends AppCompatActivity {
                             FirebaseFirestore fbf=FirebaseFirestore.getInstance();
                             //테이블을 파이어베이스 데이터베이스에 저장
                             HashMap<Object,String> use = new HashMap<>();
-                            use.put("uid",uid);
+                            use.put("password", password);
                             use.put("email",email);
                             use.put("name",name);
+                            use.put("nickname", nickname.getText().toString().trim());
                       fbf.collection("user")
                               .document()
                               .set(use)

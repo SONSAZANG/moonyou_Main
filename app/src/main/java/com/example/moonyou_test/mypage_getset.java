@@ -1,11 +1,23 @@
 package com.example.moonyou_test;
 
 public class mypage_getset {
-    private String show_ID;
+    private String book_ID;
     private String date;
-    private int seatCount;
     private String[] seat_num;
     private String time;
+    private String show_ID;
+    private String image;
+    private String title;
+    private String seatName;
+    private int seatCount;
+
+    public String getBook_ID() {
+        return book_ID;
+    }
+
+    public void setBook_ID(String book_ID) {
+        this.book_ID = book_ID;
+    }
 
     public String getShow_ID() {
         return show_ID;
@@ -14,10 +26,6 @@ public class mypage_getset {
     public void setShow_ID(String show_ID) {
         this.show_ID = show_ID;
     }
-
-    private String title;
-    private String seatName;
-    private String image;
 
     public String getImage() { return image; }
 

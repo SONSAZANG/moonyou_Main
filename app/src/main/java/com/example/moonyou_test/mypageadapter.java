@@ -55,6 +55,7 @@ public class mypageadapter extends RecyclerView.Adapter<mypageadapter.mypageView
     public void onBindViewHolder(@NonNull mypageViewHolder holder, int position)
     {
         mypage_getset item = arrayList.get(position);
+        holder.myTicketID.setText(item.getBook_ID());
         holder.myTicketName.setText(item.getTitle());
         holder.myTicketDate.setText(item.getDate());
         holder.myTicketTime.setText(item.getTime());
@@ -72,6 +73,7 @@ public class mypageadapter extends RecyclerView.Adapter<mypageadapter.mypageView
 
     public class mypageViewHolder extends RecyclerView.ViewHolder {
         ImageView myTicketImage;
+        TextView myTicketID;
         TextView myTicketName;
         TextView myTicketDate;
         TextView myTicketTime;
@@ -80,6 +82,7 @@ public class mypageadapter extends RecyclerView.Adapter<mypageadapter.mypageView
         public mypageViewHolder(@NonNull View itemView) {
             super(itemView);
             this.myTicketImage = itemView.findViewById(R.id.myTicketImage);
+            this.myTicketID = itemView.findViewById(R.id.TicketID);
             this.myTicketName = itemView.findViewById(R.id.myTicketName);
             this.myTicketDate = itemView.findViewById(R.id.myTicketDate);
             this.myTicketTime = itemView.findViewById(R.id.myTicketTime);
@@ -92,9 +95,10 @@ public class mypageadapter extends RecyclerView.Adapter<mypageadapter.mypageView
                     if (pos != RecyclerView.NO_POSITION)
                     {
                         mypage_getset item = arrayList.get(pos);
-                        Intent intent = new Intent(v.getContext(), myticket.class);
+                        Intent intent = new Intent(context, myticket.class);
+                        intent.putExtra("book_ID", item.getBook_ID());
                         intent.putExtra("show_ID", item.getShow_ID());
-                        v.getContext().startActivity(intent);
+                        context.startActivity(intent);
                     }
                 }
             });

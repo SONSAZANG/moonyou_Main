@@ -39,8 +39,8 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../richwysiwygeditor/build/generated/res/resValues/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../../richwysiwygeditor/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../richwysiwygeditor/build/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../richwysiwygeditor/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../richwysiwygeditor/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../richwysiwygeditor/.gradle" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -27,8 +27,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:layout_marginTop="15dp"
+
         android:orientation="vertical">
 
         <LinearLayout
@@ -40,11 +41,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="공연이름: "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/BookFinalName"
                 android:layout_width="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text=""
                 />
@@ -59,11 +66,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="공연일시: "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/BookFinalTime"
                 android:layout_width="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text=""
                 />
@@ -78,17 +91,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="좌석번호: "
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"
                 android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/BookFinalSeat"
                 android:layout_width="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text=""
                 />
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -99,13 +119,27 @@
                 android:id="@+id/BookFinalCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="5px"
+                android:layout_weight="5"
+                android:background="@drawable/button_round"
+                android:backgroundTint="#ef4f4f"
+                android:elevation="20dp"
                 android:text="취소"
-                />
+                android:textColor="#fff" />
+
             <Button
                 android:id="@+id/BookFinalOK"
                 android:layout_width="wrap_content"
+                android:layout_weight="5"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="5px"
+                android:background="@drawable/button_round"
+                android:backgroundTint="#ef4f4f"
+                android:elevation="20dp"
                 android:text="예매하기"
+                android:textColor="#fff"
                 />
         </LinearLayout>
     </LinearLayout>

@@ -1,7 +1,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
 
     <ImageView
@@ -114,32 +114,36 @@
     <LinearLayout
         android:id="@+id/bottom_layout0"
         android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/review"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="20dp"
             android:text="후기"
+            android:layout_weight="5"
             android:layout_margin="2dp"
             android:layout_gravity="bottom"
             android:backgroundTint="#ef4f4f"
             android:background="@drawable/button_round"
             android:textColor="#fff"/>
+
         <Button
             android:id="@+id/goticekt"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="1px"
+            android:layout_weight="5"
             android:layout_marginLeft="100dp"
+            android:background="@drawable/button_round"
+            android:backgroundTint="#ef4f4f"
             android:elevation="20dp"
             android:text="예매하기"
-            android:layout_margin="1px"
-            android:layout_gravity="bottom"
-            android:backgroundTint="#ef4f4f"
-            android:background="@drawable/button_round"
-            android:textColor="#fff"/>
+            android:textColor="#fff" />
     </LinearLayout>
 </RelativeLayout>

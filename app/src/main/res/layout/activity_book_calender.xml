@@ -15,6 +15,7 @@
         android:textStyle="bold"
         android:textSize="25dp"
         android:paddingLeft="15dp"
+        android:layout_gravity="center"
         android:layout_margin="5dp"/>
 
     <View
@@ -25,7 +26,7 @@
 
     <CalendarView
         android:id="@+id/simple_calendarview"
-        android:layout_width="380dp"
+        android:layout_width="fill_parent"
         android:layout_height="340dp"
         />
 
@@ -42,12 +43,13 @@
         android:text="선택된 날짜"
         android:textColor="@color/black"
         android:textStyle="bold"
+        android:layout_gravity="center"
         android:textSize="25dp"
         android:paddingLeft="15dp"
         />
 
     <FrameLayout
-        android:layout_width="380dp"
+        android:layout_width="fill_parent"
         android:layout_height="240dp">
 
         <TextView
@@ -75,8 +77,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp">
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginLeft="20dp"
                 android:id="@+id/timetable"
-                android:layout_width="370dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
         </ScrollView>

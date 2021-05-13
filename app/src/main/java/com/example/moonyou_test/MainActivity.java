@@ -133,9 +133,9 @@ public class MainActivity<fAuth> extends AppCompatActivity {
     ViewFlipper v_fllipper;
 
     int images[] = {
-            R.drawable.top_image01,
-            R.drawable.top_image02,
-            R.drawable.top_image03
+            R.drawable.rr1,
+            R.drawable.rr2,
+            R.drawable.rr3
     };
 
 

@@ -201,6 +201,8 @@ public class book_final extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) { //jdk, 3.17 16:30,"성공시"
                         Log.d("Faber", "Document ID = " );
+                        Toast.makeText(getApplicationContext(), "예매 성공!", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

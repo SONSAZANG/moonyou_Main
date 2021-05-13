@@ -42,9 +42,10 @@
         android:layout_width="55dp"
         android:layout_height="35dp"
         android:text="예매"
-        android:textColor="@color/white"
-        android:background="@color/black"
+        android:textColor="#fff"
         android:textStyle="bold"
+        android:background="@drawable/button_round"
+        android:backgroundTint="#ef4f4f"
         android:layout_marginLeft="50dp"
         app:layout_constraintLeft_toRightOf="@+id/leftseat"
         />

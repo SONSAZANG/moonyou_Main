@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,11 +42,22 @@ public class mypage_main extends AppCompatActivity {
     private FirebaseFirestore db;
     FirebaseUser user = fAuth.getCurrentUser();
     User info;
+    FrameLayout myinfo;
+    FrameLayout mypage_info_change;
+    FrameLayout myticket;
+    FrameLayout mypost;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage_main2);
+        userId = user.getUid();
+        db = FirebaseFirestore.getInstance();
+        myinfo = (FrameLayout) findViewById(R.id.mypage_info);
+        mypage_info_change = (FrameLayout) findViewById(R.id.mypage_info_change);
+        myticket = (FrameLayout) findViewById(R.id.mypage_ticket);
+        mypost = (FrameLayout) findViewById(R.id.mypage_post);
          // 아이디 연결
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.myPage);
@@ -66,20 +79,17 @@ public class mypage_main extends AppCompatActivity {
                 // do nothing
             }
         });
-        my_info();
+        pwd_confirm();
     }
 
     private void changeView(int index) {
-        FrameLayout myinfo = (FrameLayout) findViewById(R.id.mypage_info);
-        FrameLayout myticket = (FrameLayout) findViewById(R.id.mypage_ticket);
-        FrameLayout mypost = (FrameLayout) findViewById(R.id.mypage_post);
 
         switch (index) {
             case 0:
                 myinfo.setVisibility(View.VISIBLE);
                 myticket.setVisibility(View.GONE);
                 mypost.setVisibility(View.GONE);
-                my_info();
+                pwd_confirm();
                 break;
             case 1:
                 myinfo.setVisibility(View.GONE);
@@ -95,6 +105,46 @@ public class mypage_main extends AppCompatActivity {
         }
     }
 
+    private void pwd_confirm(){
+        EditText beforepwd = (EditText)findViewById(R.id.beforepwd);
+        Button pwdconfirm = (Button)findViewById(R.id.pwdconfirm);
+        pwdconfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!beforepwd.getText().toString().trim().equals(""))
+                {
+                    db.collection("user")
+                            .document(userId)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if(task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
+                                    {
+                                        DocumentSnapshot document = task.getResult(); //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
+                                        info = document.toObject(User.class);
+                                        if (beforepwd.getText().toString().trim().equals(info.getPassword()))
+                                        {
+                                            myinfo.setVisibility(View.GONE);
+                                            mypage_info_change.setVisibility(View.VISIBLE);
+                                            my_info();
+                                            beforepwd.setText("");
+                                        }
+                                        else
+                                            {
+                                                Toast.makeText(getApplicationContext(), "비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
+                                            }
+                                    }
+                                }
+                            });
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "비밀번호를 입력해 주세요", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     private void my_info(){
         TextView username = (TextView)findViewById(R.id.myid);
         TextView usernick = (TextView)findViewById(R.id.mynick);
@@ -102,8 +152,6 @@ public class mypage_main extends AppCompatActivity {
         TextView newpwd = (TextView)findViewById(R.id.newpwd);
         TextView newpwd1 = (TextView)findViewById(R.id.newpwd1);
         Button info_change = (Button)findViewById(R.id.info_cahnge);
-        String userId = user.getUid();
-        db = FirebaseFirestore.getInstance();
         db.collection("user")
                 .document(userId)
                 .get()
@@ -163,6 +211,14 @@ public class mypage_main extends AppCompatActivity {
                                                 Log.d("Faber", "Succesfully update");
                                             }
                                         });
+                                Toast.makeText(getApplicationContext(), "변경완료", Toast.LENGTH_SHORT).show();
+                                mypage_info_change.setVisibility(View.GONE);
+                                myinfo.setVisibility(View.VISIBLE);
+                                username.setText("");
+                                usernick.setText("");
+                                useremail.setText("");
+                                newpwd.setText("");
+                                newpwd1.setText("");
                             }
                         });
                     }
@@ -176,7 +232,6 @@ public class mypage_main extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         String userId = user.getUid();
         arrayList = new ArrayList<>(); //jdk, 3.17 16:30,"상태 arraylist 선언"
-        db = FirebaseFirestore.getInstance();
         arrayList.clear();//jdk, 3.17 16:30,"파이어스토어 연결 "
         db.collection("user")
                 .document(userId)

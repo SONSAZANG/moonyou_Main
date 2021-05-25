@@ -61,6 +61,8 @@ public class mypage_main extends AppCompatActivity {
          // 아이디 연결
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.myPage);
+        myinfo.setVisibility(View.VISIBLE);
+        mypage_info_change.setVisibility(View.GONE);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

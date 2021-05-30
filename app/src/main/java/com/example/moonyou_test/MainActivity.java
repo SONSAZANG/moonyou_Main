@@ -99,7 +99,7 @@ public class MainActivity<fAuth> extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), mypage_main.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -120,11 +120,36 @@ public class MainActivity<fAuth> extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button button5 = (Button) findViewById(R.id.logout);
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+
+
 
         v_fllipper = findViewById(R.id.image_slide);
 
         for(int image : images) {
             fllipperImages(image);
+        }
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String callback = data.getStringExtra("callback");
+            switch (callback)
+            {
+                case "logout":
+                    logout();
+                case "cancel":
+                    int a = 0;
+            }
         }
     }
 
@@ -193,7 +218,7 @@ public class MainActivity<fAuth> extends AppCompatActivity {
             return imageview2; //jdk, 3.17 16:30,"이미지 뷰 반환"
         }
     }
-    public void logout(View view) {
+    public void logout() {
         fAuth.signOut();
         Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);

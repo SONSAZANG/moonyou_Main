@@ -89,33 +89,51 @@
         >
 
         <TextView
+            android:id="@+id/nick_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사용 하실 수 없는 별명입니다."
+            android:text="기존 별명입니다."
             android:textStyle="bold"
             android:textColor="#aaef4f4f"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="200dp"
+            android:visibility="gone"
             />
 
         <TextView
+            android:id="@+id/email_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사용 하실 수 없는 이메일입니다."
+            android:text="기존 이메일입니다."
             android:textStyle="bold"
             android:textColor="#aaef4f4f"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="280dp"
+            android:visibility="gone"
             />
 
         <TextView
+            android:id="@+id/pwd_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="비밀번호가 일치 하지 않습니다."
+            android:text="이전 비밀번호와 일치 합니다."
+            android:textStyle="bold"
+            android:textColor="#aaef4f4f"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="360dp"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/pwd1_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="신규 비밀번호가 일치 하지 않습니다."
             android:textStyle="bold"
             android:textColor="#aaef4f4f"
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="435dp"
+            android:visibility="gone"
             />
 
         <LinearLayout

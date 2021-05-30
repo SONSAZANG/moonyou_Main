@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.lumyjuwon:Android-Rich-Wysiwyg-Editor:1.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4000707e59ebadbefe865f76aa44a381/jetified-Android-Rich-Wysiwyg-Editor-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4000707e59ebadbefe865f76aa44a381/jetified-Android-Rich-Wysiwyg-Editor-1.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4000707e59ebadbefe865f76aa44a381/jetified-Android-Rich-Wysiwyg-Editor-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6baef89ae41023b506d4f3f3d2021af7/jetified-Android-Rich-Wysiwyg-Editor-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6baef89ae41023b506d4f3f3d2021af7/jetified-Android-Rich-Wysiwyg-Editor-1.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6baef89ae41023b506d4f3f3d2021af7/jetified-Android-Rich-Wysiwyg-Editor-1.0.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

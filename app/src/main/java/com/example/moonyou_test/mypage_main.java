@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -148,12 +151,67 @@ public class mypage_main extends AppCompatActivity {
     }
 
     private void my_info(){
-        TextView username = (TextView)findViewById(R.id.myid);
-        TextView usernick = (TextView)findViewById(R.id.mynick);
-        TextView useremail = (TextView)findViewById(R.id.myemail);
-        TextView newpwd = (TextView)findViewById(R.id.newpwd);
-        TextView newpwd1 = (TextView)findViewById(R.id.newpwd1);
+        EditText username = (EditText)findViewById(R.id.myid);
+        EditText usernick = (EditText)findViewById(R.id.mynick);
+        EditText useremail = (EditText)findViewById(R.id.myemail);
+        EditText newpwd = (EditText)findViewById(R.id.newpwd);
+        EditText newpwd1 = (EditText)findViewById(R.id.newpwd1);
+        TextView nick_confirm = (TextView)findViewById(R.id.nick_confirm);
+        TextView email_confirm = (TextView)findViewById(R.id.email_confirm);
+        TextView pwd_confirm = (TextView)findViewById(R.id.pwd_confirm);
+        TextView pwd1_confirm = (TextView)findViewById(R.id.pwd1_confirm);
         Button info_change = (Button)findViewById(R.id.info_cahnge);
+        final boolean[] nick = {false};
+
+        usernick.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                db.collection("user")
+                        .whereEqualTo("nickname", usernick.getText().toString().trim())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
+                                {
+                                    User AAA = new User();
+                                    for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"결과를  한 줄 씩document에"
+                                    {
+                                        AAA = document.toObject(User.class);
+                                    }
+
+                                    if(usernick.getText().toString().trim().equals(AAA.getNickname()) && !usernick.getText().toString().trim().equals(""))
+                                    {
+
+                                        nick_confirm.setText("동일한 별명이 존재 합니다.");
+                                        if (usernick.getText().toString().trim().equals(info.getNickname()))
+                                        {
+                                            nick_confirm.setText("기존 별명입니다.");
+                                        }
+                                        nick_confirm.setVisibility(View.VISIBLE);
+                                        nick[0] = false;
+                                    }
+                                    else
+                                    {
+                                        nick_confirm.setText("사용 가능한 별명입니다.");
+                                        nick_confirm.setVisibility(View.VISIBLE);
+                                        nick[0] = true;
+                                    }
+                                }
+                            }
+                        });
+            }
+        });
         db.collection("user")
                 .document(userId)
                 .get()

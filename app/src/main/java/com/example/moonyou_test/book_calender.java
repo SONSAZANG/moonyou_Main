@@ -1,6 +1,5 @@
 package com.example.moonyou_test;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,29 +15,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.datepicker.MaterialCalendar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
-import org.w3c.dom.Text;
-
-import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 
-public class book_calender extends AppCompatActivity {
+public class book_calender extends AppCompatActivity implements timeadpter.OnListItemSelectedInterface {
 
     TextView title_label;
     TextView selectDate;
@@ -65,7 +57,6 @@ public class book_calender extends AppCompatActivity {
         title_label = findViewById(R.id.title1);
         storage = FirebaseStorage.getInstance();
         storageref = storage.getReference();
-        TextView selected_date = (TextView)findViewById(R.id.selected_date);
 
         CalendarView calendarView = (CalendarView) findViewById(R.id.simple_calendarview);
         db = FirebaseFirestore.getInstance();
@@ -134,8 +125,40 @@ public class book_calender extends AppCompatActivity {
                     day = String.valueOf(dayOfMonth);
                 }
                 date = (year - 2000) + "." + mon + "." + day;
-                selected_date.setText(date);
                 showtimetable();
+            }
+        });
+        Button button2 = (Button) findViewById(R.id.home);
+        button2.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity2.class);
+                outIntent.putExtra("callback", "home");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+        Button button4 = (Button) findViewById(R.id.mypage_btn);
+        button4.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity2.class);
+                outIntent.putExtra("callback", "mypage");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+        Button button5 = (Button) findViewById(R.id.logout);
+        button5.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity2.class);
+                outIntent.putExtra("callback", "logout");
+                setResult(RESULT_OK, outIntent);
+                finish();
             }
         });
     }
@@ -164,8 +187,6 @@ public class book_calender extends AppCompatActivity {
                                 timegetset time = document.toObject(timegetset.class);
                                 time.setTime(document.getId());
                                 time.setShow_id(showID);
-                                Toast.makeText(getApplicationContext(),document.getId(), Toast.LENGTH_SHORT).show();
-                                Log.d("FABERJOO", String.valueOf(time.getTime()));
                                 int ls = 0, ts = 0;
                                 String[] seat = time.seat_array.split("");
                                 for (String s : seat)
@@ -192,10 +213,34 @@ public class book_calender extends AppCompatActivity {
                         {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
-                        adapter = new timeadpter(timelist, book_calender.this);
+                        adapter = new timeadpter(timelist, book_calender.this, book_calender.this::onListItemSelected);
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
+    }
+
+    public void onListItemSelected(View v, int pos) {
+        timeadpter.itemViewHolder viewHolder = (timeadpter.itemViewHolder)recyclerView.findViewHolderForAdapterPosition(pos);
+        timegetset item = timelist.get(pos) ;
+        Button Resv = (Button)findViewById(R.id.resv);
+        Resv.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                if (pos != RecyclerView.NO_POSITION)
+                {
+                    // 데이터 리스트로부터 아이템 데이터 참조
+                    timegetset item = timelist.get(pos);
+                    Toast.makeText(v.getContext(), item.getTime(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(v.getContext(), book_seat.class);
+                    intent.putExtra("time", item.getTime());
+                    intent.putExtra("date", item.getDate());
+                    intent.putExtra("time", item.getTime());
+                    intent.putExtra("show_id", item.getShow_id());
+                    v.getContext().startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
@@ -204,16 +249,8 @@ public class book_calender extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             String callback = data.getStringExtra("callback");
-            Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
-            switch (callback)
-            {
-                case "logout":
-                    outIntent.putExtra("callback", "logout");
-                case "mypage":
-                    outIntent.putExtra("callback", "mypage");
-                case "home":
-                    outIntent.putExtra("callback", "home");
-            }
+            Intent outIntent = new Intent(getApplicationContext(), show_main.class);
+            outIntent.putExtra("callback", callback);
             setResult(RESULT_OK, outIntent);
             finish();
         }

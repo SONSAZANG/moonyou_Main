@@ -125,16 +125,8 @@ public class show_main extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             String callback = data.getStringExtra("callback");
-            Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
-            switch (callback)
-            {
-                case "logout":
-                    outIntent.putExtra("callback", "logout");
-                case "mypage":
-                    outIntent.putExtra("callback", "mypage");
-                case "home":
-                    outIntent.putExtra("callback", "home");
-            }
+            Intent outIntent = new Intent(getApplicationContext(), MainActivity2.class);
+            outIntent.putExtra("callback", callback);
             setResult(RESULT_OK, outIntent);
             finish();
         }

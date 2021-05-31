@@ -31,23 +31,19 @@ import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 public class timeadpter extends RecyclerView.Adapter<timeadpter.itemViewHolder> {
 
-    public interface OnListItemLongSelectedInterface {
-        void onItemLongSelected(View v, int position);
-    }
-
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, int position);
+        void onListItemSelected(View v, int position);
     }
 
     private OnListItemSelectedInterface mListener;
-    private OnListItemLongSelectedInterface mLongListener;
 
     private ArrayList<timegetset> arrayList;
     private Context context;
 
-    public timeadpter(ArrayList<timegetset> arrayList, Context context) {
+    public timeadpter(ArrayList<timegetset> arrayList, Context context, OnListItemSelectedInterface listener) {
         this.arrayList = arrayList;
         this.context = context;
+        this.mListener = listener;
     }
 
     @NonNull
@@ -64,16 +60,6 @@ public class timeadpter extends RecyclerView.Adapter<timeadpter.itemViewHolder> 
         timegetset item = arrayList.get(position) ;  // 생성자클래스이름 변수= 리스트명.
         holder.time.setText(item.getTime());
         holder.left_seat.setText(String.valueOf(item.getLeft_seat()) + "/" + String.valueOf(item.getTotal_seat()));
-        holder.Resv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), book_seat.class);
-                intent.putExtra("date", item.getDate());
-                intent.putExtra("time", item.getTime());
-                intent.putExtra("show_id", item.getShow_id());
-                v.getContext().startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -96,21 +82,11 @@ public class timeadpter extends RecyclerView.Adapter<timeadpter.itemViewHolder> 
             this.time = itemView.findViewById(R.id.time);
             this.left_seat = itemView.findViewById(R.id.leftseat);
             this.Resv = itemView.findViewById(R.id.resv);
-
-            Resv.setOnClickListener(new View.OnClickListener()
-            {
-                public void onClick(View v)
-                {
-                    int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION)
-                    {
-                        // 데이터 리스트로부터 아이템 데이터 참조
-                        timegetset item = arrayList.get(pos);
-                        Toast.makeText(v.getContext(), item.getTime(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(v.getContext(), book_seat.class);
-                        intent.putExtra("time", item.getTime());
-                        v.getContext().startActivity(intent);
-                    }
+            this.Resv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    mListener.onListItemSelected(v, getAdapterPosition());
                 }
             });
         }

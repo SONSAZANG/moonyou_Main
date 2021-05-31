@@ -154,15 +154,7 @@ public class MainActivity2 extends AppCompatActivity implements CustomAdapter.On
         if (resultCode == RESULT_OK) {
             String callback = data.getStringExtra("callback");
             Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
-            switch (callback)
-            {
-                case "logout":
-                    outIntent.putExtra("callback", "logout");
-                case "mypage":
-                    outIntent.putExtra("callback", "mypage");
-                case "home":
-                    outIntent.putExtra("callback", "home");
-            }
+            outIntent.putExtra("callback", callback);
             setResult(RESULT_OK, outIntent);
             finish();
         }

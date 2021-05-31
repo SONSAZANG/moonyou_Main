@@ -13,44 +13,20 @@
         android:text="공연이름"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:paddingLeft="15dp"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#C6C6C6"
-        android:layout_margin="5dp"/>
+        android:layout_gravity="center"/>
 
     <CalendarView
         android:id="@+id/simple_calendarview"
-        android:layout_width="fill_parent"
-        android:layout_height="340dp"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#C6C6C6"
-        android:layout_margin="5dp"/>
-
-    <TextView
-        android:id="@+id/selected_date"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:text="선택된 날짜"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:layout_width="345dp"
+        android:layout_height="345dp"
         android:layout_gravity="center"
-        android:textSize="25dp"
-        android:paddingLeft="15dp"
         />
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="240dp">
+        android:layout_height="220dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,6 +60,50 @@
                 />
         </ScrollView>
     </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:gravity="center"
+        android:id="@+id/menubar"
+        android:layout_marginTop="7dp"
+        android:background="@color/black">
+        <Button
+            android:id="@+id/home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="홈"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:drawableTop="@drawable/ic_baseline_home_24"
+            style="?android:attr/borderlessButtonStyle"
+            />
 
+        <Button
+            android:id="@+id/community"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="커뮤니티"
+            android:textColor="@color/white"
+            android:drawableTop="@drawable/ic_baseline_3p_24"
+            style="?android:attr/borderlessButtonStyle"
+            />
 
+        <Button
+            android:id="@+id/mypage_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="마이"
+            android:textColor="@color/white"
+            android:drawableTop="@drawable/ic_baseline_person_24"
+            style="?android:attr/borderlessButtonStyle"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/logout"
+            android:text="로그아웃"
+            android:textColor="@color/white"
+            android:drawableTop="@drawable/ic_baseline_close_24"
+            style="?android:attr/borderlessButtonStyle"/>
+    </LinearLayout>
 </LinearLayout>

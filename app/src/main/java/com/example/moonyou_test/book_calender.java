@@ -103,7 +103,6 @@ public class book_calender extends AppCompatActivity {
                             calendarView.setMinDate(strLong);
                             Date initialdate = new Date(calendarView.getDate());
                             date = dateFormat.format(initialdate);
-                            selected_date.setText(date);
                         }
                         else
                         {
@@ -197,5 +196,26 @@ public class book_calender extends AppCompatActivity {
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String callback = data.getStringExtra("callback");
+            Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+            switch (callback)
+            {
+                case "logout":
+                    outIntent.putExtra("callback", "logout");
+                case "mypage":
+                    outIntent.putExtra("callback", "mypage");
+                case "home":
+                    outIntent.putExtra("callback", "home");
+            }
+            setResult(RESULT_OK, outIntent);
+            finish();
+        }
     }
 }

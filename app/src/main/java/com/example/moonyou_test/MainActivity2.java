@@ -79,6 +79,41 @@ public class MainActivity2 extends AppCompatActivity implements CustomAdapter.On
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
+
+        Button button2 = (Button) findViewById(R.id.home);
+        button2.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                outIntent.putExtra("callback", "home");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+        Button button4 = (Button) findViewById(R.id.mypage_btn);
+        button4.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                outIntent.putExtra("callback", "mypage");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+        Button button5 = (Button) findViewById(R.id.logout);
+        button5.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                outIntent.putExtra("callback", "logout");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+
     }
 
     @Override
@@ -108,9 +143,28 @@ public class MainActivity2 extends AppCompatActivity implements CustomAdapter.On
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),show_main.class);
                 intent.putExtra("show_id", item.getShow_id());
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String callback = data.getStringExtra("callback");
+            Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+            switch (callback)
+            {
+                case "logout":
+                    outIntent.putExtra("callback", "logout");
+                case "mypage":
+                    outIntent.putExtra("callback", "mypage");
+                case "home":
+                    outIntent.putExtra("callback", "home");
+            }
+            setResult(RESULT_OK, outIntent);
+            finish();
+        }
     }
 }

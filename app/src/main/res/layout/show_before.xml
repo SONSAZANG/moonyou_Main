@@ -16,7 +16,6 @@
             android:id="@+id/show_mainImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/show_main_1"
             ></ImageView>
     </LinearLayout>
 
@@ -34,8 +33,7 @@
         <TextView
             android:id="@+id/show_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="라만차" />
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <LinearLayout
@@ -53,7 +51,6 @@
             android:id="@+id/show_period"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="21.04.05 ~ 21.04.20"
             />
     </LinearLayout>
 
@@ -140,7 +137,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="logout"
+            android:id="@+id/logout"
             android:text="로그아웃"
             android:textColor="@color/white"
             android:drawableTop="@drawable/ic_baseline_close_24"

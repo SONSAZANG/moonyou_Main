@@ -82,8 +82,61 @@ public class show_main extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),book_calender.class);
                 intent.putExtra("show_id", show_info.getShow_id());
 
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
+        Button button2 = (Button) findViewById(R.id.home);
+        button2.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity2.class);
+                outIntent.putExtra("callback", "home");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+        Button button4 = (Button) findViewById(R.id.mypage_btn);
+        button4.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity2.class);
+                outIntent.putExtra("callback", "mypage");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+        Button button5 = (Button) findViewById(R.id.logout);
+        button5.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity2.class);
+                outIntent.putExtra("callback", "logout");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String callback = data.getStringExtra("callback");
+            Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+            switch (callback)
+            {
+                case "logout":
+                    outIntent.putExtra("callback", "logout");
+                case "mypage":
+                    outIntent.putExtra("callback", "mypage");
+                case "home":
+                    outIntent.putExtra("callback", "home");
+            }
+            setResult(RESULT_OK, outIntent);
+            finish();
+        }
     }
 }

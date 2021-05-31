@@ -90,7 +90,7 @@ public class MainActivity<fAuth> extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -108,7 +108,7 @@ public class MainActivity<fAuth> extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), maincommunity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -117,7 +117,7 @@ public class MainActivity<fAuth> extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), help_center.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
         Button button5 = (Button) findViewById(R.id.logout);
@@ -147,8 +147,12 @@ public class MainActivity<fAuth> extends AppCompatActivity {
             {
                 case "logout":
                     logout();
-                case "cancel":
-                    int a = 0;
+                case "mypage":
+                    Intent intent = new Intent(getApplicationContext(), mypage_main.class);
+                    startActivityForResult(intent, 1);
+                case "home":
+                    resultCode = 0;
+
             }
         }
     }

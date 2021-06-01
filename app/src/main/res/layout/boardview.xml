@@ -1,98 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="2dp"
+    android:background="@color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
 
     <TextView
         android:id="@+id/boardtitle"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
+        android:layout_marginStart="16dp"
         android:text="일이삼사오육칠팔구십"
-        android:textStyle="bold"
-        android:textSize="20dp"
         android:textColor="@color/black"
-        />
-
-    <TextView
-        android:id="@+id/boardcomments"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:text="[4444]"
+        android:textSize="20dp"
         android:textStyle="bold"
-        android:textSize="15dp"
-        android:textColor="#0055ff"
-        android:paddingTop="4dp"
-        android:paddingLeft="10dp"
-        app:layout_constraintLeft_toRightOf="@id/boardtitle"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="#33000000"
+        android:gravity="center"
+        android:orientation="vertical"
+
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="4dp">
+
+        <TextView
+            android:id="@+id/boardcomments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="[44]"
+            android:textColor="#0055ff"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="댓글" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/boarddate"
-        android:layout_width="60dp"
+        android:layout_width="45dp"
         android:layout_height="25dp"
+        android:layout_marginStart="4dp"
         android:text="17:19"
-        android:textColor="#99000000"
-        android:textStyle="bold"
-        android:textSize="18dp"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/boardtitle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/slash1"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:text=" | "
         android:textColor="#99000000"
+        android:textSize="13dp"
         android:textStyle="bold"
-        android:textSize="18dp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/boardtitle"
-        app:layout_constraintLeft_toRightOf="@id/boarddate"
-        app:layout_constraintRight_toLeftOf="@+id/username"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/boardtitle" />
 
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
+        android:layout_marginStart="16dp"
         android:text="assa2134"
-        android:textColor="#99000000"
-        android:textStyle="bold"
-        android:textSize="18dp"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/boardtitle"
-        app:layout_constraintLeft_toRightOf="@id/slash1"
-        />
-
-    <TextView
-        android:id="@+id/slash2"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:text=" | "
         android:textColor="#99000000"
+        android:textSize="13dp"
         android:textStyle="bold"
-        android:textSize="18dp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/boardtitle"
-        app:layout_constraintLeft_toRightOf="@id/username"
-        app:layout_constraintRight_toLeftOf="@+id/views"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boardtitle" />
 
     <TextView
         android:id="@+id/views"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:text="151"
-        android:textColor="#99000000"
-        android:textStyle="bold"
-        android:textSize="18dp"
+        android:layout_marginStart="4dp"
+        android:text="조회 151"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/boardtitle"
-        app:layout_constraintLeft_toRightOf="@id/slash2"
-        />
+        android:textColor="#99000000"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/boarddate"
+        app:layout_constraintTop_toBottomOf="@+id/boardtitle" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#26000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/views" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

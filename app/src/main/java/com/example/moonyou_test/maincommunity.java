@@ -39,6 +39,8 @@ public class maincommunity extends AppCompatActivity {
     ArrayList<boardgetset> boardlist = new ArrayList<>();
     ArrayList<boardgetset> noticelist = new ArrayList<>();
     Button writebtn;
+    Button home;
+    Button mypage;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -53,6 +55,8 @@ public class maincommunity extends AppCompatActivity {
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.bord);
+
+
 
         getboard();
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -87,6 +91,30 @@ public class maincommunity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        home = findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                outIntent.putExtra("callback", "home");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+
+        mypage = findViewById(R.id.mypage_btn);
+        mypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                outIntent.putExtra("callback", "mypage");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+
+
 
     }  //ONCRETE 끝
 

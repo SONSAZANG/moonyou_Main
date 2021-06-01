@@ -22,14 +22,12 @@
         </activity>
         <activity android:name=".board_write"/>
         <activity android:name=".maincommpage2"/>
-        <activity android:name=".mypage_review" />
         <activity android:name=".book_final" />
         <activity android:name=".maincommunity" />
         <activity android:name=".help_center" />
         <activity android:name=".show_main" />
         <activity android:name=".book_seat" />
         <activity android:name=".book_calender" />
-        <activity android:name=".mypage_ticket" />
         <activity android:name=".mypage_main" />
         <activity android:name=".MainActivity2" />
         <activity android:name=".Login" />

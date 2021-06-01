@@ -57,7 +57,7 @@ public class mypage_main extends AppCompatActivity {
     EditText newpwd;
     EditText newpwd1;
     User AAA;
-    int nick = 0, email = 0, pwd = 0;
+    int update = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,17 +210,17 @@ public class mypage_main extends AppCompatActivity {
                                         nick_confirm.setText("변경을 원하시면 별명을 입력하세요.");
                                         nick_confirm.setTextColor(0xff000000);
                                     }
-                                    nick = 0;
+                                    update = 0;
                                 }
                                 else
                                 {
                                     nick_confirm.setText("사용 가능한 별명입니다.");
                                     nick_confirm.setTextColor(0xdd55ff66);
-                                    nick = 1;
+                                    update = 1;
                                 }
                             }
                         });
-                if (nick == 1 || email == 1 || pwd == 1)
+                if (update == 1)
                 {
                     info_change.setEnabled(true);
                 }
@@ -267,17 +267,17 @@ public class mypage_main extends AppCompatActivity {
                                         email_confirm.setText("변경을 원하시면 이메일을 입력하세요.");
                                         email_confirm.setTextColor(0xff000000);
                                     }
-                                    email = 0;
+                                    update = 0;
                                 }
                                 else
                                 {
                                     email_confirm.setText("사용 가능한 이메일입니다.");
                                     email_confirm.setTextColor(0xdd55ff66);
-                                    email = 1;
+                                    update = 1;
                                 }
                             }
                         });
-                if (nick == 1 || email == 1 || pwd == 1)
+                if (update == 1)
                 {
                     info_change.setEnabled(true);
                 }
@@ -303,45 +303,29 @@ public class mypage_main extends AppCompatActivity {
                 newpwd1.setFocusable(false);
                 newpwd1.setFocusableInTouchMode(false);
                 pwd_confirm.setTextColor(0xaaef4f4f);
-                db.collection("user")
-                        .whereEqualTo("password", useremail.getText().toString().trim())
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
-                                {
-                                    AAA = new User();
-                                    for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"결과를  한 줄 씩document에"
-                                    {
-                                        AAA = document.toObject(User.class);
-                                    }
-                                }
-                                if(!newpwd.getText().toString().trim().equals(""))
-                                {
-                                    if (newpwd.getText().toString().trim().length() >= 6)
-                                    {
-                                        if(!newpwd.getText().toString().trim().equals(info.getPassword()))
-                                        {
-                                            pwd_confirm.setText("사용 가능한 비밀번호입니다.");
-                                            pwd_confirm.setTextColor(0xdd55ff66);
-                                            newpwd1.setClickable(true);
-                                            newpwd1.setFocusable(true);
-                                            newpwd1.setFocusableInTouchMode(true);
+                if(!newpwd.getText().toString().trim().equals(""))
+                {
+                    if (newpwd.getText().toString().trim().length() >= 6)
+                    {
+                        if(!newpwd.getText().toString().trim().equals(info.getPassword()))
+                        {
+                            pwd_confirm.setText("사용 가능한 비밀번호입니다.");
+                            pwd_confirm.setTextColor(0xdd55ff66);
+                            newpwd1.setClickable(true);
+                            newpwd1.setFocusable(true);
+                            newpwd1.setFocusableInTouchMode(true);
 
-                                        }
-                                        else
-                                        {
-                                            pwd_confirm.setText("기존 비밀번호입니다.");
-                                        }
-                                    }
-                                    else{pwd_confirm.setText("비밀번호는 6자리 이상 조합입니다.");}
-                                }
-                                else {
-                                    pwd_confirm.setText("비밀번호를 입력해 주세요.");
-                                }
-                            }
-                        });
+                        }
+                        else
+                        {
+                            pwd_confirm.setText("기존 비밀번호입니다.");
+                        }
+                    }
+                    else{pwd_confirm.setText("비밀번호는 6자리 이상 조합입니다.");}
+                }
+                else {
+                    pwd_confirm.setText("비밀번호를 입력해 주세요.");
+                }
             }
         });
         newpwd1.addTextChangedListener(new TextWatcher() {
@@ -359,17 +343,17 @@ public class mypage_main extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if (newpwd.getText().toString().trim().equals(newpwd1.getText().toString().trim()))
                 {
-                    pwd = 1;
+                    update = 1;
                     pwd1_confirm.setText("비밀번호가 동일합니다.");
                     pwd1_confirm.setTextColor(0xdd55ff66);
                 }
                 else{
                     pwd1_confirm.setText("비밀번호가 동일하지 않습니다.");
                     pwd1_confirm.setTextColor(0xaaef4f4f);
-                    pwd = 0;
+                    update = 0;
                 }
                 pwd1_confirm.setVisibility(View.VISIBLE);
-                if (nick == 1 || email == 1 || pwd == 1)
+                if (update == 1)
                 {
                     info_change.setEnabled(true);
                 }
@@ -408,8 +392,8 @@ public class mypage_main extends AppCompatActivity {
                                 Map<String, Object> newinfo = new HashMap<>(); //해쉬맵 선언
                                 newinfo.put("nickname", usernick.getText().toString().trim());
                                 newinfo.put("email", useremail.getText().toString().trim());
-                                newinfo.put("password", newpwd.getText().toString().trim());
-                                user.updatePassword(newpwd.getText().toString().trim())
+                                newinfo.put("password", newpwd1.getText().toString().trim());
+                                user.updatePassword(newpwd1.getText().toString().trim())
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {

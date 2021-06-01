@@ -226,6 +226,7 @@ public class MainActivity<fAuth> extends AppCompatActivity {
         fAuth.signOut();
         Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
+        finish();
     } //로그아웃 기능 구현
 }
 

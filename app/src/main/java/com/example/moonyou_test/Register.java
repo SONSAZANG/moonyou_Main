@@ -90,25 +90,30 @@ public class Register extends AppCompatActivity {
                             use.put("email",email);
                             use.put("name",name);
                             use.put("nickname", nickname.getText().toString().trim());
-                      fbf.collection("user")
-                              .document()
-                              .set(use)
-                              .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                  @Override
-                                  public void onSuccess(Void aVoid) {
-                                      Log.d("Faber", "Document user = " + use);
-                                  }
-                              }).addOnFailureListener(new OnFailureListener() {
-                          @Override
-                          public void onFailure(@NonNull Exception e) {
-                              Log.d("faber", "Document Error!!");
-                          }
-                      });
+                            fbf.collection("user")
+                                    .document(uid)
+                                    .set(use)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>()
+                                    {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d("Faber", "Document user = " + use);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener()
+                            {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("faber", "Document Error!!");
+                                }
+                            });
                             Toast.makeText(Register.this, "User Created.", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        } else {
-                            Toast.makeText(Register.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            finish();
                         }
+                        else
+                            {
+                                Toast.makeText(Register.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                     }
                 });
             }
@@ -117,6 +122,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
             }
         });
     }

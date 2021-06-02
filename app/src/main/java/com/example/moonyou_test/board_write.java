@@ -86,7 +86,7 @@ public class board_write extends AppCompatActivity {
                                                      long now = System.currentTimeMillis();
                                                      Date date=new Date(now);
                                                      Map<String, Object> comm = new HashMap<>(); //jdk, 3.17 16:30," 해쉬맵 선언"
-                                                     comm.put("username",naming);
+                                                     comm.put("uid",user.getUid());
                                                      comm.put("title",title);
                                                      comm.put("content",content);
                                                      comm.put("views",0);

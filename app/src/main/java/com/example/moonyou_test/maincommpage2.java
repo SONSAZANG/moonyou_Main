@@ -21,6 +21,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Date;
 
 public class maincommpage2 extends AppCompatActivity{
@@ -55,13 +57,25 @@ public class maincommpage2 extends AppCompatActivity{
                             if (document.exists()) {
                                 boardgetset detail = document.toObject(boardgetset.class);
                                 String title = detail.getTitle();
-                                String uname = detail.getUsername();
                                 String write = detail.getContent();
                                 int dviews = detail.getViews();
                                 Date time = detail.getTime();
                                 dt_title.setText(title);
                                 dt_title.setText(title);
-                                dt_uname.setText(uname);
+                                db.collection("user")
+                                        .document(detail.getUid())
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                                                if(task.isSuccessful())
+                                                {
+                                                    DocumentSnapshot document = task.getResult();
+                                                    User user = document.toObject(User.class);
+                                                    dt_uname.setText(user.getNickname());
+                                                }
+                                            }
+                                        });
                                 String unencodedHtml = write;
                                 String encodedHtml = Base64.encodeToString(unencodedHtml.getBytes(),
                                         Base64.NO_PADDING);
@@ -70,7 +84,7 @@ public class maincommpage2 extends AppCompatActivity{
                                 dt_views.setText(String.valueOf(dviews));
                                 dt_time.setText(String.valueOf(time));
 
-                                Log.d("aaaa", "aaaaaaaaaa:" + title + uname + write + dviews + time);
+                                Log.d("aaaa", "aaaaaaaaaa:" + title  + write + dviews + time);
                             } else {
                                 Log.d("AAAAA", "No such document");
                             }
@@ -80,5 +94,4 @@ public class maincommpage2 extends AppCompatActivity{
                     }
                 });
     }
-
 }

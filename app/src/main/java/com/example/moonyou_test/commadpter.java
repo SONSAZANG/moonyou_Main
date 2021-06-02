@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,13 +58,27 @@ public class commadpter extends RecyclerView.Adapter<commadpter.itemViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull itemViewHolder holder, int position)
     {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         boardgetset item = arrayList.get(position) ;  // 생성자클래스이름 변수= 리스트명.
         Date write_date = item.getTime(); //작성일을 날짜 타입에 저장
         SimpleDateFormat date = new SimpleDateFormat("MM/dd"); // 시간을 출력할 포맷 설정
         holder.boardtitle.setText(item.getTitle());
         holder.boardcomments.setText("[" + String.valueOf(item.getComments()) + "]");
         holder.boarddate.setText(date.format(write_date)); //작성일을 설정한 포맷으로 반환하여 텍스트뷰에 저장
-        holder.username.setText(item.getUsername());
+        db.collection("user")
+                .document(item.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+                            DocumentSnapshot document = task.getResult();
+                            User user = document.toObject(User.class);
+                            holder.username.setText(user.getNickname());
+                        }
+                    }
+                });
         holder.views.setText(String.valueOf(item.getViews()));
     }
 

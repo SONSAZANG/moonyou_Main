@@ -224,21 +224,24 @@ public class mypage_main extends AppCompatActivity {
                                     {
 
                                         nick_confirm.setText("동일한 별명이 존재 합니다.");
-                                        nick_confirm.setTextColor(0xaaef4f4f);
+                                        if (usernick.getText().toString().trim().equals(info.getNickname()))
+                                        {
+                                            nick_confirm.setText("변경을 원하시면 별명을 입력하세요.");
+                                        }
                                         update = 0;
                                         nick = 0;
                                     }
                                     else
                                     {
-                                        nick_confirm.setText("사용 가능한 별명입니다.");
+                                        nick_confirm.setText("사용 가능한 이메일입니다.");
                                         update = 1;
                                         nick = 1;
                                     }
                                 }
                                 else
-                                    {
-                                        nick_confirm.setText("변경을 원하시면 새 별명을 입력해주세요.");
-                                    }
+                                {
+                                    nick_confirm.setText("변경을 원하시면 새 별명을 입력해주세요.");
+                                }
 
                                 if (update == 1)
                                 {
@@ -287,7 +290,7 @@ public class mypage_main extends AppCompatActivity {
                                     if(useremail.getText().toString().trim().equals(AAA.getEmail()))
                                     {
 
-                                        email_confirm.setText("동일한 이메일 존재 합니다.");
+                                        email_confirm.setText("동일한 이메일이 존재 합니다.");
                                         if (useremail.getText().toString().trim().equals(info.getEmail()))
                                         {
                                             email_confirm.setText("변경을 원하시면 이메일을 입력하세요.");

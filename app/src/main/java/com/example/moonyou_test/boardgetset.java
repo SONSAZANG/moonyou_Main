@@ -8,18 +8,17 @@ public class boardgetset {
     private int views;
     private String dId;
     private String content;
+    private String title;
+    private String uid;
+    private Date time;
 
     public String getdId() {
         return dId;
     }
 
-    public void setId(String dId) {
+    public void setdId(String dId) {
         this.dId = dId;
     }
-
-    private String title;
-    private String username;
-    private Date time;
 
     public int getComments() {
         return comments;
@@ -69,11 +68,11 @@ public class boardgetset {
         this.title = title;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUid() {
+        return uid;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

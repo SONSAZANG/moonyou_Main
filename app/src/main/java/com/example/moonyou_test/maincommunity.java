@@ -16,6 +16,7 @@ import android.widget.ViewFlipper;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +24,8 @@ import com.google.firebase.firestore.Query.Direction;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -41,12 +44,14 @@ public class maincommunity extends AppCompatActivity {
     Button writebtn;
     Button home;
     Button mypage;
+    boardgetset board;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maincommunity);
+        FirebaseUser user= fAuth.getCurrentUser();
         hot_board = (FrameLayout) findViewById(R.id.hot_board);
         notice_board = (FrameLayout) findViewById(R.id.Notice_board);
         my_board = (FrameLayout) findViewById(R.id.my_board);
@@ -201,8 +206,8 @@ public class maincommunity extends AppCompatActivity {
                         {
                             for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
                             {
-                                boardgetset board = document.toObject(boardgetset.class);
-                                board.setId(document.getId());
+                                board = document.toObject(boardgetset.class);
+                                board.setdId(document.getId());
                                 Log.d("FABERJOO", String.valueOf(board.getdId()));
                                 boardlist.add(board);
                             }
@@ -213,9 +218,6 @@ public class maincommunity extends AppCompatActivity {
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
-    }
-    private void gethotwrite(){
-
     }
     private void getnotice() {
         boardlist.clear();
@@ -237,7 +239,7 @@ public class maincommunity extends AppCompatActivity {
                             {
 
                                 boardgetset board = document.toObject(boardgetset.class);
-                                board.setId(document.getId());
+                                board.setdId(document.getId());
                                 Log.d("FABERJOO", String.valueOf(board.getdId()));
                                 noticelist.add(board);
                             }
@@ -286,7 +288,7 @@ public class maincommunity extends AppCompatActivity {
                                                     for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
                                                     {
                                                         boardgetset board = document.toObject(boardgetset.class);
-                                                        board.setId(document.getId());
+                                                        board.setdId(document.getId());
                                                         Log.d("FABERJOO", document.getId());
                                                         boardlist.add(board);
                                                     }

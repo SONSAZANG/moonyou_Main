@@ -66,6 +66,34 @@
             app:layout_constraintTop_toBottomOf="@+id/detail_time" />
 
         <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="댓글수"
+            android:textColor="#99000000"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/line5"
+            app:layout_constraintRight_toLeftOf="@+id/detail_comments" />
+
+        <TextView
+            android:id="@+id/detail_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+
+            android:text="ㅁ"
+            android:textColor="#99000000"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/line5"
+            app:layout_constraintRight_toLeftOf="@+id/textView4"/>
+
+        <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,58 +122,85 @@
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="575dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         >
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <WebView
-                android:id="@+id/webView"
-                android:layout_width="match_parent"
-                android:layout_height="520dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true" />
-
+            android:layout_height="575dp"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <EditText
-                    android:id="@+id/commenttext"
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:hint="터치시댓글쓰기"/>
+                android:orientation="vertical">
+                <WebView
+                    android:id="@+id/webView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
 
-                <Button
-                    android:id="@+id/create_comment"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="8dp"
-                    android:text="등록"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:inputType="textMultiLine"
-                    android:background="@drawable/button_round"
-                    android:backgroundTint="#ef4f4f"
-                    android:backgroundTintMode="add"
-                    tools:layout_editor_absoluteY="0dp" />
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/commenttext"
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:hint="터치시댓글쓰기"/>
+
+                    <Button
+                        android:id="@+id/create_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        android:text="등록"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:inputType="textMultiLine"
+                        android:background="@drawable/button_round"
+                        android:backgroundTint="#ef4f4f"
+                        android:backgroundTintMode="add"
+                        tools:layout_editor_absoluteY="0dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="    댓글 "/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detail_comments1"
+                        android:text="a"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 개"/>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/commentss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/commentss"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:layout_width="414dp"
         android:layout_height="match_parent"
-        android:layout_weight="5.5"
+        android:layout_weight="5"
         android:background="@color/black"
         android:gravity="center">
 

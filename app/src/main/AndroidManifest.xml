@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        >
         <meta-data android:name="android.max_aspect" android:value="ratio_float"/>
         <activity android:name=".intro">
             <intent-filter>
@@ -21,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".board_write"/>
-        <activity android:name=".maincommpage2"/>
+        <activity android:name=".maincommpage2"
+            android:windowSoftInputMode="adjustUnspecified|adjustPan"/>
         <activity android:name=".book_final" />
         <activity android:name=".maincommunity" />
         <activity android:name=".help_center" />

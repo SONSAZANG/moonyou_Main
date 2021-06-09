@@ -25,13 +25,26 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class show_main extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+public class show_main extends AppCompatActivity implements showNoticeAdapter.OnListItemSelectedInterface{
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<show_info> arrayList;
+
     ImageView show_poster;
     TextView title_label;
     TextView period_label;
     TextView runtime_label;
+    TextView notice_label;
     show_info show_info;
+    String notice;
     StorageReference storageref;
     FirebaseStorage storage;
 
@@ -43,10 +56,18 @@ public class show_main extends AppCompatActivity {
         String showID = intent.getStringExtra("show_id"); // id가져오기
         Toast.makeText(getApplicationContext(), showID, Toast.LENGTH_SHORT).show();
 
+        recyclerView = findViewById(R.id.recyclerView1); // 아이디 연결
+        recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        arrayList = new ArrayList<>(); //User 객체를 담을 어레이 리스트
+
         show_poster = findViewById(R.id.show_poster);
         title_label = findViewById(R.id.title_label);
         period_label = findViewById(R.id.period_label);
         runtime_label = findViewById(R.id.runtime_label);
+        notice_label = findViewById(R.id.notice);
+        notice = getString(R.string.long_text);
         storage = FirebaseStorage.getInstance();
         storageref = storage.getReference();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -66,11 +87,16 @@ public class show_main extends AppCompatActivity {
                             title_label.setText(show_info.getTitle());
                             period_label.setText((show_info.getStartday()) + " ~ " + (show_info.getFinishday()));
                             runtime_label.setText(String.valueOf(show_info.getRuntime()));
+                            notice = show_info.getNotice();
+                            notice_label.setText(notice);
+                            arrayList.add(show_info);
+
                         }
                         else
                         {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
+                        adapter = new showNoticeAdapter(arrayList, show_main.this, show_main.this);
 
                     }
                 });
@@ -130,5 +156,15 @@ public class show_main extends AppCompatActivity {
             setResult(RESULT_OK, outIntent);
             finish();
         }
+    }
+
+    @Override
+    public void onItemSelected(View v, int position) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

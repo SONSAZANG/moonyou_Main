@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">moonyou_test</string>
+    <string name="long_text"></string>
 
 </resources>

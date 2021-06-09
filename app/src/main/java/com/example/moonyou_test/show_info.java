@@ -8,9 +8,14 @@ public class show_info {
     private String startday;
     private String finishday;
     private String seat_array;
+    private String notice;
     private int runtime;
     private int hit;
     private String state;
+
+    public String getNotice() { return notice; }
+
+    public void setNotice(String notice) { this.notice = notice; }
 
     public String getState() {
         return state;

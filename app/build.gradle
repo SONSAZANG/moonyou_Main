@@ -30,6 +30,8 @@ android {
 }
 
 dependencies {
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'kr.co.prnd:readmore-textview:1.0.0'
     implementation 'com.github.lumyjuwon:Android-Rich-Wysiwyg-Editor:1.0.0'
     implementation 'com.github.esafirm.android-image-picker:imagepicker:2.0.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'

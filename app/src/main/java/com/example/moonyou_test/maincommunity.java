@@ -93,7 +93,7 @@ public class maincommunity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), board_write.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -303,6 +303,17 @@ public class maincommunity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String callback = data.getStringExtra("callback");
+            if(callback.equals("writesucess")){
+                getboard();
+            }
+        }
     }
 }
 

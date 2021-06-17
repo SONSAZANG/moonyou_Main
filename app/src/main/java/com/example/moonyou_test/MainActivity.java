@@ -85,17 +85,17 @@ public class MainActivity<fAuth> extends AppCompatActivity {
                     }
                 });
 
-        Button button1 = (Button) findViewById(R.id.show);
-        button1.setOnClickListener(new View.OnClickListener() {
+        Button button2 = (Button) findViewById(R.id.community);
+        button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                Intent intent = new Intent(getApplicationContext(), showcommunity.class);
                 startActivityForResult(intent, 1);
             }
         });
 
-        Button button2 = (Button) findViewById(R.id.mypage_btn);
-        button2.setOnClickListener(new View.OnClickListener() {
+        Button button3 = (Button) findViewById(R.id.mypage_btn);
+        button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), mypage_main.class);
@@ -103,32 +103,40 @@ public class MainActivity<fAuth> extends AppCompatActivity {
             }
         });
 
-        Button button3 = (Button) findViewById(R.id.menu);
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), maincommunity.class);
-                startActivityForResult(intent, 1);
-            }
-        });
-
-        Button button4 = (Button) findViewById(R.id.center);
+        Button button4 = (Button) findViewById(R.id.logout);
         button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), help_center.class);
-                startActivityForResult(intent, 1);
-            }
-        });
-        Button button5 = (Button) findViewById(R.id.logout);
-        button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logout();
             }
         });
 
+        Button button5 = (Button) findViewById(R.id.show);
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                startActivityForResult(intent, 1);
+            }
+        });
 
+        Button button7 = (Button) findViewById(R.id.center);
+        button7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), help_center.class);
+                startActivity(intent);
+            }
+        });
+
+        Button button8 = (Button) findViewById(R.id.menu);
+        button8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), maincommunity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
 
         v_fllipper = findViewById(R.id.image_slide);
 
@@ -141,6 +149,7 @@ public class MainActivity<fAuth> extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
+        Intent intent;
         if (resultCode == RESULT_OK) {
             String callback = data.getStringExtra("callback");
             switch (callback)
@@ -148,11 +157,13 @@ public class MainActivity<fAuth> extends AppCompatActivity {
                 case "logout":
                     logout();
                 case "mypage":
-                    Intent intent = new Intent(getApplicationContext(), mypage_main.class);
+                    intent = new Intent(getApplicationContext(), mypage_main.class);
+                    startActivityForResult(intent, 1);
+                case "community":
+                    intent = new Intent(getApplicationContext(), showcommunity.class);
                     startActivityForResult(intent, 1);
                 case "home":
                     resultCode = 0;
-
             }
         }
     }

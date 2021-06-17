@@ -58,7 +58,10 @@ public class board_write extends AppCompatActivity {
                 String title=  wysiwyg.getHeadlineEditText().getText().toString(); //헤드라인
                     String content= wysiwyg.getContent().getHtml(); //텍스트내용
                 addData(title,content);//jdk, 3.17 16:30," 저장된 텍스트를 전달하여 db에 저장하는 함수 실행 "
-              finish();
+                Intent outIntent = new Intent(getApplicationContext(), maincommunity.class);
+                outIntent.putExtra("callback", "writesucess");
+                setResult(RESULT_OK, outIntent);
+                finish();
             }
             // Handle this
            /*     Log.i("Rich Wysiwyg Headline", wysiwyg.getHeadlineEditText().getText().toString());

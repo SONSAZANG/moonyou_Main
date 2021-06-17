@@ -56,11 +56,11 @@ public class show_main extends AppCompatActivity implements showNoticeAdapter.On
         String showID = intent.getStringExtra("show_id"); // id가져오기
         Toast.makeText(getApplicationContext(), showID, Toast.LENGTH_SHORT).show();
 
-        recyclerView = findViewById(R.id.recyclerView1); // 아이디 연결
-        recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        arrayList = new ArrayList<>(); //User 객체를 담을 어레이 리스트
+//        recyclerView = findViewById(R.id.recyclerView1); // 아이디 연결
+//        recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
+//        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        arrayList = new ArrayList<>(); //User 객체를 담을 어레이 리스트
 
         show_poster = findViewById(R.id.show_poster);
         title_label = findViewById(R.id.title_label);
@@ -89,14 +89,14 @@ public class show_main extends AppCompatActivity implements showNoticeAdapter.On
                             runtime_label.setText(String.valueOf(show_info.getRuntime()));
                             notice = show_info.getNotice();
                             notice_label.setText(notice);
-                            arrayList.add(show_info);
+                            //arrayList.add(show_info);
 
                         }
                         else
                         {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
-                        adapter = new showNoticeAdapter(arrayList, show_main.this, show_main.this);
+                        //adapter = new showNoticeAdapter(arrayList, show_main.this, show_main.this);
 
                     }
                 });
@@ -118,6 +118,17 @@ public class show_main extends AppCompatActivity implements showNoticeAdapter.On
             public void onClick(View view) {
                 Intent outIntent = new Intent(getApplicationContext(), MainActivity2.class);
                 outIntent.putExtra("callback", "home");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+        Button button3 = (Button) findViewById(R.id.community);
+        button3.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity2.class);
+                outIntent.putExtra("callback", "community");
                 setResult(RESULT_OK, outIntent);
                 finish();
             }

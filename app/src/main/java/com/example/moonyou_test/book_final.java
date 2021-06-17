@@ -117,6 +117,9 @@ public class book_final extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent outIntent = new Intent(getApplicationContext(), book_seat.class);
+                outIntent.putExtra("callback", "home");
+                setResult(RESULT_OK, outIntent);
                 finish();
             }
         });
@@ -130,6 +133,55 @@ public class book_final extends AppCompatActivity {
                 seats_change(date, time, seat_array, seatA);
                 resv_save(date, time, dateA, seatA, selectA, img1);
                 show_uphit(seatA);
+                Intent outIntent = new Intent(getApplicationContext(), book_seat.class);
+                outIntent.putExtra("callback", "home");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+
+        Button button1 = (Button) findViewById(R.id.home);
+        button1.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), book_seat.class);
+                outIntent.putExtra("callback", "home");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+
+        Button button2 = (Button) findViewById(R.id.community);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), book_seat.class);
+                outIntent.putExtra("callback", "community");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+
+        Button button3 = (Button) findViewById(R.id.mypage_btn);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), book_seat.class);
+                outIntent.putExtra("callback", "mypage");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+
+        Button button4 = (Button) findViewById(R.id.logout);
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), book_seat.class);
+                outIntent.putExtra("callback", "logout");
+                setResult(RESULT_OK, outIntent);
+                finish();
             }
         });
     }

@@ -91,6 +91,17 @@ public class MainActivity2 extends AppCompatActivity implements CustomAdapter.On
                 finish();
             }
         });
+        Button button3 = (Button) findViewById(R.id.community);
+        button3.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                outIntent.putExtra("callback", "community");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
         Button button4 = (Button) findViewById(R.id.mypage_btn);
         button4.setOnClickListener(new View.OnClickListener(){
 

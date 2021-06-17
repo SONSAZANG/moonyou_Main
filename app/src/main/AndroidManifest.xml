@@ -36,6 +36,8 @@
         <activity android:name=".Register"/>
         <activity android:name=".myticket"/>
         <activity android:name=".MainActivity" />
+        <activity android:name=".showcommunity"/>
+        <activity android:name=".showcommunity2"/>
 
         <meta-data
             android:name="preloaded_fonts"

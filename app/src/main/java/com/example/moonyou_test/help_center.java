@@ -1,6 +1,7 @@
 package com.example.moonyou_test;
 //고객센터
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -76,22 +77,14 @@ public class help_center extends AppCompatActivity {
         recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         List<ExpandableListAdapter.Item> data = new ArrayList<>();
 
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Fruits"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Apple"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Orange"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Banana"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Cars"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Audi"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Aston Martin"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "BMW"));
-        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Cadillac"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "매진되면 티켓을 전혀 구매할 수 없나요?"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "없습니다."));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "현장 판매 진행하나요?"));
+        data.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "매진시 막판 취소표에 따라 진행 여부와 수량을 결정해 5월 9일~10일 경 별도 공지합니다."));
 
-        ExpandableListAdapter.Item places = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "Places");
+        ExpandableListAdapter.Item places = new ExpandableListAdapter.Item(ExpandableListAdapter.HEADER, "티켓을 배송 받았는데 예매자 신분증이 필요한가");
         places.invisibleChildren = new ArrayList<>();
-        places.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Kerala"));
-        places.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Tamil Nadu"));
-        places.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Karnataka"));
-        places.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "Maharashtra"));
+        places.invisibleChildren.add(new ExpandableListAdapter.Item(ExpandableListAdapter.CHILD, "아니요. 배송 받은 티켓을 소지하고 해당 손목밴드 부스로 바로 가시면 됩니다."));
 
         data.add(places);
 
@@ -161,7 +154,6 @@ public class help_center extends AppCompatActivity {
                 });
             }
         });
-
 
     }
 

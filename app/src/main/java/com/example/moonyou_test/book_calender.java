@@ -139,6 +139,17 @@ public class book_calender extends AppCompatActivity implements timeadpter.OnLis
                 finish();
             }
         });
+        Button button3 = (Button) findViewById(R.id.community);
+        button3.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity2.class);
+                outIntent.putExtra("callback", "community");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
         Button button4 = (Button) findViewById(R.id.mypage_btn);
         button4.setOnClickListener(new View.OnClickListener(){
 
@@ -237,7 +248,7 @@ public class book_calender extends AppCompatActivity implements timeadpter.OnLis
                     intent.putExtra("date", item.getDate());
                     intent.putExtra("time", item.getTime());
                     intent.putExtra("show_id", item.getShow_id());
-                    v.getContext().startActivity(intent);
+                    startActivityForResult(intent, 1);
                 }
             }
         });

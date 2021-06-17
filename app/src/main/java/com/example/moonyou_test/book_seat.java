@@ -75,7 +75,7 @@ public class book_seat extends AppCompatActivity implements View.OnClickListener
                 intent.putExtra("show_id", showID);
                 intent.putExtra("time", time);
                 intent.putExtra("seat_array", seat_array);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -205,6 +205,19 @@ public class book_seat extends AppCompatActivity implements View.OnClickListener
             Toast.makeText(this, view.getId() + " 좌석은 예매되어있는 자리입니다.", Toast.LENGTH_SHORT).show();
         } else if ((int) view.getTag() == STATUS_RESERVED) {
             Toast.makeText(this, view.getId() + " 좌석은 거리두기 자리입니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String callback = data.getStringExtra("callback");
+            Intent outIntent = new Intent(getApplicationContext(), book_seat.class);
+            outIntent.putExtra("callback", callback);
+            setResult(RESULT_OK, outIntent);
+            finish();
         }
     }
 }

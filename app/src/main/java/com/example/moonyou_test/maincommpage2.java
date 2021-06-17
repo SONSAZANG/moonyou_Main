@@ -54,6 +54,13 @@ public class maincommpage2 extends AppCompatActivity{
     RecyclerView commentss;
     RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    TextView dt_title;
+    TextView dt_uname;
+    TextView dt_time;
+    WebView dt_write;
+    TextView dt_views;
+    TextView dt_comments;
+    TextView dt_comments1;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maincommpage2);
@@ -61,24 +68,27 @@ public class maincommpage2 extends AppCompatActivity{
         Intent intent = getIntent();
         BoardID = intent.getStringExtra("BoardID");
 
-        Button create_comment = (Button)findViewById(R.id.create_comment);
+        Button create_comment = (Button) findViewById(R.id.create_comment);
         create_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!comment_text.getText().toString().trim().equals(""))
-                {
+                if (!comment_text.getText().toString().trim().equals("")) {
                     add_comment();
                 }
             }
         });
-        TextView dt_title = (TextView) findViewById(R.id.detail_title);
-        TextView dt_uname = (TextView) findViewById(R.id.detail_username);
-        TextView dt_time = (TextView) findViewById(R.id.detail_time);
-        WebView dt_write =  findViewById(R.id.webView);
-        TextView dt_views = (TextView) findViewById(R.id.detail_views);
-        TextView dt_comments = (TextView) findViewById(R.id.detail_comments);
-        TextView dt_comments1 = (TextView) findViewById(R.id.detail_comments1);
+        dt_title = (TextView) findViewById(R.id.detail_title);
+        dt_uname = (TextView) findViewById(R.id.detail_username);
+        dt_time = (TextView) findViewById(R.id.detail_time);
+        dt_write = findViewById(R.id.webView);
+        dt_views = (TextView) findViewById(R.id.detail_views);
+        dt_comments = (TextView) findViewById(R.id.detail_comments);
+        dt_comments1 = (TextView) findViewById(R.id.detail_comments1);
 
+        get_content();
+    }
+    private void get_content()
+    {
         FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30,"파이어스토어 연결"
         db.collection("Board")
                 .document(BoardID)
@@ -177,6 +187,7 @@ public class maincommpage2 extends AppCompatActivity{
                         Log.d("faberjooaaaaaaa", "Error putting documents: ");
                     }
                 });
+        get_content();
     }
     private void getcomments()
     {

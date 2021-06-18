@@ -150,6 +150,6 @@
             android:textColor="@color/white"
             android:drawableTop="@drawable/ic_baseline_close_24"
             style="?android:attr/borderlessButtonStyle"/>
-        ></LinearLayout>
+        </LinearLayout>
 
 </LinearLayout>

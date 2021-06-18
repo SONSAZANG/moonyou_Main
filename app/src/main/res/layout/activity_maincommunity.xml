@@ -38,13 +38,6 @@
             android:textAlignment="center" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabCOMMItem3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="공지"
-            android:textAlignment="center" />
-
-        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabCOMMItem4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,22 +93,22 @@
                 android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/logout"
-                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/mypage_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableTop="@drawable/ic_baseline_email_24"
-                android:text="채팅"
-                android:textColor="@color/white" />
+                android:text="마이"
+                android:textColor="@color/white"
+                android:drawableTop="@drawable/ic_baseline_person_24"
+                style="?android:attr/borderlessButtonStyle"/>
 
             <Button
-                android:id="@+id/mypage_btn"
-                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableTop="@drawable/ic_baseline_person_24"
-                android:text="마이"
-                android:textColor="@color/white" />
+                android:id="@+id/logout"
+                android:text="로그아웃"
+                android:textColor="@color/white"
+                android:drawableTop="@drawable/ic_baseline_close_24"
+                style="?android:attr/borderlessButtonStyle"/>
         </LinearLayout>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

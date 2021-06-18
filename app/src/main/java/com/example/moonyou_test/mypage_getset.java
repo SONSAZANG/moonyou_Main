@@ -5,7 +5,7 @@ public class mypage_getset {
     private String date;
     private String[] seat_num;
     private String time;
-    private String show_ID;
+    private String show_id;
     private String image;
     private String title;
     private String seatName;
@@ -20,11 +20,11 @@ public class mypage_getset {
     }
 
     public String getShow_ID() {
-        return show_ID;
+        return show_id;
     }
 
-    public void setShow_ID(String show_ID) {
-        this.show_ID = show_ID;
+    public void setShow_ID(String show_id) {
+        this.show_id = show_id;
     }
 
     public String getImage() { return image; }

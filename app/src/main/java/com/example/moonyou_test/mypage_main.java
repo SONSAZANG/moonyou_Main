@@ -81,7 +81,6 @@ public class mypage_main extends AppCompatActivity {
         myinfo = (FrameLayout) findViewById(R.id.mypage_info);
         mypage_info_change = (FrameLayout) findViewById(R.id.mypage_info_change);
         myticket = (FrameLayout) findViewById(R.id.mypage_ticket);
-        mypost = (FrameLayout) findViewById(R.id.mypage_post);
          // 아이디 연결
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.myPage);
@@ -122,12 +121,6 @@ public class mypage_main extends AppCompatActivity {
                 myticket.setVisibility(View.VISIBLE);
                 mypost.setVisibility(View.GONE);
                 mycs();
-                break;
-            case 2:
-                myinfo.setVisibility(View.GONE);
-                mypage_info_change.setVisibility(View.GONE);
-                myticket.setVisibility(View.GONE);
-                mypost.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -340,7 +333,6 @@ public class mypage_main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (nick == 1) {newinfo.put("nickname", usernick.getText().toString().trim());}
-
                 if (pwd == 1) {
                     user.updatePassword(newpwd1.getText().toString().trim())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -348,6 +340,19 @@ public class mypage_main extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Log.d("Fabervvvvvvvvvvv", "User password updated.");
+                                        newinfo.put("password", newpwd1.getText().toString().trim());
+                                        docref.update(newinfo)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Log.d("Faber", "Succesfully update");
+                                                    }
+                                                });
+                                        Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                        outIntent.putExtra("callback", "logout");
+                                        setResult(RESULT_OK, outIntent);
+                                        finish();
+                                        FirebaseAuth.getInstance().signOut();
                                         Toast.makeText(getApplicationContext(), "비밀번호 변경완료", Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -356,24 +361,10 @@ public class mypage_main extends AppCompatActivity {
                                 @Override
                                 public void onFailure(@NonNull @NotNull Exception e) {
                                     Log.d("Fabervvvvvvvvvvv", "User password update failed.");
-                                    Toast.makeText(getApplicationContext(), "비밀번호 변경에 실패했습니다.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "네트워크가 불안정합니다. 다시 시도해 주세요.", Toast.LENGTH_LONG).show();
                                 }
                             });
-                    newinfo.put("password", newpwd1.getText().toString().trim());
                 }
-
-                docref.update(newinfo)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Log.d("Faber", "Succesfully update");
-                            }
-                        });
-                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
-                outIntent.putExtra("callback", "logout");
-                setResult(RESULT_OK, outIntent);
-                finish();
-                FirebaseAuth.getInstance().signOut();
             }
         });
     }

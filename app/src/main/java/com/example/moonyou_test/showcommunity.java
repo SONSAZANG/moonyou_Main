@@ -91,7 +91,6 @@ public class showcommunity extends AppCompatActivity implements communityadaper.
         if (pos != RecyclerView.NO_POSITION)
         {
             Intent intent = new Intent(v.getContext(), showcommunity2.class);
-            intent.putExtra("book_ID", item.getBook_ID());
             intent.putExtra("show_ID", item.getShow_ID());
             startActivityForResult(intent, 1);
         }

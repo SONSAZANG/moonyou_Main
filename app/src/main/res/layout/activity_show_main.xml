@@ -114,12 +114,25 @@
         android:layout_height="370dp"
         android:layout_marginHorizontal="10dp"
         app:layout_constraintTop_toBottomOf="@+id/b123"
-        app:layout_constraintBottom_toTopOf="@id/bottom_layout0"
+        app:layout_constraintBottom_toTopOf="@id/menubar"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
+            <Button
+                android:id="@+id/goticekt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="1px"
+                android:layout_weight="5"
+                android:layout_marginLeft="100dp"
+                android:background="@drawable/button_round"
+                android:backgroundTint="#ef4f4f"
+                android:elevation="20dp"
+                android:text="좌석선택"
+                android:textColor="#fff"
+                app:layout_constraintTop_toTopOf="parent"/>
             <TextView
                 android:id="@+id/tv1"
                 android:layout_width="match_parent"
@@ -129,7 +142,7 @@
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/goticekt"
                 app:layout_constraintBottom_toTopOf="@id/notice"/>
             <kr.co.prnd.readmore.ReadMoreTextView
                 android:id="@+id/notice"
@@ -223,29 +236,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/a123"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-    <LinearLayout
-        android:id="@+id/bottom_layout0"
-        android:orientation="horizontal"
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/menubar"
-        app:layout_constraintTop_toBottomOf="@+id/scroll1">
-
-        <Button
-            android:id="@+id/goticekt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="1px"
-            android:layout_weight="5"
-            android:layout_marginLeft="100dp"
-            android:background="@drawable/button_round"
-            android:backgroundTint="#ef4f4f"
-            android:elevation="20dp"
-            android:text="좌석선택"
-            android:textColor="#fff" />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"

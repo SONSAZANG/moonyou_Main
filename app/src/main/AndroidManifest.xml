@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".board_write"/>
+        <activity android:name=".board_write2"/>
         <activity android:name=".maincommpage2"
             android:windowSoftInputMode="adjustUnspecified|adjustPan"/>
         <activity android:name=".book_final" />

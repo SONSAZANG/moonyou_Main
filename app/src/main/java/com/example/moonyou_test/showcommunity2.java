@@ -37,7 +37,6 @@ public class showcommunity2 extends AppCompatActivity {
     FrameLayout all_board;
     FrameLayout navi;
     ArrayList<boardgetset> boardlist = new ArrayList<>();
-    ArrayList<boardgetset> noticelist = new ArrayList<>();
     Button writebtn;
     Button home;
     Button mypage;

@@ -96,17 +96,6 @@
             android:textStyle="bold"
             android:textColor="#aaef4f4f"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="200dp"
-            />
-
-        <TextView
-            android:id="@+id/email_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="변경을 원하시면 새 이메일을 입력하세요."
-            android:textStyle="bold"
-            android:textColor="#aaef4f4f"
-            android:layout_marginHorizontal="40dp"
             android:layout_marginTop="280dp"
             />
 
@@ -155,6 +144,19 @@
                 />
 
             <EditText
+                android:id="@+id/myemail"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="17.5dp"
+                android:inputType="textEmailAddress"
+                android:hint="이메일"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:enabled="false"
+                />
+
+            <EditText
                 android:id="@+id/mynick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -163,19 +165,6 @@
                 android:inputType="textPersonName"
                 android:hint="별명"
                 android:ems="10"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:enabled="true"
-                />
-
-            <EditText
-                android:id="@+id/myemail"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="17.5dp"
-                android:inputType="textEmailAddress"
-                android:hint="이메일"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:enabled="true"

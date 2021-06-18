@@ -156,14 +156,18 @@ public class MainActivity<fAuth> extends AppCompatActivity {
             {
                 case "logout":
                     logout();
+                    break;
                 case "mypage":
                     intent = new Intent(getApplicationContext(), mypage_main.class);
                     startActivityForResult(intent, 1);
+                    break;
                 case "community":
                     intent = new Intent(getApplicationContext(), showcommunity.class);
                     startActivityForResult(intent, 1);
+                    break;
                 case "home":
                     resultCode = 0;
+                    break;
             }
         }
     }

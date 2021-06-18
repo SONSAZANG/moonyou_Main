@@ -216,7 +216,7 @@ public class maincommpage2 extends AppCompatActivity{
                         } else {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
-                        adapter = new commentsadpter(commentslist, maincommpage2.this, BoardID);
+                        adapter = new commentsadpter(commentslist, maincommpage2.this);
                         commentss.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });

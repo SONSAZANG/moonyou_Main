@@ -41,12 +41,10 @@ public class commentsadpter extends RecyclerView.Adapter<commentsadpter.itemView
 
     private ArrayList<commentsgetset> arrayList;
     private Context context;
-    private String BoardID;
 
-    public commentsadpter(ArrayList<commentsgetset> arrayList, Context context, String BoardID) {
+    public commentsadpter(ArrayList<commentsgetset> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
-        this.BoardID = BoardID;
     }
 
     @NonNull

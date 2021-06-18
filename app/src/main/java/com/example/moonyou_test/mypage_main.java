@@ -182,7 +182,6 @@ public class mypage_main extends AppCompatActivity {
     private void info_change(User info)
     {
         TextView nick_confirm = (TextView)findViewById(R.id.nick_confirm);
-        TextView email_confirm = (TextView)findViewById(R.id.email_confirm);
         TextView pwd_confirm = (TextView)findViewById(R.id.pwd_confirm);
         TextView pwd1_confirm = (TextView)findViewById(R.id.pwd1_confirm);
         Button info_change = (Button)findViewById(R.id.info_cahnge);
@@ -255,76 +254,6 @@ public class mypage_main extends AppCompatActivity {
                         });
             }
         });
-        useremail.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                db.collection("user")
-                        .whereEqualTo("email", useremail.getText().toString().trim())
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
-                                {
-                                    AAA = new User();
-                                    for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"결과를  한 줄 씩document에"
-                                    {
-                                        AAA = document.toObject(User.class);
-                                    }
-                                }
-                                if (!useremail.getText().toString().trim().equals(""))
-                                {
-                                    newpwd.setClickable(false);
-                                    newpwd.setFocusable(false);
-                                    newpwd.setFocusableInTouchMode(false);
-                                    if(useremail.getText().toString().trim().equals(AAA.getEmail()))
-                                    {
-
-                                        email_confirm.setText("동일한 이메일이 존재 합니다.");
-                                        if (useremail.getText().toString().trim().equals(info.getEmail()))
-                                        {
-                                            email_confirm.setText("변경을 원하시면 이메일을 입력하세요.");
-                                        }
-                                        update = 0;
-                                        email = 0;
-                                    }
-                                    else
-                                    {
-                                        email_confirm.setText("사용 가능한 이메일입니다.");
-                                        update = 1;
-                                        email = 1;
-                                    }
-                                }
-                                else
-                                {
-                                    newpwd.setClickable(true);
-                                    newpwd.setFocusable(true);
-                                    newpwd.setFocusableInTouchMode(true);
-                                    email_confirm.setText("변경을 원하시면 새 이메일을 입력해주세요.");
-                                }
-
-                                if (update == 1)
-                                {
-                                    info_change.setEnabled(true);
-                                }
-                                else
-                                {
-                                    info_change.setEnabled(false);
-                                }
-                            }
-                        });
-            }
-        });
         newpwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -342,9 +271,6 @@ public class mypage_main extends AppCompatActivity {
                 newpwd1.setFocusableInTouchMode(false);
                 if(!newpwd.getText().toString().trim().equals(""))
                 {
-                    useremail.setClickable(false);
-                    useremail.setFocusable(false);
-                    useremail.setFocusableInTouchMode(false);
                     if (newpwd.getText().toString().trim().length() >= 6)
                     {
                         if(!newpwd.getText().toString().trim().equals(info.getPassword()))
@@ -364,9 +290,6 @@ public class mypage_main extends AppCompatActivity {
                 }
                 else {
                     pwd1_confirm.setVisibility(View.GONE);
-                    useremail.setClickable(true);
-                    useremail.setFocusable(true);
-                    useremail.setFocusableInTouchMode(true);
                     pwd_confirm.setText("변경을 원하시면 새 비밀번호를 입력해주세요.");
 
                 }
@@ -410,32 +333,13 @@ public class mypage_main extends AppCompatActivity {
 
         username.setText(info.getName());
         usernick.setText(info.getNickname());
+        useremail.setText(info.getEmail());
 
         info_change.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
                 if (nick == 1) {newinfo.put("nickname", usernick.getText().toString().trim());}
-
-                if (email == 1) {
-                    user.updateEmail(useremail.getText().toString().trim())
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Log.d("Fabervvvvvvvvvvv", "User email address updated.");
-                                    }
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull @NotNull Exception e) {
-                                    Log.d("Fabervvvvvvvvvvv", "User email address update failed.");
-                                    Toast.makeText(getApplicationContext(), "이메일 변경에 실패했습니다.", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                    newinfo.put("email", useremail.getText().toString().trim());
-                }
 
                 if (pwd == 1) {
                     user.updatePassword(newpwd1.getText().toString().trim())
@@ -444,6 +348,7 @@ public class mypage_main extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Log.d("Fabervvvvvvvvvvv", "User password updated.");
+                                        Toast.makeText(getApplicationContext(), "비밀번호 변경완료", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             })
@@ -464,7 +369,6 @@ public class mypage_main extends AppCompatActivity {
                                 Log.d("Faber", "Succesfully update");
                             }
                         });
-                Toast.makeText(getApplicationContext(), "변경완료", Toast.LENGTH_SHORT).show();
                 Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
                 outIntent.putExtra("callback", "logout");
                 setResult(RESULT_OK, outIntent);

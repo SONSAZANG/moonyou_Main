@@ -10,7 +10,7 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="533dp"
+        android:layout_height="575dp"
         android:scrollbars="vertical">
 
         <HorizontalScrollView

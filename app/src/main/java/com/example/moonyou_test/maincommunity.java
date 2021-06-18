@@ -40,7 +40,6 @@ public class maincommunity extends AppCompatActivity {
     FrameLayout all_board;
     FrameLayout navi;
     ArrayList<boardgetset> boardlist = new ArrayList<>();
-    ArrayList<boardgetset> noticelist = new ArrayList<>();
     Button writebtn;
     Button home;
     Button mypage;
@@ -52,9 +51,6 @@ public class maincommunity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maincommunity);
         FirebaseUser user= fAuth.getCurrentUser();
-        hot_board = (FrameLayout) findViewById(R.id.hot_board);
-        notice_board = (FrameLayout) findViewById(R.id.Notice_board);
-        my_board = (FrameLayout) findViewById(R.id.my_board);
         all_board = (FrameLayout) findViewById(R.id.all_board);
         navi = (FrameLayout) findViewById(R.id.navi);
 
@@ -128,41 +124,15 @@ public class maincommunity extends AppCompatActivity {
 
         switch (index) {
             case 0:
-                all_board.setVisibility(View.VISIBLE);
-                hot_board.setVisibility(View.GONE);
-                notice_board.setVisibility(View.GONE);
-                my_board.setVisibility(View.GONE);
-                navi.setVisibility(View.GONE);
-                navi.setVisibility(View.VISIBLE);
                 getboard();
                 break;
             case 1:
-                all_board.setVisibility(View.GONE);
-                hot_board.setVisibility(View.VISIBLE);
-                notice_board.setVisibility(View.GONE);
-                my_board.setVisibility(View.GONE);
-                navi.setVisibility(View.GONE);
-                navi.setVisibility(View.VISIBLE);
+                gethit();
                 break;
             case 2:
-                all_board.setVisibility(View.GONE);
-                hot_board.setVisibility(View.GONE);
-                notice_board.setVisibility(View.VISIBLE);
-                getnotice();
-                my_board.setVisibility(View.GONE);
-                navi.setVisibility(View.GONE);
-                navi.setVisibility(View.VISIBLE);
-
                 break;
             case 3:
-                all_board.setVisibility(View.GONE);
-                hot_board.setVisibility(View.GONE);
-                notice_board.setVisibility(View.GONE);
-                my_board.setVisibility(View.VISIBLE);
                 getuserwrite();
-                navi.setVisibility(View.GONE);
-                navi.setVisibility(View.VISIBLE);
-
                 break;
         }
     }
@@ -220,14 +190,17 @@ public class maincommunity extends AppCompatActivity {
                 });
     }
     private void getnotice() {
+    }
+
+    private void gethit()
+    {
         boardlist.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance(); //파이어스토어 연결
-        recyclerView = findViewById(R.id.notice_posts);
+        recyclerView = findViewById(R.id.all_posts);
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        db.collection("Notice")
+        db.collection("Board")
                 .orderBy("time", Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -237,16 +210,18 @@ public class maincommunity extends AppCompatActivity {
                         {
                             for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
                             {
-
-                                boardgetset board = document.toObject(boardgetset.class);
-                                board.setdId(document.getId());
-                                Log.d("FABERJOO", String.valueOf(board.getdId()));
-                                noticelist.add(board);
+                                board = document.toObject(boardgetset.class);
+                                if(board.getViews() >= 10)
+                                {
+                                    board.setdId(document.getId());
+                                    Log.d("FABERJOO", String.valueOf(board.getdId()));
+                                    boardlist.add(board);
+                                }
                             }
                         } else {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
-                        adapter = new noticeAdapter(boardlist, maincommunity.this);
+                        adapter = new commadpter(boardlist, maincommunity.this);
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
@@ -255,52 +230,36 @@ public class maincommunity extends AppCompatActivity {
     private void getuserwrite() {
         boardlist.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance(); //파이어스토어 연결
-        recyclerView = findViewById(R.id.my_posts); //리사이클러뷰아디
+        recyclerView = findViewById(R.id.all_posts);
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         FirebaseUser user = fAuth.getCurrentUser(); //"현재 로그인 유저 불러오기"
-        String email = user.getEmail(); //"유저 이메일 저장"
-        db.collection("user") //user 컬렉션에서
-                .whereEqualTo("email", email)
+        String Uid = user.getUid(); //"유저 이메일 저장"
+        db.collection("Board")
+                .orderBy("time", Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) //jdk, 3.17 16:30,"성공시"
+                        if (task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
                         {
-                            for (QueryDocumentSnapshot document : task.getResult())// 16:30,"결과를  한 줄 씩document에"
+                            for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
                             {
-                                User name = document.toObject(User.class);
-                                String naming = name.getNickname(); //닉네임가져오기
-                                Log.d("FABERJOO",naming); //닉네임로그확인
-
-                                db.collection("Board")
-                                        .whereEqualTo("username", naming)
-                                        //여기서 막힘
-                                        .get() //가져오기
-                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                if (task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
-                                                {
-                                                    for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
-                                                    {
-                                                        boardgetset board = document.toObject(boardgetset.class);
-                                                        board.setdId(document.getId());
-                                                        Log.d("FABERJOO", document.getId());
-                                                        boardlist.add(board);
-                                                    }
-                                                } else {
-                                                    Log.d("faberJOOOOOOO", "Error : ", task.getException());
-                                                }
-                                                adapter = new commadpter(boardlist, maincommunity.this);
-                                                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-                                            }
-                                        });
+                                board = document.toObject(boardgetset.class);
+                                if(board.getUid().equals(Uid))
+                                {
+                                    board.setdId(document.getId());
+                                    Log.d("FABERJOO", String.valueOf(board.getdId()));
+                                    boardlist.add(board);
+                                }
                             }
+                        } else {
+                            Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
+                        adapter = new commadpter(boardlist, maincommunity.this);
+                        recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
     }

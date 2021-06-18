@@ -31,7 +31,8 @@
         <activity android:name=".book_seat" />
         <activity android:name=".book_calender" />
         <activity android:name=".mypage_main" />
-        <activity android:name=".MainActivity2" />
+        <activity android:name=".MainActivity2"
+            android:windowSoftInputMode="adjustUnspecified|adjustPan"/>
         <activity android:name=".Login" />
         <activity android:name=".Register"/>
         <activity android:name=".myticket"/>

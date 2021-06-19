@@ -101,7 +101,6 @@ public class show_main extends AppCompatActivity implements showNoticeAdapter.On
                             notice = show_info.getNotice();
                             notice_label.setText(notice);
                             //arrayList.add(show_info);
-
                         }
                         else
                         {

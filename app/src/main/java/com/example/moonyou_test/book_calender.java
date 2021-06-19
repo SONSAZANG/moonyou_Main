@@ -232,26 +232,14 @@ public class book_calender extends AppCompatActivity implements timeadpter.OnLis
 
     public void onListItemSelected(View v, int pos) {
         timeadpter.itemViewHolder viewHolder = (timeadpter.itemViewHolder)recyclerView.findViewHolderForAdapterPosition(pos);
-        timegetset item = timelist.get(pos) ;
-        Button Resv = (Button)findViewById(R.id.resv);
-        Resv.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                if (pos != RecyclerView.NO_POSITION)
-                {
-                    // 데이터 리스트로부터 아이템 데이터 참조
-                    timegetset item = timelist.get(pos);
-                    Toast.makeText(v.getContext(), item.getTime(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(v.getContext(), book_seat.class);
-                    intent.putExtra("time", item.getTime());
-                    intent.putExtra("date", item.getDate());
-                    intent.putExtra("time", item.getTime());
-                    intent.putExtra("show_id", item.getShow_id());
-                    startActivityForResult(intent, 1);
-                }
-            }
-        });
+        timegetset item = timelist.get(pos);
+        Toast.makeText(v.getContext(), item.getTime(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(v.getContext(), book_seat.class);
+        intent.putExtra("time", item.getTime());
+        intent.putExtra("date", item.getDate());
+        intent.putExtra("time", item.getTime());
+        intent.putExtra("show_id", item.getShow_id());
+        startActivityForResult(intent, 1);
     }
 
     @Override

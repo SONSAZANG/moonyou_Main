@@ -126,7 +126,7 @@ public class maincommunity extends AppCompatActivity implements commadpter.OnAIt
         switch (index) {
             case 0:
                 getboard();
-                break;xwx
+                break;
             case 1:
                 gethit();
                 break;

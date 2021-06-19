@@ -11,19 +11,10 @@ public class show_info {
     private String notice;
     private int runtime;
     private int hit;
-    private String state;
 
     public String getNotice() { return notice; }
 
     public void setNotice(String notice) { this.notice = notice; }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
 
     public String getStartday() { return startday; }
 

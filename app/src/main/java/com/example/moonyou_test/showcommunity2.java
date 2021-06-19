@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query.Direction;
@@ -29,8 +31,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class showcommunity2 extends AppCompatActivity {
+public class showcommunity2 extends AppCompatActivity implements commadpter.OnAItemSelectedInterface {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -198,7 +202,7 @@ public class showcommunity2 extends AppCompatActivity {
                         } else {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
-                        adapter = new commadpter(boardlist, showcommunity2.this);
+                        adapter = new commadpter(boardlist, showcommunity2.this, showcommunity2.this::onAItemSelected);
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
@@ -234,7 +238,7 @@ public class showcommunity2 extends AppCompatActivity {
                         } else {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
-                        adapter = new commadpter(boardlist, showcommunity2.this);
+                        adapter = new commadpter(boardlist, showcommunity2.this, showcommunity2.this::onAItemSelected);
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
@@ -273,11 +277,33 @@ public class showcommunity2 extends AppCompatActivity {
                         } else {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
                         }
-                        adapter = new commadpter(boardlist, showcommunity2.this);
+                        adapter = new commadpter(boardlist, showcommunity2.this, showcommunity2.this::onAItemSelected);
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
     }
+
+    public void onAItemSelected(View v, int pos) {
+        commadpter.itemViewHolder viewHolder = (commadpter.itemViewHolder)recyclerView.findViewHolderForAdapterPosition(pos);
+        boardgetset item = boardlist.get(pos) ;
+        Toast.makeText(v.getContext(), item.getdId(), Toast.LENGTH_SHORT).show();
+        FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30,"파이어스토어 연결"
+        DocumentReference docref = db.collection("Board")
+                .document(item.getdId());
+        Map<String, Object> view = new HashMap<>(); //해쉬맵 선언
+        view.put("views", item.getViews() + 1);
+        docref.update(view)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d("Faber", "Succesfully deleted");
+                    }
+                });
+        Intent intent = new Intent(v.getContext(), maincommpage2.class);
+        intent.putExtra("BoardID", item.getdId());
+        v.getContext().startActivity(intent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 

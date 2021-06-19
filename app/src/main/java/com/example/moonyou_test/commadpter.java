@@ -28,23 +28,20 @@ import java.util.Map;
 
 public class commadpter extends RecyclerView.Adapter<commadpter.itemViewHolder> {
 
-    public interface OnListItemLongSelectedInterface {
-        void onItemLongSelected(View v, int position);
+
+    public interface OnAItemSelectedInterface {
+        void onAItemSelected(View v, int position);
     }
 
-    public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, int position);
-    }
-
-    private OnListItemSelectedInterface mListener;
-    private OnListItemLongSelectedInterface mLongListener;
+    private OnAItemSelectedInterface mListener;
 
     private ArrayList<boardgetset> arrayList;
     private Context context;
 
-    public commadpter(ArrayList<boardgetset> arrayList, Context context) {
+    public commadpter(ArrayList<boardgetset> arrayList, Context context, commadpter.OnAItemSelectedInterface listener) {
         this.arrayList = arrayList;
         this.context = context;
+        this.mListener = listener;
     }
 
     @NonNull
@@ -114,25 +111,8 @@ public class commadpter extends RecyclerView.Adapter<commadpter.itemViewHolder> 
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION)
                     {
+                        mListener.onAItemSelected(v, getAdapterPosition());
                         // 데이터 리스트로부터 아이템 데이터 참조
-                        boardgetset item = arrayList.get(pos);
-                        Toast.makeText(v.getContext(), item.getdId(), Toast.LENGTH_SHORT).show();
-                        FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30,"파이어스토어 연결"
-                        DocumentReference docref = db.collection("Board")
-                                .document(item.getdId());
-                        Map<String, Object> view = new HashMap<>(); //해쉬맵 선언
-                        view.put("views", item.getViews() + 1);
-                        docref.update(view)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Log.d("Faber", "Succesfully deleted");
-                                    }
-                                });
-
-                        Intent intent = new Intent(v.getContext(), maincommpage2.class);
-                        intent.putExtra("BoardID", item.getdId());
-                        v.getContext().startActivity(intent);
                     }
                 }
             });

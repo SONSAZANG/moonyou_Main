@@ -13,7 +13,7 @@
         <ViewFlipper
             android:id="@+id/image_slide2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
@@ -48,7 +48,7 @@
     <FrameLayout
         android:id="@+id/all_board"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="450dp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/navi"
         app:layout_constraintTop_toBottomOf="@+id/bord">

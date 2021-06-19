@@ -40,12 +40,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="예매번호: "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/TicketID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:text=""
                 />
         </LinearLayout>
@@ -59,12 +65,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="공연이름: "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/TicketName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:text=""
                 />
         </LinearLayout>
@@ -78,12 +90,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="공연일시: "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/TicketTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:text=""
                 />
         </LinearLayout>
@@ -96,16 +114,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="좌석번호: "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/TicketSeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:text=""
                 />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+        </LinearLayout>
     </LinearLayout>
+    <Button
+        android:id="@+id/gocomu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="커뮤니티 바로가기"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:background="@drawable/button_round"
+        android:backgroundTint="#ef4f4f"/>
 
     <View
         android:layout_width="match_parent"

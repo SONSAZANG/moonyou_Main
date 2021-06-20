@@ -112,14 +112,12 @@ public class mypage_main extends AppCompatActivity {
                 myinfo.setVisibility(View.VISIBLE);
                 mypage_info_change.setVisibility(View.GONE);
                 myticket.setVisibility(View.GONE);
-                mypost.setVisibility(View.GONE);
                 pwd_confirm();
                 break;
             case 1:
                 myinfo.setVisibility(View.GONE);
                 mypage_info_change.setVisibility(View.GONE);
                 myticket.setVisibility(View.VISIBLE);
-                mypost.setVisibility(View.GONE);
                 mycs();
                 break;
         }
@@ -352,9 +350,7 @@ public class mypage_main extends AppCompatActivity {
                                         outIntent.putExtra("callback", "logout");
                                         setResult(RESULT_OK, outIntent);
                                         finish();
-                                        FirebaseAuth.getInstance().signOut();
-                                        Toast.makeText(getApplicationContext(), "비밀번호 변경완료", Toast.LENGTH_SHORT).show();
-                                    }
+                                        FirebaseAuth.getInstance().signOut();}
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -396,9 +392,17 @@ public class mypage_main extends AppCompatActivity {
                 {
                     Log.d("faberJOOOOOOO", "Error : ", task.getException());
                 }
-                adapter = new mypageadapter(arrayList, mypage_main.this);
+                adapter = new mypageadapter(arrayList, mypage_main.this, mypage_main.this::onbItemSelected);
                 recyclerView.setAdapter(adapter);
             }
         });
+    }
+    public void onbItemSelected(View v, int pos) {
+        mypageadapter.mypageViewHolder viewHolder = (mypageadapter.mypageViewHolder)recyclerView.findViewHolderForAdapterPosition(pos);
+        mypage_getset item = arrayList.get(pos) ;
+        Intent intent = new Intent(this, myticket.class);
+        intent.putExtra("book_ID", item.getBook_ID());
+        intent.putExtra("show_ID", item.getShow_ID());
+        startActivityForResult(intent, 1);
     }
 }

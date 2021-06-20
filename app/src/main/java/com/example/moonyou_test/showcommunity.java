@@ -95,4 +95,16 @@ public class showcommunity extends AppCompatActivity implements communityadaper.
             startActivityForResult(intent, 1);
         }
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String callback = data.getStringExtra("callback");
+            Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+            outIntent.putExtra("callback", callback);
+            setResult(RESULT_OK, outIntent);
+            finish();
+        }
+    }
 }

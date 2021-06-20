@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app1"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/app1"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true"
@@ -40,6 +40,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".showcommunity"/>
         <activity android:name=".showcommunity2"/>
+        <activity android:name=".showcommunity3"/>
 
         <meta-data
             android:name="preloaded_fonts"

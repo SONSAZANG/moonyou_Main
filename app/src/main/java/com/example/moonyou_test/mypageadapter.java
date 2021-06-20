@@ -31,16 +31,21 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class mypageadapter extends RecyclerView.Adapter<mypageadapter.mypageViewHolder> {
+    public interface OnbItemSelectedInterface {
+        void onbItemSelected(View v, int position);
+    }
+    private mypageadapter.OnbItemSelectedInterface mListener;
     private ArrayList<mypage_getset> arrayList;
     private Context context;
     StorageReference storageref;
     FirebaseStorage storage;
     private Uri mImageUri;
 
-    public mypageadapter(ArrayList<mypage_getset> arrayList, Context context) {
+    public mypageadapter(ArrayList<mypage_getset> arrayList, Context context, mypageadapter.OnbItemSelectedInterface listener) {
 
         this.arrayList = arrayList;
         this.context = context;
+        this.mListener = listener;
     }
 
     @NonNull
@@ -91,15 +96,7 @@ public class mypageadapter extends RecyclerView.Adapter<mypageadapter.mypageView
             {
                 public void onClick(View v)
                 {
-                    int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION)
-                    {
-                        mypage_getset item = arrayList.get(pos);
-                        Intent intent = new Intent(context, myticket.class);
-                        intent.putExtra("book_ID", item.getBook_ID());
-                        intent.putExtra("show_ID", item.getShow_ID());
-                        context.startActivity(intent);
-                    }
+                    mListener.onbItemSelected(v, getAdapterPosition());
                 }
             });
         }

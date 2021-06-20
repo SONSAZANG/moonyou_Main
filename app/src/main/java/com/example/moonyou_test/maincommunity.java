@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -47,7 +48,9 @@ public class maincommunity extends AppCompatActivity implements commadpter.OnAIt
     Button writebtn;
     Button home;
     Button mypage;
+    Button logout;
     boardgetset board;
+    String a;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -57,6 +60,7 @@ public class maincommunity extends AppCompatActivity implements commadpter.OnAIt
         FirebaseUser user= fAuth.getCurrentUser();
         all_board = (FrameLayout) findViewById(R.id.all_board);
         navi = (FrameLayout) findViewById(R.id.navi);
+        a = "1";
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.bord);
@@ -90,7 +94,8 @@ public class maincommunity extends AppCompatActivity implements commadpter.OnAIt
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), board_write.class);
-                startActivityForResult(intent, 1);
+                intent.putExtra("Boardtype", a);
+                startActivityForResult(intent, 2);
             }
         });
 
@@ -116,8 +121,16 @@ public class maincommunity extends AppCompatActivity implements commadpter.OnAIt
             }
         });
 
-
-
+        logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent outIntent = new Intent(getApplicationContext(), showcommunity2.class);
+                outIntent.putExtra("callback", "home");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
     }  //ONCRETE 끝
 
 
@@ -125,12 +138,15 @@ public class maincommunity extends AppCompatActivity implements commadpter.OnAIt
 
         switch (index) {
             case 0:
+                a = "1";
                 getboard();
                 break;
             case 1:
+                a = "2";
                 gethit();
                 break;
             case 2:
+                a = "3";
                 getuserwrite();
                 break;
         }
@@ -187,8 +203,6 @@ public class maincommunity extends AppCompatActivity implements commadpter.OnAIt
                         recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                     }
                 });
-    }
-    private void getnotice() {
     }
 
     private void gethit()
@@ -265,9 +279,7 @@ public class maincommunity extends AppCompatActivity implements commadpter.OnAIt
 
     public void onAItemSelected(View v, int pos) {
         commadpter.itemViewHolder viewHolder = (commadpter.itemViewHolder)recyclerView.findViewHolderForAdapterPosition(pos);
-        boardgetset item = boardlist.get(pos) ;
-        Toast.makeText(v.getContext(), item.getdId(), Toast.LENGTH_SHORT).show();
-        FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30,"파이어스토어 연결"
+        boardgetset item = boardlist.get(pos) ;FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30,"파이어스토어 연결"
         DocumentReference docref = db.collection("Board")
                 .document(item.getdId());
         Map<String, Object> view = new HashMap<>(); //해쉬맵 선언
@@ -281,17 +293,40 @@ public class maincommunity extends AppCompatActivity implements commadpter.OnAIt
                 });
         Intent intent = new Intent(v.getContext(), maincommpage2.class);
         intent.putExtra("BoardID", item.getdId());
-        v.getContext().startActivity(intent);
+        intent.putExtra("Boardtype", a);
+        startActivityForResult(intent, 2);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        String callback, Boardtype;
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            String callback = data.getStringExtra("callback");
-            if(callback.equals("writesucess")){
-                getboard();
+            callback = data.getStringExtra("callback");
+            Boardtype = data.getStringExtra("Boardtype");
+            switch (callback){
+                case "writesucess":
+                case "refresh":
+                    switch (Boardtype) {
+                        case "1":
+                            getboard();
+                            break;
+                        case "2":
+                            gethit();
+                            break;
+                        case "3":
+                            getuserwrite();
+                            break;
+                    }
+                    break;
+                case "home":
+                case "mypage":
+                case "logout":
+                    callback = data.getStringExtra("callback");
+                    Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    outIntent.putExtra("callback", callback);
+                    setResult(RESULT_OK, outIntent);
+                    finish();
             }
         }
     }

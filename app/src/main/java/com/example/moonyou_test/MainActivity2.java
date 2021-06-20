@@ -130,7 +130,6 @@ public class MainActivity2 extends AppCompatActivity implements CustomAdapter.On
     @Override
     public void onItemSelected(View v, int position) {
         CustomAdapter.CustomViewHolder viewHolder = (CustomAdapter.CustomViewHolder)recyclerView.findViewHolderForAdapterPosition(position);
-        Toast.makeText(this, viewHolder.tv_id.getText().toString(),Toast.LENGTH_SHORT).show(); // 짧게 누를시 안내
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageref = storage.getReference();

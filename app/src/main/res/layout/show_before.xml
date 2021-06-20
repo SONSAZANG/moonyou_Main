@@ -16,6 +16,7 @@
             android:id="@+id/show_mainImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:src="@drawable/chicago"
             ></ImageView>
     </LinearLayout>
 
@@ -33,6 +34,7 @@
         <TextView
             android:id="@+id/show_name"
             android:layout_width="wrap_content"
+            android:text="시카고"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
@@ -50,6 +52,7 @@
         <TextView
             android:id="@+id/show_period"
             android:layout_width="wrap_content"
+            android:text="21.04.08 ~ 21.07.18"
             android:layout_height="wrap_content"
             />
     </LinearLayout>

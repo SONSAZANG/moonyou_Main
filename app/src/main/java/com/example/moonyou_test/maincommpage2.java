@@ -47,7 +47,7 @@ import java.util.Map;
 public class maincommpage2 extends AppCompatActivity{
     //객체 선언
     EditText comment_text;
-    String BoardID;
+    String BoardID, Boardtype;
     int comments_value;
     commentsgetset comments;
     ArrayList<commentsgetset> commentslist = new ArrayList<>();
@@ -61,13 +61,17 @@ public class maincommpage2 extends AppCompatActivity{
     TextView dt_views;
     TextView dt_comments;
     TextView dt_comments1;
+    Button writebtn;
+    Button home;
+    Button mypage;
+    Button logout;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maincommpage2);
 
         Intent intent = getIntent();
         BoardID = intent.getStringExtra("BoardID");
-
+        Boardtype = intent.getStringExtra("Boardtype");
         Button create_comment = (Button) findViewById(R.id.create_comment);
         create_comment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +89,53 @@ public class maincommpage2 extends AppCompatActivity{
         dt_comments = (TextView) findViewById(R.id.detail_comments);
         dt_comments1 = (TextView) findViewById(R.id.detail_comments1);
 
+
+        home = findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                outIntent.putExtra("callback", "home");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+
+        mypage = findViewById(R.id.mypage_btn);
+        mypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                outIntent.putExtra("callback", "mypage");
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+
+        logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent outIntent = new Intent(getApplicationContext(), showcommunity2.class);
+                outIntent.putExtra("callback", "home");
+                outIntent.putExtra("Boardtype", Boardtype);
+                setResult(RESULT_OK, outIntent);
+                finish();
+            }
+        });
+
         get_content();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent outIntent = new Intent(getApplicationContext(), maincommunity.class);
+        outIntent.putExtra("callback", "refresh");
+        outIntent.putExtra("Boardtype", Boardtype);
+        setResult(RESULT_OK, outIntent);
+        finish();
+    }
+
     private void get_content()
     {
         FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30,"파이어스토어 연결"

@@ -50,7 +50,7 @@ public class showcommunity2 extends AppCompatActivity implements commadpter.OnAI
     Button mypage;
     Button logout;
     boardgetset board;
-    String show_id;
+    String show_id, a;
     TextView show_name;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
@@ -67,6 +67,7 @@ public class showcommunity2 extends AppCompatActivity implements commadpter.OnAI
         show_name = (TextView)findViewById(R.id.show_name);
         Intent intent1 = getIntent();
         show_id = intent1.getStringExtra("show_ID");
+        a = "1";
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.bord);
@@ -119,7 +120,8 @@ public class showcommunity2 extends AppCompatActivity implements commadpter.OnAI
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), board_write2.class);
                 intent.putExtra("show_id", show_id);
-                startActivityForResult(intent, 1);
+                intent.putExtra("Boardtype", a);
+                startActivityForResult(intent, 2);
             }
         });
 
@@ -127,7 +129,7 @@ public class showcommunity2 extends AppCompatActivity implements commadpter.OnAI
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent outIntent = new Intent(getApplicationContext(), showcommunity.class);
                 outIntent.putExtra("callback", "home");
                 setResult(RESULT_OK, outIntent);
                 finish();
@@ -138,7 +140,7 @@ public class showcommunity2 extends AppCompatActivity implements commadpter.OnAI
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent outIntent = new Intent(getApplicationContext(), showcommunity.class);
                 outIntent.putExtra("callback", "mypage");
                 setResult(RESULT_OK, outIntent);
                 finish();
@@ -149,7 +151,7 @@ public class showcommunity2 extends AppCompatActivity implements commadpter.OnAI
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent outIntent = new Intent(getApplicationContext(), showcommunity.class);
                 outIntent.putExtra("callback", "home");
                 setResult(RESULT_OK, outIntent);
                 finish();
@@ -162,14 +164,15 @@ public class showcommunity2 extends AppCompatActivity implements commadpter.OnAI
 
         switch (index) {
             case 0:
+                a = "1";
                 getboard();
                 break;
             case 1:
-                gethit();
                 break;
             case 2:
                 break;
             case 3:
+                a = "4";
                 getuserwrite();
                 break;
         }
@@ -198,42 +201,6 @@ public class showcommunity2 extends AppCompatActivity implements commadpter.OnAI
                                 board.setdId(document.getId());
                                 Log.d("FABERJOO", String.valueOf(board.getdId()));
                                 boardlist.add(board);
-                            }
-                        } else {
-                            Log.d("faberJOOOOOOO", "Error : ", task.getException());
-                        }
-                        adapter = new commadpter(boardlist, showcommunity2.this, showcommunity2.this::onAItemSelected);
-                        recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-                    }
-                });
-    }
-
-    private void gethit()
-    {
-        boardlist.clear();
-        FirebaseFirestore db = FirebaseFirestore.getInstance(); //파이어스토어 연결
-        recyclerView = findViewById(R.id.all_posts);
-        recyclerView.setHasFixedSize(true); // 리사이클러뷰 성능 강화
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        db.collection("show_info")
-                .document(show_id)
-                .collection("board")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) //jdk, 3.17 16:30,"성공 했을 시"
-                        {
-                            for (QueryDocumentSnapshot document : task.getResult()) //jdk, 3.17 16:30,"불러온 데이터 전체를 document에 하나씩 넣어서"
-                            {
-                                board = document.toObject(boardgetset.class);
-                                if(board.getViews() >= 10)
-                                {
-                                    board.setdId(document.getId());
-                                    Log.d("FABERJOO", String.valueOf(board.getdId()));
-                                    boardlist.add(board);
-                                }
                             }
                         } else {
                             Log.d("faberJOOOOOOO", "Error : ", task.getException());
@@ -285,10 +252,10 @@ public class showcommunity2 extends AppCompatActivity implements commadpter.OnAI
 
     public void onAItemSelected(View v, int pos) {
         commadpter.itemViewHolder viewHolder = (commadpter.itemViewHolder)recyclerView.findViewHolderForAdapterPosition(pos);
-        boardgetset item = boardlist.get(pos) ;
-        Toast.makeText(v.getContext(), item.getdId(), Toast.LENGTH_SHORT).show();
-        FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30,"파이어스토어 연결"
-        DocumentReference docref = db.collection("Board")
+        boardgetset item = boardlist.get(pos) ;FirebaseFirestore db = FirebaseFirestore.getInstance(); //jdk, 3.17 16:30,"파이어스토어 연결"
+        DocumentReference docref = db.collection("show_info")
+                .document(show_id)
+                .collection("board")
                 .document(item.getdId());
         Map<String, Object> view = new HashMap<>(); //해쉬맵 선언
         view.put("views", item.getViews() + 1);
@@ -299,19 +266,40 @@ public class showcommunity2 extends AppCompatActivity implements commadpter.OnAI
                         Log.d("Faber", "Succesfully deleted");
                     }
                 });
-        Intent intent = new Intent(v.getContext(), maincommpage2.class);
+        Intent intent = new Intent(v.getContext(), showcommunity3.class);
         intent.putExtra("BoardID", item.getdId());
-        v.getContext().startActivity(intent);
+        intent.putExtra("showID", show_id);
+        intent.putExtra("Boardtype", a);
+        startActivityForResult(intent, 2);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        String callback, Boardtype;
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            String callback = data.getStringExtra("callback");
-            if(callback.equals("writesucess")){
-                getboard();
+            callback = data.getStringExtra("callback");
+            Boardtype = data.getStringExtra("Boardtype");
+            switch (callback){
+                case "writesucess":
+                case "refresh":
+                    switch (Boardtype) {
+                        case "1":
+                            getboard();
+                            break;
+                        case "4":
+                            getuserwrite();
+                            break;
+                    }
+                    break;
+                case "home":
+                case "mypage":
+                case "logout":
+                    callback = data.getStringExtra("callback");
+                    Intent outIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    outIntent.putExtra("callback", callback);
+                    setResult(RESULT_OK, outIntent);
+                    finish();
             }
         }
     }

@@ -31,11 +31,14 @@ import java.util.Map;
 public class board_write extends AppCompatActivity {
 
     private RichWysiwyg wysiwyg;
+    String Boardtype;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_write);
+        Intent intent1 = getIntent();
+        Boardtype = intent1.getStringExtra("Boardtype");
         wysiwyg = findViewById(R.id.richwysiwygeditor);
         wysiwyg.getContent()
                 .setEditorFontSize(18)
@@ -60,6 +63,7 @@ public class board_write extends AppCompatActivity {
                 addData(title,content);//jdk, 3.17 16:30," 저장된 텍스트를 전달하여 db에 저장하는 함수 실행 "
                 Intent outIntent = new Intent(getApplicationContext(), maincommunity.class);
                 outIntent.putExtra("callback", "writesucess");
+                outIntent.putExtra("Boardtype", Boardtype);
                 setResult(RESULT_OK, outIntent);
                 finish();
             }

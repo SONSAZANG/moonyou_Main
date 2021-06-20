@@ -52,9 +52,7 @@ public class book_calender extends AppCompatActivity implements timeadpter.OnLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_calender);
         Intent intent1 = getIntent();
-        showID = intent1.getStringExtra("show_id"); // id가져오기
-        Toast.makeText(getApplicationContext(), showID, Toast.LENGTH_SHORT).show();
-        title_label = findViewById(R.id.title1);
+        showID = intent1.getStringExtra("show_id"); // id가져오기title_label = findViewById(R.id.title1);
         storage = FirebaseStorage.getInstance();
         storageref = storage.getReference();
 
@@ -232,9 +230,7 @@ public class book_calender extends AppCompatActivity implements timeadpter.OnLis
 
     public void onListItemSelected(View v, int pos) {
         timeadpter.itemViewHolder viewHolder = (timeadpter.itemViewHolder)recyclerView.findViewHolderForAdapterPosition(pos);
-        timegetset item = timelist.get(pos);
-        Toast.makeText(v.getContext(), item.getTime(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(v.getContext(), book_seat.class);
+        timegetset item = timelist.get(pos);Intent intent = new Intent(v.getContext(), book_seat.class);
         intent.putExtra("time", item.getTime());
         intent.putExtra("date", item.getDate());
         intent.putExtra("time", item.getTime());

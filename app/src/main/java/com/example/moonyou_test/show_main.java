@@ -217,9 +217,7 @@ public class show_main extends AppCompatActivity implements showNoticeAdapter.On
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<DocumentReference> task) {
-                        Log.d("Faberaaaaaaa", "review putting succesfull");
-                        Toast.makeText(getApplicationContext(), "리뷰 작성 완료", Toast.LENGTH_LONG).show();;
-                        review_text.setText("");
+                        Log.d("Faberaaaaaaa", "review putting succesfull");review_text.setText("");
                         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(review_text.getWindowToken(), 0);
                     }
